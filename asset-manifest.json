@@ -1,8 +1,17 @@
 {
-  "main.js": "/world/static/js/main.c380cb59.chunk.js",
-  "static/js/1.f25f8f9c.chunk.js": "/world/static/js/1.f25f8f9c.chunk.js",
-  "runtime~main.js": "/world/static/js/runtime~main.0ae1b2e3.js",
+  "main.js": "/world/static/js/main.b5256bbb.chunk.js",
+  "static/js/1.bedae95c.chunk.js": "/world/static/js/1.bedae95c.chunk.js",
+  "static/js/2.11e8d628.chunk.js": "/world/static/js/2.11e8d628.chunk.js",
+  "static/js/3.c450d61a.chunk.js": "/world/static/js/3.c450d61a.chunk.js",
+  "static/js/4.1b11782c.chunk.js": "/world/static/js/4.1b11782c.chunk.js",
+  "static/js/5.770ea307.chunk.js": "/world/static/js/5.770ea307.chunk.js",
+  "static/js/6.449f4342.chunk.js": "/world/static/js/6.449f4342.chunk.js",
+  "static/js/7.2ad574fd.chunk.js": "/world/static/js/7.2ad574fd.chunk.js",
+  "static/js/8.d186a97d.chunk.js": "/world/static/js/8.d186a97d.chunk.js",
+  "static/js/9.bbfb7b30.chunk.js": "/world/static/js/9.bbfb7b30.chunk.js",
+  "static/js/10.3e9dad76.chunk.js": "/world/static/js/10.3e9dad76.chunk.js",
+  "runtime~main.js": "/world/static/js/runtime~main.37d6eda1.js",
   "index.html": "/world/index.html",
-  "precache-manifest.9b1fa87ab546da22c434fba49211597d.js": "/world/precache-manifest.9b1fa87ab546da22c434fba49211597d.js",
+  "precache-manifest.88934e2384a4a7cf9aa34f110a745c93.js": "/world/precache-manifest.88934e2384a4a7cf9aa34f110a745c93.js",
   "service-worker.js": "/world/service-worker.js"
 }
