@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "79af046682aa103c5569",
-    "url": "/world/static/js/11.79af0466.chunk.js"
+    "revision": "4494a14f856cdf8d443f",
+    "url": "/world/static/js/11.4494a14f.chunk.js"
   },
   {
     "revision": "3184c8386894a56f5b20",
@@ -12,12 +12,12 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.2a803d18.svg"
   },
   {
-    "revision": "e516c4f2db64fbfcb774",
-    "url": "/world/static/js/main.e516c4f2.chunk.js"
+    "revision": "a4cd175b42387710dde6",
+    "url": "/world/static/js/main.a4cd175b.chunk.js"
   },
   {
-    "revision": "3fedcb8e4bda9731b8c7",
-    "url": "/world/static/js/3.3fedcb8e.chunk.js"
+    "revision": "ea6ae8a823b562cd356e",
+    "url": "/world/static/js/3.ea6ae8a8.chunk.js"
   },
   {
     "revision": "bf02e625afe11f825587",
@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/world/static/js/7.6bb956a8.chunk.js"
   },
   {
-    "revision": "c446c227a975e9a068e4",
-    "url": "/world/static/js/8.c446c227.chunk.js"
+    "revision": "64ede68920c399ced4bb",
+    "url": "/world/static/js/8.64ede689.chunk.js"
   },
   {
-    "revision": "9240956e7d14535cd746",
-    "url": "/world/static/js/9.9240956e.chunk.js"
+    "revision": "e1df4e1fd74b7c5eff26",
+    "url": "/world/static/js/9.e1df4e1f.chunk.js"
   },
   {
     "revision": "0558b1354e73a2298841",
@@ -52,8 +52,8 @@ self.__precacheManifest = [
     "url": "/world/static/js/1.b74fcf3e.chunk.js"
   },
   {
-    "revision": "b3103635b26e786faa95",
-    "url": "/world/static/js/runtime~main.b3103635.js"
+    "revision": "3b3b1d0acc4086d9e58f",
+    "url": "/world/static/js/runtime~main.3b3b1d0a.js"
   },
   {
     "revision": "bdadb6ce95c5a2e7b673940721450d3c",
@@ -92,11 +92,11 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.48f54f63.ttf"
   },
   {
-    "revision": "e516c4f2db64fbfcb774",
+    "revision": "a4cd175b42387710dde6",
     "url": "/world/static/css/main.8eedd09b.chunk.css"
   },
   {
-    "revision": "7c60bf9d2f507f1506c40cd24ed0fab6",
+    "revision": "3586cbc1224c14b864c104d0f3f4b51a",
     "url": "/world/index.html"
   }
 ];
