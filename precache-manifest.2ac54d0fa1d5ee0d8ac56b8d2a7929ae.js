@@ -12,12 +12,12 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.2a803d18.svg"
   },
   {
-    "revision": "5d3776e8e41334da2406",
-    "url": "/world/static/js/main.5d3776e8.chunk.js"
+    "revision": "fcfe3dfe06430ed776ee",
+    "url": "/world/static/js/main.fcfe3dfe.chunk.js"
   },
   {
-    "revision": "79a2cfcb59565ab112d3",
-    "url": "/world/static/js/3.79a2cfcb.chunk.js"
+    "revision": "4dfc9b26cb6b1cae095e",
+    "url": "/world/static/js/3.4dfc9b26.chunk.js"
   },
   {
     "revision": "b2ff5e33545cae40f407",
@@ -36,28 +36,28 @@ self.__precacheManifest = [
     "url": "/world/static/js/7.15b17b42.chunk.js"
   },
   {
-    "revision": "b521f4528abda5c31431",
-    "url": "/world/static/js/8.b521f452.chunk.js"
+    "revision": "d990601c23d8d840fac1",
+    "url": "/world/static/js/8.d990601c.chunk.js"
   },
   {
-    "revision": "1a42da4ff2a5ee6d1b86",
-    "url": "/world/static/js/9.1a42da4f.chunk.js"
+    "revision": "38c79404b2d6b54526b9",
+    "url": "/world/static/js/9.38c79404.chunk.js"
   },
   {
     "revision": "35c4075365fd3a217d77",
     "url": "/world/static/js/10.35c40753.chunk.js"
   },
   {
-    "revision": "f29ad0031ad2c1c14b771ce504e2bfa7",
-    "url": "/world/static/media/fa-solid-900.f29ad003.eot"
+    "revision": "48f54f63d7711d0912a9a10205538fc4",
+    "url": "/world/static/media/fa-solid-900.48f54f63.ttf"
   },
   {
     "revision": "b777ef233e2d9eb68c2a",
     "url": "/world/static/js/1.b777ef23.chunk.js"
   },
   {
-    "revision": "7190f6f7d6e2ebda1671",
-    "url": "/world/static/js/runtime~main.7190f6f7.js"
+    "revision": "c02697ee21b9df8176fd",
+    "url": "/world/static/js/runtime~main.c02697ee.js"
   },
   {
     "revision": "bdadb6ce95c5a2e7b673940721450d3c",
@@ -88,11 +88,11 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-regular-400.6993975c.svg"
   },
   {
-    "revision": "48f54f63d7711d0912a9a10205538fc4",
-    "url": "/world/static/media/fa-solid-900.48f54f63.ttf"
+    "revision": "f29ad0031ad2c1c14b771ce504e2bfa7",
+    "url": "/world/static/media/fa-solid-900.f29ad003.eot"
   },
   {
-    "revision": "5d3776e8e41334da2406",
+    "revision": "fcfe3dfe06430ed776ee",
     "url": "/world/static/css/main.1d5d903b.chunk.css"
   },
   {
@@ -100,7 +100,7 @@ self.__precacheManifest = [
     "url": "/world/static/css/11.e66cc9da.chunk.css"
   },
   {
-    "revision": "f6dbef98ec7b03266dfaf40c99788a17",
+    "revision": "ccf09412922cb8d2ee7a619f94f4238a",
     "url": "/world/index.html"
   }
 ];
