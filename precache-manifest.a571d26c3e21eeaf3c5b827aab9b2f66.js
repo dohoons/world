@@ -12,12 +12,12 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.2a803d18.svg"
   },
   {
-    "revision": "fcfe3dfe06430ed776ee",
-    "url": "/world/static/js/main.fcfe3dfe.chunk.js"
+    "revision": "9dfadd59f9dd428a7094",
+    "url": "/world/static/js/main.9dfadd59.chunk.js"
   },
   {
-    "revision": "d07a340cefc71f0d6836",
-    "url": "/world/static/js/3.d07a340c.chunk.js"
+    "revision": "e7eb7b5186d38ec9df1d",
+    "url": "/world/static/js/3.e7eb7b51.chunk.js"
   },
   {
     "revision": "b2ff5e33545cae40f407",
@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/world/static/js/7.15b17b42.chunk.js"
   },
   {
-    "revision": "9b6dd978fda429b22793",
-    "url": "/world/static/js/8.9b6dd978.chunk.js"
+    "revision": "f56f69602a60cc4ff70b",
+    "url": "/world/static/js/8.f56f6960.chunk.js"
   },
   {
-    "revision": "38416a1a257488b22d93",
-    "url": "/world/static/js/9.38416a1a.chunk.js"
+    "revision": "ab5dcb12181d15f43c6f",
+    "url": "/world/static/js/9.ab5dcb12.chunk.js"
   },
   {
     "revision": "35c4075365fd3a217d77",
@@ -56,8 +56,8 @@ self.__precacheManifest = [
     "url": "/world/static/js/1.b777ef23.chunk.js"
   },
   {
-    "revision": "ec7fa1931cf6c83fd1ac",
-    "url": "/world/static/js/runtime~main.ec7fa193.js"
+    "revision": "002a94ff846623923316",
+    "url": "/world/static/js/runtime~main.002a94ff.js"
   },
   {
     "revision": "bdadb6ce95c5a2e7b673940721450d3c",
@@ -68,12 +68,12 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-regular-400.0b5e3a54.woff"
   },
   {
-    "revision": "b48c48ea8457846a5695b139c377d3d1",
-    "url": "/world/static/media/fa-regular-400.b48c48ea.ttf"
-  },
-  {
     "revision": "6493321d567eb0f22bd5112fbcf044a8",
     "url": "/world/static/media/fa-regular-400.6493321d.eot"
+  },
+  {
+    "revision": "b48c48ea8457846a5695b139c377d3d1",
+    "url": "/world/static/media/fa-regular-400.b48c48ea.ttf"
   },
   {
     "revision": "fb493903265cad425ccdf8e04fc2de61",
@@ -92,15 +92,15 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.f29ad003.eot"
   },
   {
-    "revision": "fcfe3dfe06430ed776ee",
-    "url": "/world/static/css/main.1d5d903b.chunk.css"
+    "revision": "9dfadd59f9dd428a7094",
+    "url": "/world/static/css/main.15d4e39e.chunk.css"
   },
   {
     "revision": "cf70acdca9bca41da0ba",
     "url": "/world/static/css/11.e66cc9da.chunk.css"
   },
   {
-    "revision": "4b999bd786992701ed9adcae8d679d3c",
+    "revision": "2ab119ec2b4f0d085eaa4d3d99a55cd7",
     "url": "/world/index.html"
   }
 ];
