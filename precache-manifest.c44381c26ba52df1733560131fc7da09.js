@@ -12,12 +12,12 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-solid-900.2a803d18.svg"
   },
   {
-    "revision": "222af882db55eb79c821",
-    "url": "/world/static/js/main.222af882.chunk.js"
+    "revision": "74cb844ddcd195de8344",
+    "url": "/world/static/js/main.74cb844d.chunk.js"
   },
   {
-    "revision": "c63412be2c25ad940f7c",
-    "url": "/world/static/js/3.c63412be.chunk.js"
+    "revision": "b2f0cbc47b6bbadb0422",
+    "url": "/world/static/js/3.b2f0cbc4.chunk.js"
   },
   {
     "revision": "c7081db5a5601fb8387b",
@@ -36,28 +36,28 @@ self.__precacheManifest = [
     "url": "/world/static/js/7.1ada2379.chunk.js"
   },
   {
-    "revision": "b266751fa07a96c8e7ee",
-    "url": "/world/static/js/8.b266751f.chunk.js"
+    "revision": "828effed4b736ff2bbde",
+    "url": "/world/static/js/8.828effed.chunk.js"
   },
   {
-    "revision": "61feb1f50e4adabb2821",
-    "url": "/world/static/js/9.61feb1f5.chunk.js"
+    "revision": "1a579641b00852866592",
+    "url": "/world/static/js/9.1a579641.chunk.js"
   },
   {
     "revision": "6166e611277242f8c27f",
     "url": "/world/static/js/10.6166e611.chunk.js"
   },
   {
-    "revision": "f29ad0031ad2c1c14b771ce504e2bfa7",
-    "url": "/world/static/media/fa-solid-900.f29ad003.eot"
+    "revision": "48f54f63d7711d0912a9a10205538fc4",
+    "url": "/world/static/media/fa-solid-900.48f54f63.ttf"
   },
   {
     "revision": "a2a525c9cdb879633f78",
     "url": "/world/static/js/1.a2a525c9.chunk.js"
   },
   {
-    "revision": "9a39ae1d4f55d4413436",
-    "url": "/world/static/js/runtime~main.9a39ae1d.js"
+    "revision": "db0a20687b5847d66d2e",
+    "url": "/world/static/js/runtime~main.db0a2068.js"
   },
   {
     "revision": "bdadb6ce95c5a2e7b673940721450d3c",
@@ -88,19 +88,19 @@ self.__precacheManifest = [
     "url": "/world/static/media/fa-regular-400.6993975c.svg"
   },
   {
-    "revision": "48f54f63d7711d0912a9a10205538fc4",
-    "url": "/world/static/media/fa-solid-900.48f54f63.ttf"
+    "revision": "f29ad0031ad2c1c14b771ce504e2bfa7",
+    "url": "/world/static/media/fa-solid-900.f29ad003.eot"
   },
   {
-    "revision": "222af882db55eb79c821",
-    "url": "/world/static/css/main.b53c182f.chunk.css"
+    "revision": "74cb844ddcd195de8344",
+    "url": "/world/static/css/main.1d4602b2.chunk.css"
   },
   {
     "revision": "dd7efa37330cd76924bf",
     "url": "/world/static/css/11.8ffae01c.chunk.css"
   },
   {
-    "revision": "4c0c73b03c6a38719a0d6302096d8eb5",
+    "revision": "d8e0dbbf7dfcd535dae40847a2d6502a",
     "url": "/world/index.html"
   }
 ];
