@@ -2,7 +2,7 @@
   "static/js/0.15c4d366.chunk.js": "/world/static/js/0.15c4d366.chunk.js",
   "static/js/1.a8adb1a8.chunk.js": "/world/static/js/1.a8adb1a8.chunk.js",
   "main.css": "/world/static/css/main.6bce8d8f.chunk.css",
-  "main.js": "/world/static/js/main.3f350db4.chunk.js",
+  "main.js": "/world/static/js/main.127edb7e.chunk.js",
   "static/js/3.94abd320.chunk.js": "/world/static/js/3.94abd320.chunk.js",
   "static/js/4.9f1c8d4a.chunk.js": "/world/static/js/4.9f1c8d4a.chunk.js",
   "static/js/5.406cd1c7.chunk.js": "/world/static/js/5.406cd1c7.chunk.js",
@@ -16,6 +16,6 @@
   "runtime~main.js": "/world/static/js/runtime~main.b2b81abd.js",
   "static/media/style.scss": "/world/static/media/fa-regular-400.0b5e3a54.woff",
   "index.html": "/world/index.html",
-  "precache-manifest.52ca0b142dcdd63fa7bab6dcec7060d2.js": "/world/precache-manifest.52ca0b142dcdd63fa7bab6dcec7060d2.js",
+  "precache-manifest.0be52a5d982adcacb1d968bf4608898b.js": "/world/precache-manifest.0be52a5d982adcacb1d968bf4608898b.js",
   "service-worker.js": "/world/service-worker.js"
 }
