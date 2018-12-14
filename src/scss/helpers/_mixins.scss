@@ -1,0 +1,34 @@
+//
+// SASS MIXIN
+// --------------------------------------------------
+/* stylelint-disable */
+
+// clearfix
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+// ellipsis
+@mixin ellipsis {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+// hidden
+@mixin hidden {
+	position: absolute;
+	left: -9999px;
+}
+
+// placeholderColor
+@mixin placeholderColor($color: #aaa) {
+	&::-webkit-input-placeholder { color: $color; }
+	&:-ms-input-placeholder { color: $color; }
+	&::-moz-placeholder { color: $color; opacity: 1; }
+	&:-moz-placeholder { color: $color; opacity: 1; }
+}

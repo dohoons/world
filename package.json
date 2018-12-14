@@ -1,0 +1,61 @@
+{
+  "name": "world",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "axios": "^0.18.0",
+    "history": "^4.7.2",
+    "i18next": "^12.1.0",
+    "immer": "^1.7.4",
+    "js-cookie": "^2.2.0",
+    "lodash-es": "^4.17.11",
+    "markdown": "^0.5.0",
+    "node-sass": "^4.10.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.1",
+    "react-alert": "^4.0.4",
+    "react-alert-template-basic": "^1.0.0",
+    "react-app-rewire-hot-loader": "^1.0.3",
+    "react-app-rewired": "^1.6.2",
+    "react-dom": "^16.6.1",
+    "react-helmet": "^5.2.0",
+    "react-hot-loader": "^4.3.12",
+    "react-i18next": "^8.3.8",
+    "react-js-pagination": "^3.0.2",
+    "react-loadable": "^5.5.0",
+    "react-placeholder": "^3.0.1",
+    "react-redux": "^5.1.0",
+    "react-router-dom": "^4.3.1",
+    "react-router-scroll-4": "^1.0.0-beta.2",
+    "react-scripts": "2.1.1",
+    "react-transition-group": "^2.5.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^5.1.1",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.1.1",
+    "validator": "^10.9.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build && shx cp build/index.html build/404.html",
+    "deploy": "gh-pages -d build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "homepage": "https://dohoons.github.io/world",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "ie >= 9",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "shx": "^0.3.2"
+  }
+}

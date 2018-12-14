@@ -1,0 +1,9 @@
+.page-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  .btn ~ .btn {
+    margin-left: 7px;
+  }
+}

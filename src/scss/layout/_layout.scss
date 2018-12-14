@@ -1,0 +1,23 @@
+.container {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 5% 50px;
+}
+
+.page-loading {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 5% 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px 15px 50px;
+  }
+
+  .page-loading {
+    padding: 20px 15px 50px;
+  }
+}

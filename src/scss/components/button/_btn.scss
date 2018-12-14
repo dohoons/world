@@ -1,0 +1,95 @@
+//
+// 기본 버튼
+// --------------------------------------------------
+
+/* 기본 버튼 */
+.btn {
+	$height: 40px;
+	$padding-lr: 24px;
+
+	box-sizing: border-box;
+	display: inline-block;
+	height: $height;
+	line-height: $height - 2;
+	padding: 0 $padding-lr;
+	vertical-align: middle;
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #fff;
+	white-space: nowrap;
+	background: #5f6e78;
+	border: 1px solid #5f6e78;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: color .2s, background .2s, border .2s;
+
+	&:hover, &:focus { background-color: #374047; }
+
+	/* button 태그 클릭 시 텍스트 밀림 제거 */
+	&:focus span,
+	&:active span {
+		position: relative;
+		top: 0;
+		left: 0;
+	}
+
+	// primary
+	&.primary {
+		color: #fff;
+		background: #004d84;
+		border-color: #004d84;
+		
+		&:hover, &:focus { background-color: #00365d; }
+	}
+
+	// 보더타입
+	&.light {
+		color: #888;
+		background: #fff;
+		border-color: #acb4b9;
+		
+		&:hover, &:focus { color: #374047; background-color: #f8f9f9; border-color: #7f8a93; }
+		// &:hover, &:focus { color: #fff; background-color: #acb4b9; }
+
+		&.primary {
+			color: #004d84;
+			border-color: #004d84;
+
+			&:hover, &:focus { color: #00365d; background-color: #f8f9f9; border-color: #00365d; }
+			// &:hover, &:focus { color: #fff; background-color: #00365d; }
+		}
+	}
+  
+	&.large {
+		$height: 50px;
+		$padding-lr: 40px;
+
+		height: $height;
+		line-height: $height - 2;
+		padding: 0 $padding-lr;
+	}
+
+  @media screen and (max-width: 768px) {
+    $height: 35px;
+    $padding-lr: 15px;
+
+    height: $height;
+    line-height: $height - 2;
+    padding: 0 $padding-lr;
+    font-size: 14px;
+
+    &.large {
+      $height: 40px;
+      $padding-lr: 30px;
+
+      height: $height;
+      line-height: $height - 2;
+      padding: 0 $padding-lr;
+      font-size: 15px;
+    }
+  }
+}
+
+a.btn { text-decoration: none !important; }

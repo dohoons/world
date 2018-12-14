@@ -1,0 +1,16 @@
+@import './scss/helpers/functions';
+@import './scss/helpers/mixins';
+
+@import './scss/base/reset';
+@import './scss/base/com';
+
+@import './scss/vendors/fontawesome/fontawesome';
+@import './scss/vendors/fontawesome/solid';
+@import './scss/vendors/fontawesome/regular';
+
+@import './scss/components/area/page-foot';
+@import './scss/components/button/btn';
+@import './scss/components/form/common-form';
+@import './scss/components/input/txt';
+
+@import './scss/layout/layout';

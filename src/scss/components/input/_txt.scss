@@ -1,0 +1,139 @@
+//
+// 인풋
+// --------------------------------------------------
+
+/* 공통 인풋 */
+input.txt {
+	$height: 30px;
+	$padding-lr: 10px;
+
+	box-sizing: border-box;
+	height: $height;
+	line-height: $height;
+	padding: 0 $padding-lr;
+	vertical-align: middle;
+	font-weight: 400;
+	font-size: 14px;
+	color: #5f6e78;
+	background: #fff;
+	border: 0;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+
+  @include placeholderColor(#acb4b9);
+	
+	&:hover {
+		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+	}
+	&:focus {
+		outline: 0;
+		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px #7db9e5;
+	}
+
+	&[readonly] {
+		background-color: #f5f5f5;
+	}
+
+	&[disabled] {
+		background-color: #f5f5f5;
+	}
+
+	// 100% 사이즈
+	&.block {
+		width: 100%;
+	}
+
+  &.large {
+    $height: 50px;
+    $padding-lr: 15px;
+
+    height: $height;
+    line-height: $height;
+	  padding: 0 $padding-lr;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+    $height: 35px;
+    $padding-lr: 10px;
+
+    height: $height;
+    line-height: $height;
+	  padding: 0 $padding-lr;
+    font-size: 14px;
+
+    &.large {
+      $height: 40px;
+      $padding-lr: 10px;
+
+      height: $height;
+      line-height: $height;
+      padding: 0 $padding-lr;
+      font-size: 15px;
+    }
+  }
+}
+
+/* 텍스트 인풋 - textaera type */
+textarea.txt {
+	$padding-tb: 6px;
+	$padding-lr: 10px;
+
+	box-sizing: border-box;
+	height: auto;
+	padding: $padding-tb $padding-lr;
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 14px;
+	color: #5f6e78;
+	resize: none;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+
+  @include placeholderColor(#acb4b9);
+	
+	&:hover {
+		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+	}
+	&:focus {
+		outline: 0;
+		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px #7db9e5;
+	}
+
+	&[readonly] {
+		background-color: #f5f5f5;
+	}
+
+	&[disabled] {
+		background-color: #f5f5f5;
+	}
+
+	// 100% 사이즈
+	&.block {
+		width: 100%;
+	}
+
+  &.large {
+	  $padding-tb: 10px;
+    $padding-lr: 15px;
+
+	  padding: $padding-tb $padding-lr;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+	  $padding-tb: 6px;
+    $padding-lr: 10px;
+
+    padding: $padding-tb $padding-lr;
+    font-size: 14px;
+
+    &.large {
+      $padding-tb: 10px;
+      $padding-lr: 10px;
+
+      padding: $padding-tb $padding-lr;
+      font-size: 15px;
+    }
+  }
+}

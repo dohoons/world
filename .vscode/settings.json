@@ -1,0 +1,11 @@
+{
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+  "stylelint.enable": false,
+  "emmet.includeLanguages": {
+      "javascriptreact": "css"
+  },
+  "files.associations": {
+    "*.js": "javascriptreact"
+  }
+}
