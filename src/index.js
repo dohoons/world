@@ -3,7 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Router } from 'react-router-dom'
-import { ScrollContext } from 'react-router-scroll-4'
+import { ScrollManager, WindowScroller } from 'react-scroll-manager'
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import { Provider as AlertProvider } from 'react-alert'
@@ -38,15 +38,17 @@ const renderApp = Component => {
   render(
     <AppContainer>
       <Provider store={store}>
-        <Router history={history}>
-          <ScrollContext>
-            <AlertProvider template={AlertTemplate} {...alertOptions}>
-              <I18nextProvider i18n={i18next}>
-                <Component />
-              </I18nextProvider>
-            </AlertProvider>
-          </ScrollContext>
-        </Router>
+        <ScrollManager history={history}>
+          <Router history={history}>
+            <WindowScroller>
+              <AlertProvider template={AlertTemplate} {...alertOptions}>
+                <I18nextProvider i18n={i18next}>
+                  <Component />
+                </I18nextProvider>
+              </AlertProvider>
+            </WindowScroller>
+          </Router>
+        </ScrollManager>
       </Provider>
     </AppContainer>,
     document.getElementById('root'),
