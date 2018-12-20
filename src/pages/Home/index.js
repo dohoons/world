@@ -25,10 +25,10 @@ class Home extends Component {
         <div className="container">
           <div className="body">
             <Switch>
-              <Route path="/articles/:page?" component={() => <MainList />} />
-              <Route path="/feed/:page?" component={needAuth(() => <MainList />)} />
-              <Route path="/tag/:tag/:page?" component={() => <TagPage />} />
-              <Route component={() => <MainList />} />
+              <Route path="/articles/:page?" component={MainList} />
+              <Route path="/feed/:page?" component={needAuth(MainList)} />
+              <Route path="/tag/:tag/:page?" component={TagPage} />
+              <Route component={MainList} />
             </Switch>
           </div>
           <div className="side">

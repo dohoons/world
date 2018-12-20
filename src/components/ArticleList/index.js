@@ -35,7 +35,8 @@ class ArticleList extends Component {
   componentDidUpdate(prevProps) {
     if (
       prevProps.page !== this.props.page ||
-      prevProps.filter !== this.props.filter
+      prevProps.filter !== this.props.filter || 
+      prevProps.tag !== this.props.tag
     ) {
       this.fetch(parseInt(this.props.page))
     }
