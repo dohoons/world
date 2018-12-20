@@ -31,8 +31,8 @@ class Article extends Component {
   }
 
   delete = async () => {
-    const { slug, t } = this.props.match.params
-    const { history } = this.props
+    const { slug } = this.props.match.params
+    const { history, t } = this.props
 
     if(window.confirm(t('confirmDelete'))) {
       try {
