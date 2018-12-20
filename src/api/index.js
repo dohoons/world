@@ -3,7 +3,7 @@ import axiosCancel from 'axios-cancel'
 import Cookies from 'js-cookie'
 
 axiosCancel(axios, {
-  debug: process.env.NODE_ENV === 'development'
+  debug: false // process.env.NODE_ENV === 'development'
 })
 
 const http = axios.create({ baseURL: 'https://conduit.productionready.io/api' })
