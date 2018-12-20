@@ -13,7 +13,7 @@ const PROFILE_UNFOLLOW_SUCCESS = 'PROFILE_UNFOLLOW_SUCCESS'
 
 export const fetch = (username) => ({
   type: PROFILE_LOAD,
-  payload: API.Profile.get({ username })
+  payload: API.Profile.get({ username, requestId: 'PROFILE_LOAD' })
 })
 
 export const reset = () => ({
@@ -53,6 +53,7 @@ export default (state = initialState, action) => {
         return
 
       case PROFILE_UNLOAD:
+        API.axios.cancel('PROFILE_LOAD')
         draft.loading = false
         draft.profile = {}
         return

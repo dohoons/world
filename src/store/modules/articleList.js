@@ -18,7 +18,10 @@ const apiName = {
 
 export const fetch = ({ filter, param }) => ({
   type: ARTICLE_LIST_LOAD,
-  payload: API.Articles[apiName[filter]]({ ...param })
+  payload: API.Articles[apiName[filter]]({ 
+    ...param,
+    requestId: 'ARTICLE_LIST_LOAD'
+  }),
 })
 
 export const reset = () => ({
@@ -52,6 +55,7 @@ export default (state = initialState, action) => {
         return
 
       case ARTICLE_LIST_UNLOAD:
+        API.axios.cancel('ARTICLE_LIST_LOAD')
         draft.loading = false
         draft.articles = []
         draft.articlesCount = 0

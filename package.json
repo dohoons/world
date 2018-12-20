@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
+    "axios-cancel": "^0.2.2",
     "history": "^4.7.2",
     "i18next": "^12.1.0",
     "immer": "^1.7.4",
@@ -31,7 +32,6 @@
     "react-scroll-manager": "^1.0.0",
     "react-transition-group": "^2.5.0",
     "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.1",

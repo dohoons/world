@@ -12,8 +12,8 @@ const DELETE_COMMENT = 'DELETE_COMMENT'
 export const fetch = (slug) => ({
   type: ARTICLE_PAGE_LOAD,
   payload: Promise.all([
-    API.Articles.get({ slug }),
-    API.Comments.get({ slug }),
+    API.Articles.get({ slug, requestId: 'ARTICLE_PAGE_LOAD' }),
+    API.Comments.get({ slug, requestId: 'ARTICLE_PAGE_LOAD' }),
   ])
 })
 
@@ -49,6 +49,7 @@ export default (state = initialState, action) => {
         return
 
       case ARTICLE_PAGE_UNLOAD:
+        API.axios.cancel('ARTICLE_PAGE_LOAD')
         draft.article = null
         draft.comments = []
         return
