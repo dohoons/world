@@ -16,11 +16,12 @@ const apiName = {
   tag: 'byTag',
 }
 
-export const fetch = ({ filter, param }) => ({
+export const fetch = ({ filter, param, useCache = false }) => ({
   type: ARTICLE_LIST_LOAD,
   payload: API.Articles[apiName[filter]]({ 
     ...param,
-    requestId: 'ARTICLE_LIST_LOAD'
+    requestId: 'ARTICLE_LIST_LOAD',
+    config: { cache: useCache }
   }),
 })
 

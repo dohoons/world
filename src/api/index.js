@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { cacheAdapterEnhancer } from 'axios-extensions'
 import axiosCancel from 'axios-cancel'
 import Cookies from 'js-cookie'
 
@@ -6,7 +7,10 @@ axiosCancel(axios, {
   debug: false // process.env.NODE_ENV === 'development'
 })
 
-const http = axios.create({ baseURL: 'https://conduit.productionready.io/api' })
+const http = axios.create({
+  baseURL: 'https://conduit.productionready.io/api',
+  adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false })
+})
 
 const CancelToken = axios.CancelToken
 

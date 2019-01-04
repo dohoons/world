@@ -6,6 +6,7 @@
     "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
     "axios-cancel": "^0.2.2",
+    "axios-extensions": "^3.0.5",
     "history": "^4.7.2",
     "i18next": "^12.1.0",
     "immer": "^1.7.4",
