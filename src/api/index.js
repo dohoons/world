@@ -14,7 +14,8 @@ const http = axios.create({
 })
 
 const historyPopCache = () => ({
-  cache: history.action === 'POP'
+  cache: true,
+  forceUpdate: history.action === 'PUSH',
 })
 
 const CancelToken = axios.CancelToken
