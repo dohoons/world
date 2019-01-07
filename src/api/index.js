@@ -62,7 +62,7 @@ const Articles = {
     return http.get(`/articles?author=${encodeURIComponent(username)}&${limit(5, page)}`, { ...config, ...historyPopCache() })
   },
   favoritedBy: ({ username, page, config }) => {
-    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, { ...config, ...historyPopCache() })}`, config)
+    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, page)}`, { ...config, ...historyPopCache() })
   },
   byTag: ({ tag, page, config }) => {
     return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, { ...config, ...historyPopCache() })
