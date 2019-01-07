@@ -7,43 +7,40 @@ const PageLoading = (
     <ReactPlaceholder showLoadingAnimation={true} type='text' ready={false} rows={20} color='#E0E0E0'><div></div></ReactPlaceholder>
   </div>
 )
-
-export const Home = loadable(
-  () => import('./Home'),
+ 
+const AsyncPage = loadable(
+  props => import(`./${props.page}`),
   { fallback: PageLoading }
 )
 
-export const Login = loadable(
-  () => import('./Login'),
-  { fallback: PageLoading }
+export const Home = () => (
+  <AsyncPage page='Home' />
 )
 
-export const Logout = loadable(
-  () => import('./Logout'),
-  { fallback: PageLoading }
+export const Login = () => (
+  <AsyncPage page='Login' />
 )
 
-export const Join = loadable(
-  () => import('./Join'),
-  { fallback: PageLoading }
+export const Logout = () => (
+  <AsyncPage page='Logout' />
 )
 
-export const Form = loadable(
-  () => import('./Form'),
-  { fallback: PageLoading }
+export const Join = () => (
+  <AsyncPage page='Join' />
 )
 
-export const Article = loadable(
-  () => import('./Article'),
-  { fallback: PageLoading }
+export const Form = () => (
+  <AsyncPage page='Form' />
 )
 
-export const Profile = loadable(
-  () => import('./Profile'),
-  { fallback: PageLoading }
+export const Article = () => (
+  <AsyncPage page='Article' />
 )
 
-export const ProfileEdit = loadable(
-  () => import('./ProfileEdit'),
-  { fallback: PageLoading }
+export const Profile = () => (
+  <AsyncPage page='Profile' />
+)
+
+export const ProfileEdit = () => (
+  <AsyncPage page='ProfileEdit' />
 )
