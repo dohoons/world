@@ -2,6 +2,7 @@ import axios from 'axios'
 import { cacheAdapterEnhancer } from 'axios-extensions'
 import axiosCancel from 'axios-cancel'
 import Cookies from 'js-cookie'
+import { history } from 'index'
 
 axiosCancel(axios, {
   debug: false // process.env.NODE_ENV === 'development'
@@ -41,26 +42,26 @@ const Auth = {
 
 const Tags = {
   getAll: () => {
-    return http.get('/tags')
+    return http.get('/tags', { cache: history.action === 'POP' })
   }
 }
 
 const limit = (count, page) => `limit=${count}&offset=${page ? page * count : 0}`
 const Articles = {
   all: ({ page, config }) => {
-    return http.get(`/articles?${limit(10, page)}`, config)
+    return http.get(`/articles?${limit(10, page)}`, { ...config, cache: history.action === 'POP' })
   },
   feed: ({ page, config }) => {
-    return http.get(`/articles/feed?${limit(10, page)}`, config)
+    return http.get(`/articles/feed?${limit(10, page)}`, { ...config, cache: history.action === 'POP' })
   },
   byAuthor: ({ username, page, config }) => {
-    return http.get(`/articles?author=${encodeURIComponent(username)}&${limit(5, page)}`, config)
+    return http.get(`/articles?author=${encodeURIComponent(username)}&${limit(5, page)}`, { ...config, cache: history.action === 'POP' })
   },
   favoritedBy: ({ username, page, config }) => {
-    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, page)}`, config)
+    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, { ...config, cache: history.action === 'POP' })}`, config)
   },
   byTag: ({ tag, page, config }) => {
-    return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, config)
+    return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, { ...config, cache: history.action === 'POP' })
   },
   favorite: ({ slug, config }) => {
     return http.post(`/articles/${slug}/favorite`, config)
@@ -78,13 +79,13 @@ const Articles = {
     return http.delete(`/articles/${slug}`, config)
   },
   get: ({ slug, config }) => {
-    return http.get(`/articles/${slug}`, config)
+    return http.get(`/articles/${slug}`, { ...config, cache: history.action === 'POP' })
   },
 }
 
 const Comments = {
   get: ({ slug, config }) => {
-    return http.get(`/articles/${slug}/comments`, config)
+    return http.get(`/articles/${slug}/comments`, { ...config, cache: history.action === 'POP' })
   },
   create: ({ slug, comment, config }) => {
     return http.post(`/articles/${slug}/comments`, { comment }, config)
@@ -96,7 +97,7 @@ const Comments = {
 
 const Profile = {
   get: ({ username, config }) => {
-    return http.get(`/profiles/${username}`, config)
+    return http.get(`/profiles/${username}`, { ...config, cache: history.action === 'POP' })
   },
   follow: ({ username, config }) => {
     return http.post(`/profiles/${username}/follow`, config)

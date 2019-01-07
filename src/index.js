@@ -25,7 +25,7 @@ i18next.init({
     },
 })
 
-const history = createBrowserHistory({ basename: process.env.PUBLIC_URL })
+export const history = createBrowserHistory({ basename: process.env.PUBLIC_URL })
 
 const alertOptions = {
   position: 'bottom center',

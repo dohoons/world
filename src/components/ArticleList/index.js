@@ -52,7 +52,6 @@ class ArticleList extends Component {
     articleListActions.fetch({
       filter,
       param: { username, page: page - 1, tag },
-      useCache: this.props.history.action === 'POP'
     })
   }
 

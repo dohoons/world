@@ -22,7 +22,7 @@ class Article extends Component {
   componentDidMount() {
     const { articleActions } = this.props
     articleActions.reset()
-    articleActions.fetch(this.props.match.params.slug, this.props.history.action === 'POP')
+    articleActions.fetch(this.props.match.params.slug)
   }
 
   componentWillUnmount() {

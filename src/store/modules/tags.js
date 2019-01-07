@@ -1,7 +1,7 @@
 import produce from "immer"
 import API from 'api'
 
-const TAGS_LOAD = 'TAGS_LOAD' // 아 쉬바
+const TAGS_LOAD = 'TAGS_LOAD'
 const TAGS_LOAD_PENDING = 'TAGS_LOAD_PENDING'
 const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS'
 const TAGS_LOAD_FAILURE = 'TAGS_LOAD_FAILURE'
