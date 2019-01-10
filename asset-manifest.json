@@ -27,6 +27,6 @@
   "runtime~main.js": "/world/static/js/runtime~main.f04430b1.js",
   "static/media/style.scss": "/world/static/media/fa-regular-400.0b5e3a54.woff",
   "index.html": "/world/index.html",
-  "precache-manifest.81320a56c0da824b99d5dfb2a527099c.js": "/world/precache-manifest.81320a56c0da824b99d5dfb2a527099c.js",
+  "precache-manifest.eac315bc33b243fd99749b48f6329c88.js": "/world/precache-manifest.eac315bc33b243fd99749b48f6329c88.js",
   "service-worker.js": "/world/service-worker.js"
 }
