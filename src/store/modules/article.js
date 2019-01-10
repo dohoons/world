@@ -1,5 +1,5 @@
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 import { markdown } from 'markdown'
 
 const ARTICLE_PAGE_LOAD = 'ARTICLE_PAGE_LOAD'

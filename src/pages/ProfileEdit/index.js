@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import produce from "immer"
-import * as authActions from 'store/modules/auth'
+import * as authActions from '~/store/modules/auth'
 import validator from 'validator'
 
 import Page from './style'

@@ -1,5 +1,5 @@
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 
 const TAGS_LOAD = 'TAGS_LOAD'
 const TAGS_LOAD_PENDING = 'TAGS_LOAD_PENDING'

@@ -5,16 +5,16 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
-import API from 'api'
+import API from '~/api'
 import Cookies from 'js-cookie'
-import * as authActions from 'store/modules/auth'
-import needAuth from 'util/needAuth'
+import * as authActions from '~/store/modules/auth'
+import needAuth from '~/util/needAuth'
 
 import "react-placeholder/lib/reactPlaceholder.css"
 import './style.scss'
 
-import Header from 'components/Header'
-import Footer from 'components/Footer'
+import Header from '~/components/Header'
+import Footer from '~/components/Footer'
 
 import {
   Home,
@@ -25,7 +25,7 @@ import {
   Article,
   Profile,
   ProfileEdit,
-} from 'pages'
+} from '~/pages'
 
 class App extends Component {
   constructor(props) {

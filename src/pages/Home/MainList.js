@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 
-import ArticleList from 'components/ArticleList'
-import TabNav from 'components/TabNav'
+import ArticleList from '~/components/ArticleList'
+import TabNav from '~/components/TabNav'
 
 class MainList extends Component {
   isRoot = () => {

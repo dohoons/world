@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 
-import ArticleList from 'components/ArticleList'
+import ArticleList from '~/components/ArticleList'
 import { TagTitle } from './style'
 
 class TagPage extends Component {

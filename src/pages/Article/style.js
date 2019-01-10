@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import TagStyle from 'components/TagList/style'
+import TagStyle from '~/components/TagList/style'
 
 export const ArticleHeader = styled.div`
   color: #fff;

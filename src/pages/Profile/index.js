@@ -4,9 +4,9 @@ import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 
-import ProfileInfo from 'components/ProfileInfo'
-import ArticleList from 'components/ArticleList'
-import TabNav from 'components/TabNav'
+import ProfileInfo from '~/components/ProfileInfo'
+import ArticleList from '~/components/ArticleList'
+import TabNav from '~/components/TabNav'
 
 import Page from './style'
 

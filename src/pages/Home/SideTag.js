@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
-import * as tagsActions from 'store/modules/tags'
+import * as tagsActions from '~/store/modules/tags'
 
-import TagList from 'components/TagList'
+import TagList from '~/components/TagList'
 
 class SideTag extends Component {
   componentDidMount() {

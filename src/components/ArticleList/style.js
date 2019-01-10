@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import AuthorInfo from 'components/AuthorInfo/style'
-import TagList from 'components/TagList/style'
-import BtnLike from 'components/BtnLike/style'
+import AuthorInfo from '~/components/AuthorInfo/style'
+import TagList from '~/components/TagList/style'
+import BtnLike from '~/components/BtnLike/style'
 
 export const Total = styled.p`
   margin-bottom: 10px;

@@ -3,7 +3,7 @@ import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 import validator from 'validator'
 import { withAlert } from 'react-alert'
 

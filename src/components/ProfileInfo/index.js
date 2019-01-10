@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
-import * as profileAction from 'store/modules/profile'
-import goLogin from 'util/goLogin'
+import * as profileAction from '~/store/modules/profile'
+import goLogin from '~/util/goLogin'
 
 import ProfileInfo from './style'
 

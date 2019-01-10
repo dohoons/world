@@ -1,5 +1,5 @@
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 
 const ARTICLE_LIST_LOAD = 'ARTICLE_LIST_LOAD'
 const ARTICLE_LIST_LOAD_PENDING = 'ARTICLE_LIST_LOAD_PENDING'

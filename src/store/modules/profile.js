@@ -1,5 +1,5 @@
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 
 const PROFILE_LOAD = 'PROFILE_LOAD'
 const PROFILE_LOAD_PENDING = 'PROFILE_LOAD_PENDING'

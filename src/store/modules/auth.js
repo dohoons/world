@@ -1,5 +1,5 @@
 import produce from "immer"
-import API from 'api'
+import API from '~/api'
 import Cookies from 'js-cookie'
 
 const LOGIN = 'LOGIN'

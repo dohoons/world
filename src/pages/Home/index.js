@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
-import needAuth from 'util/needAuth'
+import needAuth from '~/util/needAuth'
 
 import TopVisual from './TopVisual'
 import SideTag from './SideTag'

@@ -3,13 +3,13 @@ import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import compose from 'lodash-es/flowRight'
-import * as articleListActions from 'store/modules/articleList'
+import * as articleListActions from '~/store/modules/articleList'
 
 import ReactPlaceholder from 'react-placeholder'
-import AuthorInfo from 'components/AuthorInfo'
-import BtnLike from 'components/BtnLike'
-import Pagination from "components/Pagination"
-import TagList from "components/TagList"
+import AuthorInfo from '~/components/AuthorInfo'
+import BtnLike from '~/components/BtnLike'
+import Pagination from "~/components/Pagination"
+import TagList from "~/components/TagList"
 import Articles, { Total, Loading } from './style'
 
 const ListPlaceHolder = () => (

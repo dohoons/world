@@ -19,6 +19,7 @@
     "react": "^16.6.1",
     "react-alert": "^4.0.4",
     "react-alert-template-basic": "^1.0.0",
+    "react-app-rewire-aliases": "^0.2.0",
     "react-app-rewire-hot-loader": "^1.0.3",
     "react-app-rewired": "^1.6.2",
     "react-dom": "^16.6.1",

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { cacheAdapterEnhancer } from 'axios-extensions'
 import axiosCancel from 'axios-cancel'
 import Cookies from 'js-cookie'
-import { history } from 'index'
+import { history } from '~/index'
 
 axiosCancel(axios, {
   debug: false // process.env.NODE_ENV === 'development'

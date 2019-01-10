@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withNamespaces, Trans } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
-import * as articleActions from 'store/modules/article'
+import * as articleActions from '~/store/modules/article'
 import produce from "immer"
 import { withAlert } from 'react-alert'
 

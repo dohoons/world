@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
-import API from 'api'
+import API from '~/api'
 import produce from "immer"
-import goLogin from 'util/goLogin'
+import goLogin from '~/util/goLogin'
 
 import Button from './style'
 
