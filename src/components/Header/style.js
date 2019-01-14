@@ -34,6 +34,8 @@ export default styled.header`
     display: flex;
     margin: 0 0 0 auto;
     padding: 0;
+    position: relative;
+    z-index: 1;
 
     li {
       flex-shrink: 0;
