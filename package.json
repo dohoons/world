@@ -37,7 +37,7 @@
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.1",
-    "validator": "^10.9.0"
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -58,6 +58,7 @@
   ],
   "devDependencies": {
     "gh-pages": "^2.0.1",
+    "react-app-rewire-webpack-bundle-analyzer": "^1.0.1",
     "shx": "^0.3.2"
   }
 }
