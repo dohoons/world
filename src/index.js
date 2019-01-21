@@ -15,6 +15,7 @@ import locale from './locale'
 
 import store from '~/store'
 import App from '~/App'
+import ErrorMonitoring from '~/util/ErrorMonitoring'
 
 i18next.init({
     interpolation: { escapeValue: false },
@@ -36,21 +37,23 @@ const alertOptions = {
 
 const renderApp = Component => {
   render(
-    <AppContainer>
-      <Provider store={store}>
-        <ScrollManager history={history}>
-          <Router history={history}>
-            <WindowScroller>
-              <AlertProvider template={AlertTemplate} {...alertOptions}>
-                <I18nextProvider i18n={i18next}>
-                  <Component />
-                </I18nextProvider>
-              </AlertProvider>
-            </WindowScroller>
-          </Router>
-        </ScrollManager>
-      </Provider>
-    </AppContainer>,
+    <ErrorMonitoring>
+      <AppContainer>
+        <Provider store={store}>
+          <ScrollManager history={history}>
+            <Router history={history}>
+              <WindowScroller>
+                <AlertProvider template={AlertTemplate} {...alertOptions}>
+                  <I18nextProvider i18n={i18next}>
+                    <Component />
+                  </I18nextProvider>
+                </AlertProvider>
+              </WindowScroller>
+            </Router>
+          </ScrollManager>
+        </Provider>
+      </AppContainer>
+    </ErrorMonitoring>,
     document.getElementById('root'),
   )
 }

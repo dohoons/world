@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@loadable/component": "^5.2.2",
+    "@sentry/browser": "^4.5.2",
     "axios": "^0.18.0",
     "axios-cancel": "^0.2.2",
     "axios-extensions": "^3.0.5",
