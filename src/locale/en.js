@@ -40,7 +40,7 @@ export default {
     },
     profileInfo: {
       follow: 'Follow',
-      unfollow: 'Follow',
+      unfollow: 'Unfollow',
       profile: 'Edit Profile',
     },
   },
