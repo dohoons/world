@@ -17,10 +17,13 @@ const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
 const UPDATE_FAILURE = 'UPDATE_FAILURE'
 const RESET_AUTH = 'RESET_AUTH'
 
-export const init = () => ({
-  type: LOGIN,
-  payload: API.Auth.current()
-})
+export const init = (token) => {
+  API.setToken(token)
+  return ({
+    type: LOGIN,
+    payload: API.Auth.current()
+  })
+}
 
 export const login = ({ email, password }) => ({
   type: LOGIN,

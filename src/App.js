@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
-import API from '~/api'
 import Cookies from 'js-cookie'
 import * as authActions from '~/store/modules/auth'
 import needAuth from '~/util/needAuth'
@@ -27,20 +26,23 @@ import {
   ProfileEdit,
 } from '~/pages'
 
+const token = Cookies.get('jwt')
+
 class App extends Component {
   constructor(props) {
     super(props)
 
-    const token = Cookies.get('jwt')
-
     if(token) {
-      API.setToken(token)
-      props.authActions.init()
+      props.authActions.init(token)
     }
   }
 
   render() {
-    const { lng } = this.props
+    const { lng, userInfo } = this.props
+
+    if(token && !userInfo.username) {
+      return null
+    }
     
     return (
       <>
@@ -67,6 +69,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  userInfo: state.auth.userInfo,
 })
 
 const mapDispatchToProps = (dispatch) => ({
