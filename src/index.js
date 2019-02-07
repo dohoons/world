@@ -3,6 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Router } from 'react-router-dom'
+import { LastLocationProvider } from 'react-router-last-location'
 import { ScrollManager, WindowScroller } from 'react-scroll-manager'
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
@@ -18,12 +19,12 @@ import App from '~/App'
 import ErrorMonitoring from '~/util/ErrorMonitoring'
 
 i18next.init({
-    interpolation: { escapeValue: false },
-    lng: localStorage.getItem('lang') || (navigator.language === 'ko-KR' ? 'ko' : 'en'),
-    resources: {
-      en: locale.en,
-      ko: locale.ko,
-    },
+  interpolation: { escapeValue: false },
+  lng: localStorage.getItem('lang') || (navigator.language === 'ko-KR' ? 'ko' : 'en'),
+  resources: {
+    en: locale.en,
+    ko: locale.ko,
+  },
 })
 
 export const history = createBrowserHistory({ basename: process.env.PUBLIC_URL })
@@ -42,13 +43,15 @@ const renderApp = Component => {
         <Provider store={store}>
           <ScrollManager history={history}>
             <Router history={history}>
-              <WindowScroller>
-                <AlertProvider template={AlertTemplate} {...alertOptions}>
-                  <I18nextProvider i18n={i18next}>
-                    <Component />
-                  </I18nextProvider>
-                </AlertProvider>
-              </WindowScroller>
+              <LastLocationProvider>
+                <WindowScroller>
+                  <AlertProvider template={AlertTemplate} {...alertOptions}>
+                    <I18nextProvider i18n={i18next}>
+                      <Component />
+                    </I18nextProvider>
+                  </AlertProvider>
+                </WindowScroller>
+              </LastLocationProvider>
             </Router>
           </ScrollManager>
         </Provider>

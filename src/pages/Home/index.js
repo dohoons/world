@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
@@ -12,32 +12,26 @@ import TagPage from './TagPage'
 
 import Page from './style'
 
-class Home extends Component {
-  render() {
-    const { t } = this.props
-
-    return (
-      <Page>
-        <Helmet>
-          <title>Home - {t('common:siteName')}</title>
-        </Helmet>
-        <TopVisual />
-        <div className="container">
-          <div className="body">
-            <Switch>
-              <Route path="/articles/:page?" component={MainList} />
-              <Route path="/feed/:page?" component={needAuth(MainList)} />
-              <Route path="/tag/:tag/:page?" component={TagPage} />
-              <Route component={MainList} />
-            </Switch>
-          </div>
-          <div className="side">
-            <SideTag />
-          </div>
+const Home = ({ t }) => {
+  return (
+    <Page>
+      <Helmet title={`Home - ${t('common:siteName')}`} />
+      <TopVisual />
+      <div className="container">
+        <div className="body">
+          <Switch>
+            <Route path="/articles/:page?" component={MainList} />
+            <Route path="/feed/:page?" component={needAuth(MainList)} />
+            <Route path="/tag/:tag/:page?" component={TagPage} />
+            <Route component={MainList} />
+          </Switch>
         </div>
-      </Page>
-    )
-  }
+        <div className="side">
+          <SideTag />
+        </div>
+      </div>
+    </Page>
+  )
 }
 
 export default compose(

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withNamespaces } from 'react-i18next'
@@ -15,44 +15,46 @@ import CommentForm from '~/components/CommentForm'
 import CommentList from '~/components/CommentList'
 import TagList from '~/components/TagList'
 import goLogin from '~/util/goLogin'
+import withPushBack from '~/util/withPushBack'
 
 import Page, { ArticleHeader, ArticleBody } from './style'
 
-class Article extends Component {
-  componentDidMount() {
-    const { articleActions } = this.props
-    articleActions.reset()
-    articleActions.fetch(this.props.match.params.slug)
-  }
+const Article = (props) => {
+  const { article, comments, user, articleActions, history, pushBack, t } = props
+  const { slug } = props.match.params
 
-  componentWillUnmount() {
-    const { articleActions } = this.props
+  useEffect(() => {
     articleActions.reset()
-  }
+    articleActions.fetch(slug)
 
-  delete = async () => {
-    const { slug } = this.props.match.params
-    const { history, t } = this.props
+    return () => {
+      articleActions.reset()
+    }
+  }, [slug, user])
+
+  const del = async () => {
+    if(!user) {
+      goLogin(props)
+      return
+    }
 
     if(window.confirm(t('confirmDelete'))) {
       try {
         await API.Articles.delete({ slug })
-        history.goBack()
+        pushBack()
       } catch(e) {
         if(e.response.data.errors.article[0] === 'not owned by user') {
-          this.props.alert.error(t('canAuthorDelete'))
+          props.alert.error(t('canAuthorDelete'))
         } else {
-          this.props.alert.error(t('errorDelete'))
+          props.alert.error(t('errorDelete'))
         }
       }
     }
   }
 
-  deleteComment = async (slug, commentId) => {
-    const { user, articleActions, t } = this.props
-
+  const delComment = async (slug, commentId) => {
     if(!user) {
-      goLogin(this.props)
+      goLogin(props)
       return
     }
 
@@ -61,68 +63,62 @@ class Article extends Component {
         await API.Comments.delete({ slug, commentId })
         articleActions.deleteComment(commentId)
       } catch (e) {
-        this.props.alert.error(t('components:comment.errorDelete'))
+        props.alert.error(t('components:comment.errorDelete'))
       }
     }
   }
 
-  render() {
-    const { history, article, comments, t } = this.props
-
-    if(!article) {
-      return <div className="page-loading">
-        <ReactPlaceholder showLoadingAnimation={true} type='text' ready={false} rows={20} color='#E0E0E0'><div></div></ReactPlaceholder>
-      </div>
-    }
-
-    return (
-      <Page>
-        <Helmet>
-          <title>{article.title} - {t('common:siteName')}</title>
-        </Helmet>
-        <ArticleHeader>
-          <div className="wrap">
-            <h2 className="subject">{article.title}</h2>
-            <p className="desc">{article.description}</p>
-            <div className="info">
-              <AuthorInfo
-                image={article.author.image}
-                username={article.author.username}
-                createdAt={article.createdAt}
-              />
-              <BtnLike
-                slug={article.slug}
-                favorited={article.favorited}
-                favoritesCount={article.favoritesCount}
-              />
-            </div>
-          </div>
-        </ArticleHeader>
-        <div className="container">
-        	<ArticleBody>
-            <div className="body" dangerouslySetInnerHTML={{ __html: article.body }}></div>
-            <TagList tags={article.tagList} />
-          </ArticleBody>
-          
-        	<div className="page-foot">
-        	  <button type="button" className="btn" onClick={() => history.push(`/form/${article.slug}`)}>{t('common:modify')}</button>{' '}
-        	  <button type="button" className="btn" onClick={this.delete}>{t('common:delete')}</button>{' '}
-        	  <button type="button" className="btn" onClick={history.goBack}>{t('common:list')}</button>
-        	</div>
-        	
-        	<h3 className="comment-title">{t('components:comment.heading')}</h3>
-        	<CommentForm
-        	  slug={article.slug}
-        	/>
-        	<CommentList
-        	  slug={article.slug}
-        	  comments={comments}
-        	  deleteComment={this.deleteComment}
-        	/>
-        </div>
-      </Page>
-    )
+  if(!article) {
+    return <div className="page-loading">
+      <ReactPlaceholder showLoadingAnimation={true} type='text' ready={false} rows={20} color='#E0E0E0'><div></div></ReactPlaceholder>
+    </div>
   }
+
+  return (
+    <Page>
+      <Helmet title={`${article.title} - ${t('common:siteName')}`} />
+      <ArticleHeader>
+        <div className="wrap">
+          <h2 className="subject">{article.title}</h2>
+          <p className="desc">{article.description}</p>
+          <div className="info">
+            <AuthorInfo
+              image={article.author.image}
+              username={article.author.username}
+              createdAt={article.createdAt}
+            />
+            <BtnLike
+              slug={article.slug}
+              favorited={article.favorited}
+              favoritesCount={article.favoritesCount}
+            />
+          </div>
+        </div>
+      </ArticleHeader>
+      <div className="container">
+        <ArticleBody>
+          <div className="body" dangerouslySetInnerHTML={{ __html: article.body }}></div>
+          <TagList tags={article.tagList} />
+        </ArticleBody>
+
+        <div className="page-foot">
+          <button type="button" className="btn" onClick={() => history.push(`/form/${article.slug}`)}>{t('common:modify')}</button>{' '}
+          <button type="button" className="btn" onClick={del}>{t('common:delete')}</button>{' '}
+          <button type="button" className="btn" onClick={history.goBack}>{t('common:list')}</button>
+        </div>
+
+        <h3 className="comment-title">{t('components:comment.heading')}</h3>
+        <CommentForm
+          slug={article.slug}
+        />
+        <CommentList
+          slug={article.slug}
+          comments={comments}
+          deleteComment={delComment}
+        />
+      </div>
+    </Page>
+  )
 }
 
 const mapStateToProps = (state) => ({
@@ -139,6 +135,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   withAlert,
+  withPushBack,
   connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('article'),
 )(Article)

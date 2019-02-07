@@ -31,7 +31,7 @@ export const login = ({ email, password }) => ({
 })
 
 export const logout = () => ({
-    type: LOGOUT
+  type: LOGOUT
 })
 
 export const register = ({ username, email, password }) => ({
@@ -45,7 +45,7 @@ export const update = ({ user }) => ({
 })
 
 export const resetAuth = () => ({
-    type: RESET_AUTH
+  type: RESET_AUTH
 })
 
 const initialState = {
@@ -93,6 +93,7 @@ export default (state = initialState, action) => {
         return
 
       case LOGOUT:
+        Cookies.remove('jwt')
         API.setToken(null)
         draft.user = null
         draft.userInfo = {}

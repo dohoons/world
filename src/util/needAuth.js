@@ -1,21 +1,18 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as authActions from '~/store/modules/auth'
 import goLogin from '~/util/goLogin'
 
 export default (WrappedComponent = null) => {
-  class needAuth extends Component {
-    constructor(props) {
-      super(props)
-
+  const needAuth = (props) => {
+    useEffect(() => {
       if(!props.user) {
         goLogin(props)
       }
-    }
-    render() {
-      return <WrappedComponent { ...this.props } />
-    }
+    }, [props.user])
+    
+    return <WrappedComponent { ...props } />
   }
 
   const mapStateToProps = (state) => ({

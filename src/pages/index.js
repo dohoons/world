@@ -21,10 +21,6 @@ export const Login = props => (
   <AsyncPage page='Login' {...props} />
 )
 
-export const Logout = props => (
-  <AsyncPage page='Logout' {...props} />
-)
-
 export const Join = props => (
   <AsyncPage page='Join' {...props} />
 )

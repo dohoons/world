@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
@@ -10,60 +10,51 @@ import TabNav from '~/components/TabNav'
 
 import Page from './style'
 
-class Profile extends Component {
-  isRoot = () => {
-    return this.props.match.params.filter === undefined
-  }
+const Profile = ({ match: { params }, history, t }) => {
+  const { username } = params
+  const isRoot = params.filter === undefined
 
-  getListType = () => {
-    const isArticles = this.isRoot() || this.props.match.params.filter === 'articles'
+  const getListType = () => {
+    const isArticles = isRoot || params.filter === 'articles'
     return isArticles ? 'articles' : 'favorites'
   }
 
-  getPageUrl = pageNumber => {
-    const { username } = this.props.match.params
-    return `/@${username}/${this.getListType()}/${pageNumber}`
+  const getPageUrl = pageNumber => {
+    return `/@${username}/${getListType()}/${pageNumber}`
   }
+
+  const handlePageChange = pageNumber => {
+    history.push(getPageUrl(pageNumber))
+  }
+
+  const listType = getListType()
+  const page = isRoot ? params.filter : params.page
   
-  handlePageChange = pageNumber => {
-    this.props.history.push(this.getPageUrl(pageNumber))
-  }
+  return (
+    <Page>
+      <Helmet title={`@${username} - ${t('common:siteName')}`} />
+      <ProfileInfo
+        username={username}
+      />
 
-  render() {
-    const { match: { params }, t } = this.props
-    const { username } = params
+      <div className="container">
+        <TabNav>
+          <li className={ listType === 'articles' ? 'selected' : '' }><Link to={`/@${username}`}>{t('myArticles')}</Link></li>
+          <li className={ listType === 'favorites' ? 'selected' : '' }><Link to={`/@${username}/favorites`}>{t('favoritedArticles')}</Link></li>
+        </TabNav>
 
-    const listType = this.getListType()
-    const page = this.isRoot() ? params.filter : params.page
-
-    return (
-      <Page>
-        <Helmet>
-          <title>@{username} - {t('common:siteName')}</title>
-        </Helmet>
-        <ProfileInfo
+        <ArticleList
           username={username}
+          filter={listType}
+          page={page}
+          handlePageChange={handlePageChange}
+          getPageUrl={getPageUrl}
+          useTotal={true}
+          countPerPage={5}
         />
-
-        <div className="container">
-          <TabNav>
-            <li className={ listType === 'articles' ? 'selected' : '' }><Link to={`/@${username}`}>{t('myArticles')}</Link></li>
-            <li className={ listType === 'favorites' ? 'selected' : '' }><Link to={`/@${username}/favorites`}>{t('favoritedArticles')}</Link></li>
-          </TabNav>
-  
-          <ArticleList
-            username={username}
-            filter={listType}
-            page={page}
-            handlePageChange={this.handlePageChange}
-            getPageUrl={this.getPageUrl}
-            useTotal={true}
-            countPerPage={5}
-          />
-        </div>
-      </Page>
-    )
-  }
+      </div>
+    </Page>
+  )
 }
 
 export default compose(

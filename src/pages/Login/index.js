@@ -1,31 +1,32 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withNamespaces, Trans } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
-import produce from "immer"
 import * as authActions from '~/store/modules/auth'
 import validator from 'validator'
 
 import Page from './style'
 
-class Login extends Component {
-  state = {
+const Login = (props) => {
+  const { user, loading, error, authActions, history, location, t } = props
+  const [ errors, setErrors ] = useState({})
+  const [ form, setForm ] = useState({
     email: '',
     password: '',
-    errors: {},
-  }
+  })
+  const { email, password } = form
 
-  componentWillUnmount() {
-    this.props.authActions.resetAuth()
-  }
+  useEffect(() => {
+    return () => {
+      authActions.resetAuth()
+    }
+  }, [user])
 
-  validate() {
+  const validate = () => {
     const errors = {}
-    const { t } = this.props
-    const { email, password } = this.state
 
     if(validator.isEmpty(email)) {
       errors.email = t('validate:emptyEmail')
@@ -43,105 +44,85 @@ class Login extends Component {
       return true
 
     } else {
-      this.setState(
-        produce(draft => {
-          draft.errors = errors
-        })
-      )
-
+      setErrors(errors)
       return false
     }
   }
 
-  submitHandle = (e) => {
-    const { authActions, history, location } = this.props
-    const { email, password } = this.state
-    
-    this.setState(
-      produce(draft => {
-        draft.errors = {}
-      })
-    )
+  const submitHandle = (e) => {
+    setErrors({})
 
-    if(this.validate()) {
+    if(validate()) {
       authActions.login({ email, password }).then(() => {
         if(!location.state) {
           history.goBack()
         }
-    })
+      })
     }
 
     e.preventDefault()
   }
 
-  changeInput = name => e => {
-    const { value } = e.target
-    this.setState(
-      produce(draft => {
-          draft[name] = value
-      })
-    )
+  const changeInput = name => e => {
+    setForm({
+      ...form,
+      [name]: e.target.value,
+    })
   }
-  
-  render() {
-    const { user, loading, error, location, t } = this.props
-    const { errors } = this.state
-    const { prevLocation, loginMsg } = location.state || { prevLocation: { pathname: '/' }, loginMsg: false }
-    const errorMsg = error[0] === 'email or password is invalid' ? t('invalidLoginInfo') : t('loginFail')
 
-    return user ?
-      <Redirect to={prevLocation} />
-      :
-      (
-        <Page className="container">
-          <Helmet>
-            <title>{t('heading')} - {t('common:siteName')}</title>
-          </Helmet>
-          <div className="common-form">
-            <h2 className="form-title">{t('heading')}</h2>
-            {
-              loginMsg &&
-              <p className="login-msg"><i className="fas fa-info-circle"></i> {t('needLogin')}</p> 
-            }
-            <form onSubmit={this.submitHandle}>
-              <fieldset>
-                <legend>{t('heading')}</legend>
-                <div className="form-row">
-                  <label>
-                    <span className="form-head">
-                      {t('email')}
-                    </span>
-                    <input type="email" placeholder={t('email')} className="txt large block" disabled={loading} onChange={this.changeInput('email')} />
-                  </label>
-                  { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
-                </div>
-                <div className="form-row">
-                  <label>
-                    <span className="form-head">
-                      {t('password')}
-                    </span>
-                    <input type="password" placeholder={t('password')} className="txt large block" disabled={loading} onChange={this.changeInput('password')} />
-                  </label>
-                  { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
-                </div>
-                { loading && <div>{t('sending')}</div> }
-                { error.length > 0 && <p className="input-error"><i className="fas fa-times-circle"></i> {errorMsg}</p> }
+  const { prevLocation, loginMsg } = location.state || { prevLocation: { pathname: '/' }, loginMsg: false }
+  const errorMsg = error[0] === 'email or password is invalid' ? t('invalidLoginInfo') : t('loginFail')
 
-                <div className="form-action">
-                  <button type="submit" className="btn large primary" disabled={loading}>{t('login')}</button>
-                </div>
-              </fieldset>
-            </form>
-            
-            <div className="info-box">
-              <Trans i18nKey="infoDesc">
-                처음 오셨나요? <Link to="/join">회원가입</Link>을 해주세요.
-              </Trans>
+  return user ?
+  <Redirect to={prevLocation} />
+  :
+  (
+    <Page className="container">
+      <Helmet title={`${t('heading')} - ${t('common:siteName')}`} />
+      <div className="common-form">
+        <h2 className="form-title">{t('heading')}</h2>
+        {
+          loginMsg &&
+          <p className="login-msg"><i className="fas fa-info-circle"></i> {t('needLogin')}</p> 
+        }
+        <form onSubmit={submitHandle}>
+          <fieldset>
+            <legend>{t('heading')}</legend>
+            <div className="form-row">
+              <label>
+                <span className="form-head">
+                  {t('email')}
+                </span>
+                <input type="email" placeholder={t('email')} className="txt large block" disabled={loading} onChange={changeInput('email')} />
+              </label>
+              { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
             </div>
-          </div>
-        </Page>
-      )
-  }
+            <div className="form-row">
+              <label>
+                <span className="form-head">
+                  {t('password')}
+                </span>
+                <input type="password" placeholder={t('password')} className="txt large block" disabled={loading} onChange={changeInput('password')} />
+              </label>
+              { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
+            </div>
+            { loading && <div>{t('sending')}</div> }
+            { error.length > 0 && <p className="input-error"><i className="fas fa-times-circle"></i> {errorMsg}</p> }
+
+            <div className="form-action">
+              <button type="submit" className="btn large primary" disabled={loading}>{t('login')}</button>
+            </div>
+          </fieldset>
+        </form>
+
+        <div className="info-box">
+          <Trans i18nKey="infoDesc">
+            처음 오셨나요? <Link to="/join">회원가입</Link>을 해주세요.
+          </Trans>
+        </div>
+      </div>
+    </Page>
+  )
 }
 
 const mapStateToProps = (state) => ({

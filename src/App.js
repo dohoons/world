@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -18,7 +18,6 @@ import Footer from '~/components/Footer'
 import {
   Home,
   Login,
-  Logout,
   Join,
   Form,
   Article,
@@ -26,46 +25,40 @@ import {
   ProfileEdit,
 } from '~/pages'
 
-const token = Cookies.get('jwt')
+const App = ({ lng, userInfo, authActions }) => {
+  const [ token, setToken ] = useState(Cookies.get('jwt'))
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-
+  useEffect(() => {
     if(token) {
-      props.authActions.init(token)
+      authActions.init(token)
     }
+    return () => {
+      setToken(undefined)
+    }
+  }, [token])
+
+  if(token && !userInfo.username) {
+    return null
   }
 
-  render() {
-    const { lng, userInfo } = this.props
-
-    if(token && !userInfo.username) {
-      return null
-    }
-    
-    return (
-      <>
-        <Helmet>
-          <html lang={lng} />
-        </Helmet>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/logout" component={Logout} />
-          <Route exact path="/join" component={Join} />
-          <Route path="/article/:slug" component={Article} />
-          <Route exact path="/form" component={needAuth(Form)} />
-          <Route path="/form/:slug" component={needAuth(Form)} />
-          <Route path="/@:username/:filter?/:page?" component={Profile} />
-          <Route path="/profile" component={needAuth(ProfileEdit)} />
-          <Route component={Home} />
-        </Switch>
-        <Footer />
-      </>
-    )
-  }
+  return (
+    <>
+      <Helmet htmlAttributes={{ lang : lng }} />
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/join" component={Join} />
+        <Route path="/article/:slug" component={Article} />
+        <Route exact path="/form" component={needAuth(Form)} />
+        <Route path="/form/:slug" component={needAuth(Form)} />
+        <Route path="/@:username/:filter?/:page?" component={Profile} />
+        <Route path="/profile" component={needAuth(ProfileEdit)} />
+        <Route component={Home} />
+      </Switch>
+      <Footer />
+    </>
+  )
 }
 
 const mapStateToProps = (state) => ({
