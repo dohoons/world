@@ -16,12 +16,12 @@ const apiName = {
   tag: 'byTag',
 }
 
-export const fetch = ({ filter, param, useCache = false }) => ({
+export const fetch = ({ filter, param, forceUpdate = false }) => ({
   type: ARTICLE_LIST_LOAD,
   payload: API.Articles[apiName[filter]]({ 
     ...param,
     requestId: 'ARTICLE_LIST_LOAD',
-    config: { cache: useCache }
+    config: { forceUpdate },
   }),
 })
 

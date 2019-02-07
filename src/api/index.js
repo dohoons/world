@@ -13,9 +13,10 @@ const http = axios.create({
   adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false })
 })
 
-const historyPopCache = forceUpdate => ({
+const historyPopCache = config => ({
+  forceUpdate: history.action === 'PUSH',
+  ...config,
   cache: true,
-  forceUpdate: history.action === 'PUSH' || forceUpdate === true,
 })
 
 const CancelToken = axios.CancelToken
@@ -31,8 +32,8 @@ const setToken = (token = null) => {
 }
 
 const Auth = {
-  current: ({ config, forceUpdate } = {}) => {
-    return http.get(`/user`, { ...config, ...historyPopCache(forceUpdate) })
+  current: ({ config } = {}) => {
+    return http.get(`/user`, historyPopCache(config))
   },
   login: ({ email, password, config } = {}) => {
     return http.post(`/users/login`, { user: { email, password } }, config)
@@ -46,27 +47,27 @@ const Auth = {
 }
 
 const Tags = {
-  getAll: ({ config, forceUpdate } = {}) => {
-    return http.get('/tags', { ...config, ...historyPopCache(forceUpdate) })
+  getAll: ({ config } = {}) => {
+    return http.get('/tags', historyPopCache(config))
   }
 }
 
 const limit = (count, page) => `limit=${count}&offset=${page ? page * count : 0}`
 const Articles = {
-  all: ({ page, config, forceUpdate } = {}) => {
-    return http.get(`/articles?${limit(10, page)}`, { ...config, ...historyPopCache(forceUpdate) })
+  all: ({ page, config } = {}) => {
+    return http.get(`/articles?${limit(10, page)}`, historyPopCache(config))
   },
-  feed: ({ page, config, forceUpdate } = {}) => {
-    return http.get(`/articles/feed?${limit(10, page)}`, { ...config, ...historyPopCache(forceUpdate) })
+  feed: ({ page, config } = {}) => {
+    return http.get(`/articles/feed?${limit(10, page)}`, historyPopCache(config))
   },
-  byAuthor: ({ username, page, config, forceUpdate } = {}) => {
-    return http.get(`/articles?author=${encodeURIComponent(username)}&${limit(5, page)}`, { ...config, ...historyPopCache(forceUpdate) })
+  byAuthor: ({ username, page, config } = {}) => {
+    return http.get(`/articles?author=${encodeURIComponent(username)}&${limit(5, page)}`, historyPopCache(config))
   },
-  favoritedBy: ({ username, page, config, forceUpdate } = {}) => {
-    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, page)}`, { ...config, ...historyPopCache(forceUpdate) })
+  favoritedBy: ({ username, page, config } = {}) => {
+    return http.get(`/articles?favorited=${encodeURIComponent(username)}&${limit(5, page)}`, historyPopCache(config))
   },
-  byTag: ({ tag, page, config, forceUpdate } = {}) => {
-    return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, { ...config, ...historyPopCache(forceUpdate) })
+  byTag: ({ tag, page, config } = {}) => {
+    return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, historyPopCache(config))
   },
   favorite: ({ slug, config } = {}) => {
     return http.post(`/articles/${slug}/favorite`, config)
@@ -83,14 +84,14 @@ const Articles = {
   delete: ({ slug, config } = {}) => {
     return http.delete(`/articles/${slug}`, config)
   },
-  get: ({ slug, config, forceUpdate } = {}) => {
-    return http.get(`/articles/${slug}`, { ...config, ...historyPopCache(forceUpdate) })
+  get: ({ slug, config } = {}) => {
+    return http.get(`/articles/${slug}`, historyPopCache(config))
   },
 }
 
 const Comments = {
-  get: ({ slug, config, forceUpdate } = {}) => {
-    return http.get(`/articles/${slug}/comments`, { ...config, ...historyPopCache(forceUpdate) })
+  get: ({ slug, config } = {}) => {
+    return http.get(`/articles/${slug}/comments`, historyPopCache(config))
   },
   create: ({ slug, comment, config } = {}) => {
     return http.post(`/articles/${slug}/comments`, { comment }, config)
@@ -101,8 +102,8 @@ const Comments = {
 }
 
 const Profile = {
-  get: ({ username, config, forceUpdate } = {}) => {
-    return http.get(`/profiles/${username}`, { ...config, ...historyPopCache(forceUpdate) })
+  get: ({ username, config } = {}) => {
+    return http.get(`/profiles/${username}`, historyPopCache(config))
   },
   follow: ({ username, config } = {}) => {
     return http.post(`/profiles/${username}/follow`, config)
