@@ -4,7 +4,7 @@ import compose from 'lodash-es/flowRight'
 
 import { Top } from './style'
 
-const TopVisual = (props) => {
+const TopVisual = () => {
   const [ init, setInit ] = useState(false)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const TopVisual = (props) => {
     return () => {
       clearTimeout(timer)
     }
-  })
+  }, [])
 
   return (
     <Top className={ `home-head ${ init ? `init` : `` }` }>

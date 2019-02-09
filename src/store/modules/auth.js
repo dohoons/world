@@ -83,20 +83,21 @@ export default (state = initialState, action) => {
       case LOGIN_FAILURE:
       case REGISTER_FAILURE:
       case UPDATE_FAILURE:
-        const errors = action.payload.response.data.errors
-        const msg = Object.keys(errors).map(k => {
-          return `${k} ${errors[k].join(', ')}`
-        })
-
+        draft.user = null
         draft.loading = false
-        draft.error = msg
+        API.setToken(null)
+        
+        const errors = action.payload.response.data.errors
+        if(errors) {
+          draft.error = Object.keys(errors).map(k => `${k} ${errors[k].join(', ')}`)
+        }
+        
         return
 
       case LOGOUT:
-        Cookies.remove('jwt')
-        API.setToken(null)
         draft.user = null
         draft.userInfo = {}
+        API.setToken(null)
         return
 
       case RESET_AUTH:

@@ -25,19 +25,17 @@ import {
   ProfileEdit,
 } from '~/pages'
 
-const App = ({ lng, userInfo, authActions }) => {
+const App = ({ lng, user, authActions }) => {
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
   useEffect(() => {
     if(token) {
       authActions.init(token)
     }
-    return () => {
-      setToken(undefined)
-    }
-  }, [token])
+  }, [])
 
-  if(token && !userInfo.username) {
+  if(token && !user) {
+    setToken(undefined)
     return null
   }
 
@@ -62,7 +60,7 @@ const App = ({ lng, userInfo, authActions }) => {
 }
 
 const mapStateToProps = (state) => ({
-  userInfo: state.auth.userInfo,
+  user: state.auth.user,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -26,7 +26,7 @@ const setToken = (token = null) => {
     Cookies.set('jwt', token)
     http.defaults.headers.common['Authorization'] = `Token ${token}`
   } else {
-    Cookies.remove('jwt', token)
+    Cookies.remove('jwt')
     delete http.defaults.headers.common['Authorization']
   }
 }

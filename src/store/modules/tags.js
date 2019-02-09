@@ -35,12 +35,12 @@ export default (state = initialState, action) => {
 
       case TAGS_LOAD_FAILURE:
         draft.loading = false
-        draft.tags = {}
+        draft.tags = []
         return
 
       case TAGS_UNLOAD:
         draft.loading = false
-        draft.tags = {}
+        draft.tags = []
         return
 
       default:
