@@ -15,7 +15,7 @@ import Page from './style'
 const Home = ({ t }) => {
   return (
     <Page>
-      <Helmet title={`Home - ${t('common:siteName')}`} />
+      <Helmet title={`Home`} />
       <TopVisual />
       <div className="container">
         <div className="body">

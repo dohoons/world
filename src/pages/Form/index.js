@@ -140,7 +140,7 @@ const Form = (props) => {
   :
   (
     <Page className="container">
-      <Helmet title={ slug ? t('headingModify') : `${t('headingWrite') } - ${t('common:siteName')}`} />
+      <Helmet title={ slug ? t('headingModify') : t('headingWrite') } />
       <div className="common-form">
         <h2 className="form-title">{ slug ? t('headingModify') : t('headingWrite') }</h2>
         <form onSubmit={submitHandle}>

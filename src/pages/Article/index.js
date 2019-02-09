@@ -76,7 +76,7 @@ const Article = (props) => {
 
   return (
     <Page>
-      <Helmet title={`${article.title} - ${t('common:siteName')}`} />
+      <Helmet title={article.title} />
       <ArticleHeader>
         <div className="wrap">
           <h2 className="subject">{article.title}</h2>

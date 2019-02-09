@@ -25,7 +25,7 @@ import {
   ProfileEdit,
 } from '~/pages'
 
-const App = ({ lng, user, authActions }) => {
+const App = ({ lng, user, authActions, t }) => {
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
   useEffect(() => {
@@ -41,7 +41,11 @@ const App = ({ lng, user, authActions }) => {
 
   return (
     <>
-      <Helmet htmlAttributes={{ lang : lng }} />
+      <Helmet
+        htmlAttributes={{ lang : lng }}
+        defaultTitle={`${t('common:siteName')}`}
+        titleTemplate={`%s - ${t('common:siteName')}`}
+      />
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />

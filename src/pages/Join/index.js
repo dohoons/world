@@ -81,7 +81,7 @@ const Join = (props) => {
   :
   (
     <Page className="container">
-      <Helmet title={`${t('heading')} - ${t('common:siteName')}`} />
+      <Helmet title={t('heading')} />
       <div className="common-form">
         <h2 className="form-title">{t('heading')}</h2>
         <form onSubmit={submitHandle}>

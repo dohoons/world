@@ -32,7 +32,7 @@ const Profile = ({ match: { params }, history, t }) => {
   
   return (
     <Page>
-      <Helmet title={`@${username} - ${t('common:siteName')}`} />
+      <Helmet title={`@${username}`} />
       <ProfileInfo
         username={username}
       />
