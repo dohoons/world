@@ -44,6 +44,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build && shx cp build/index.html build/404.html",
+    "build:stats": "react-app-rewired build",
     "deploy": "gh-pages -d build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"

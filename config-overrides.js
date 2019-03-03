@@ -9,7 +9,7 @@ module.exports = function override(config, env) {
       '~': path.resolve(__dirname, './src')
   })(config, env)
   
-  if(env === 'production') {
+  if(process.env.npm_lifecycle_event === 'build:stats') {
     config = rewireWebpackBundleAnalyzer(config, env, {
       analyzerMode: 'static',
       reportFilename: 'report.html'
