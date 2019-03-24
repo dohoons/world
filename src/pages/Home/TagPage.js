@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
@@ -9,13 +9,13 @@ import { TagTitle } from './style'
 const TagPage = ({ history, match: { params } }) => {
   const { tag, page } = params
 
-  const getPageUrl = pageNumber => {
-    return `/tag/${params.tag}/${pageNumber}`
-  }
+  const getPageUrl = useCallback(pageNumber => {
+    return `/tag/${tag}/${pageNumber}`
+  }, [tag])
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }
+  }, [getPageUrl])
 
   return (
     <>

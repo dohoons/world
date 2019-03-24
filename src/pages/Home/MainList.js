@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { withAlert } from 'react-alert'
 import { connect } from 'react-redux'
@@ -12,18 +12,18 @@ const MainList = (props) => {
   const { user, match: { params, url }, history, t } = props
   const isRoot = url === '/'
 
-  const getListType = () => {
+  const getListType = useCallback(() => {
     const isFeed =  isRoot || url.split('/')[1] === 'feed'
     return isFeed ? user ? 'feed' : 'all' : 'all'
-  }
+  }, [isRoot, url, user])
 
-  const getPageUrl = pageNumber => {
+  const getPageUrl = useCallback(pageNumber => {
     return `/${getListType() === 'feed' ? 'feed' : 'articles' }/${pageNumber}`
-  }
+  }, [getListType])
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }
+  }, [getPageUrl])
 
   const listType = getListType()
   const page = isRoot ? params.filter : params.page

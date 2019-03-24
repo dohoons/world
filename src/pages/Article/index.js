@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withNamespaces } from 'react-i18next'
@@ -20,7 +20,7 @@ import withPushBack from '~/util/withPushBack'
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { article, comments, user, articleActions, history, pushBack, t } = props
+  const { article, comments, user, articleActions, history, pushBack, t, lng } = props
   const { slug } = props.match.params
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Article = (props) => {
     }
   }
 
-  const delComment = async (slug, commentId) => {
+  const delComment = useCallback(async (slug, commentId) => {
     if(!user) {
       goLogin(props)
       return
@@ -66,7 +66,7 @@ const Article = (props) => {
         props.alert.error(t('components:comment.errorDelete'))
       }
     }
-  }
+  }, [user, lng])
 
   if(!article) {
     return <div className="page-loading">

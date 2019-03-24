@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
@@ -14,18 +14,18 @@ const Profile = ({ match: { params }, history, t }) => {
   const { username } = params
   const isRoot = params.filter === undefined
 
-  const getListType = () => {
+  const getListType = useCallback(() => {
     const isArticles = isRoot || params.filter === 'articles'
     return isArticles ? 'articles' : 'favorites'
-  }
+  }, [isRoot, params.filter])
 
-  const getPageUrl = pageNumber => {
+  const getPageUrl = useCallback(pageNumber => {
     return `/@${username}/${getListType()}/${pageNumber}`
-  }
+  }, [getListType])
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }
+  }, [getPageUrl])
 
   const listType = getListType()
   const page = isRoot ? params.filter : params.page
