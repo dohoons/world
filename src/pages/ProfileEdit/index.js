@@ -70,9 +70,7 @@ const ProfileEdit = (props) => {
         .then(data => {
           props.pushBack()
         })
-      // .catch(e => {
-      //   alert('저장하는데 실패했습니다.')
-      // })
+        .catch(console.log)
     }
 
     e.preventDefault()

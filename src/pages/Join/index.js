@@ -61,9 +61,7 @@ const Join = (props) => {
 
     if(validate()) {
       authActions.register({ username, email, password })
-      // .catch(e => {
-      //   alert('회원가입에 실패했습니다.')
-      // })
+      .catch(console.log)
     }
 
     e.preventDefault()
