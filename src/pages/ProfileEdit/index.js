@@ -60,19 +60,21 @@ const ProfileEdit = (props) => {
     setErrors({})
 
     if(validate()) {
-      const userData = { image, bio, email }
-
-      if(username !== userInfo.username) {
-        userData.username = username
-      }
-
-      if(password !== '') {
-        userData.password = password
+      const userData = {
+        image,
+        bio,
+        email,
+        ...username !== userInfo.username && { username },
+        ...password !== '' && { password },
       }
 
       authActions.update({ user: userData })
         .then(() => {
-          props.pushBack()
+          if(userData.username === undefined) {
+            props.pushBack()
+          } else {
+            history.push(`/@${userData.username}`)
+          }
         })
         .catch(console.log)
     }
