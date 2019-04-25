@@ -9,11 +9,11 @@ const CREATE_COMMENT = 'CREATE_COMMENT'
 const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
 const DELETE_COMMENT = 'DELETE_COMMENT'
 
-export const fetch = (slug, forceUpdate = false) => ({
+export const fetch = (slug, config) => ({
   type: ARTICLE_PAGE_LOAD,
   payload: Promise.all([
-    API.Articles.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config: { forceUpdate } }),
-    API.Comments.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config: { forceUpdate } }),
+    API.Articles.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config }),
+    API.Comments.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config }),
   ])
 })
 
