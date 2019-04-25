@@ -6,7 +6,8 @@ const rewireWebpackBundleAnalyzer = require('react-app-rewire-webpack-bundle-ana
 module.exports = function override(config, env) {
   config = rewireReactHotLoader(config, env)
   config = rewireAliases.aliasesOptions({
-      '~': path.resolve(__dirname, './src')
+    'react-dom': '@hot-loader/react-dom',
+    '~': path.resolve(__dirname, './src')
   })(config, env)
   
   if(process.env.npm_lifecycle_event === 'build:stats') {

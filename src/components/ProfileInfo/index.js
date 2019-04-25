@@ -18,7 +18,7 @@ const Profile = (props) => {
     return () => {
       profileAction.reset()
     }
-  }, [props.username])
+  }, [profileAction, props.username])
 
   const follow = async (follow) => {
     if(!user) {

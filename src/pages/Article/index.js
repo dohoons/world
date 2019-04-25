@@ -20,7 +20,7 @@ import withPushBack from '~/util/withPushBack'
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { article, comments, user, articleActions, history, pushBack, t, lng } = props
+  const { article, comments, user, articleActions, history, pushBack, t } = props
   const { slug } = props.match.params
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Article = (props) => {
     return () => {
       articleActions.reset()
     }
-  }, [slug, user])
+  }, [articleActions, slug, user])
 
   const del = async () => {
     if(!user) {
@@ -66,7 +66,7 @@ const Article = (props) => {
         props.alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, lng])
+  }, [user, t, props, articleActions])
 
   if(!article) {
     return <div className="page-loading">

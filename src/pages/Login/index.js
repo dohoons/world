@@ -23,7 +23,7 @@ const Login = (props) => {
     return () => {
       authActions.resetAuth()
     }
-  }, [user])
+  }, [authActions, user])
 
   const validate = () => {
     const errors = {}

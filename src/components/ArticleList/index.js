@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -28,7 +28,7 @@ const ArticleList = ({
   filter,
   tag,
   useTotal,
-  page,
+  page = 1,
   countPerPage,
   handlePageChange,
   getPageUrl,
@@ -36,20 +36,21 @@ const ArticleList = ({
   articles,
   articlesCount,
 }) => {
-  const fetch = (page = 1) => {
+
+  const fetch = useCallback(() => {
     articleListActions.fetch({
       filter,
-      param: { username, page: page - 1, tag },
+      param: { username, page: parseInt(page) - 1, tag },
     })
-  }
+  }, [articleListActions, filter, page, tag, username])
 
   useEffect(() => {
-    fetch(parseInt(page))
+    fetch()
 
     return () => {
       articleListActions.reset()
     }
-  }, [page, filter, tag])
+  }, [articleListActions, fetch])
 
   const pageTotal = Math.ceil(articlesCount / countPerPage)
 

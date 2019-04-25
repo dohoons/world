@@ -23,7 +23,7 @@ const MainList = (props) => {
 
   const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }, [getPageUrl])
+  }, [getPageUrl, history])
 
   const listType = getListType()
   const page = isRoot ? params.filter : params.page

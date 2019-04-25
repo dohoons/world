@@ -5,12 +5,12 @@ import * as authActions from '~/store/modules/auth'
 import goLogin from '~/util/goLogin'
 
 export default (WrappedComponent = null) => {
-  const needAuth = (props) => {
+  const NeedAuth = (props) => {
     useEffect(() => {
       if(!props.user) {
         goLogin(props)
       }
-    }, [props.user])
+    }, [props, props.user])
     
     return <WrappedComponent { ...props } />
   }
@@ -24,5 +24,5 @@ export default (WrappedComponent = null) => {
     authActions: bindActionCreators(authActions, dispatch)
   })
 
-  return connect(mapStateToProps, mapDispatchToProps)(needAuth)
+  return connect(mapStateToProps, mapDispatchToProps)(NeedAuth)
 }

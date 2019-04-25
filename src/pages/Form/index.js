@@ -27,47 +27,47 @@ const Form = (props) => {
   const { slug, title, description, body, tag } = form
 
   useEffect(() => {
+    const fetchArticles = async (slug) => {
+      try {
+        const req = API.CancelToken.source()
+        setReq(req)
+        setLoading(true)
+
+        const { data } = await API.Articles.get({
+          slug,
+          config: { cancelToken: req.token },
+        })
+        const { article } = data
+
+        if(article.author.username !== userInfo.username) {
+          props.alert.error(t('errorModifyAuth'))
+          history.goBack()
+          return
+        }
+
+        setLoading(false)
+        setForm({
+          slug: article.slug,
+          title: article.title,
+          description: article.description,
+          body: article.body,
+          tag: article.tagList.join(', ')
+        })
+      } catch(e) {
+        if(e.response && e.response.data.status === '404') {
+          // alert('게시물이 없습니다.')
+          history.goBack()
+        }
+      }
+    }
+
     if(params && params.slug) {
       fetchArticles(params.slug)
     }
     return () => {
       if(req) req.cancel()
     }
-  }, [params.slug])
-
-  const fetchArticles = async (slug) => {
-    try {
-      const req = API.CancelToken.source()
-      setReq(req)
-      setLoading(true)
-
-      const { data } = await API.Articles.get({
-        slug,
-        config: { cancelToken: req.token },
-      })
-      const { article } = data
-
-      if(article.author.username !== userInfo.username) {
-        props.alert.error(t('errorModifyAuth'))
-        history.goBack()
-        return
-      }
-
-      setLoading(false)
-      setForm({
-        slug: article.slug,
-        title: article.title,
-        description: article.description,
-        body: article.body,
-        tag: article.tagList.join(', ')
-      })
-    } catch(e) {
-      if(e.response && e.response.data.status === '404') {
-        // alert('게시물이 없습니다.')
-        history.goBack()
-      }
-    }
-  }
+  }, [history, params, params.slug, props.alert, req, t, userInfo.username])
 
   const validate = () => {
     const errors = {}

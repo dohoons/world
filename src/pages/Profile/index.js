@@ -21,11 +21,11 @@ const Profile = ({ match: { params }, history, t }) => {
 
   const getPageUrl = useCallback(pageNumber => {
     return `/@${username}/${getListType()}/${pageNumber}`
-  }, [getListType])
+  }, [getListType, username])
 
   const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }, [getPageUrl])
+  }, [getPageUrl, history])
 
   const listType = getListType()
   const page = isRoot ? params.filter : params.page

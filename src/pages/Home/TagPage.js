@@ -15,7 +15,7 @@ const TagPage = ({ history, match: { params } }) => {
 
   const handlePageChange = useCallback(pageNumber => {
     history.push(getPageUrl(pageNumber))
-  }, [getPageUrl])
+  }, [getPageUrl, history])
 
   return (
     <>

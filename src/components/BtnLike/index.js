@@ -20,7 +20,7 @@ const BtnLike = props => {
     return () => {
       if(req) req.cancel()
     }
-  }, [])
+  }, [req])
 
   const like = async () => {
     if(!user) {

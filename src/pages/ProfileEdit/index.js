@@ -26,7 +26,7 @@ const ProfileEdit = (props) => {
     return () => {
       authActions.resetAuth()
     }
-  }, [userInfo])
+  }, [authActions, userInfo])
 
   const validate = () => {
     const errors = {}

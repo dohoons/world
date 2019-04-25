@@ -10,7 +10,7 @@ import TagList from '~/components/TagList'
 const SideTag = ({ tags, tagsActions, t }) => {
   useEffect(() => {
     tagsActions.fetch()
-  }, [])
+  }, [tagsActions])
 
   return (
     <div className="tag-area">

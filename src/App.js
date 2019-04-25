@@ -32,7 +32,7 @@ const App = ({ lng, user, authActions, t }) => {
     if(token) {
       authActions.init(token)
     }
-  }, [])
+  }, [authActions, token])
 
   if(token && !user) {
     setToken(undefined)
