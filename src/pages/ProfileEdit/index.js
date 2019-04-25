@@ -60,14 +60,20 @@ const ProfileEdit = (props) => {
     setErrors({})
 
     if(validate()) {
-      const userData = { image, username, bio, email }
+      const userData = { image, bio, email }
+
+      if(username !== userInfo.username) {
+        userData.username = username
+      }
 
       if(password !== '') {
         userData.password = password
       }
 
+      console.log({ user: userData })
+
       authActions.update({ user: userData })
-        .then(data => {
+        .then(() => {
           props.pushBack()
         })
         .catch(console.log)

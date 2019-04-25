@@ -55,6 +55,10 @@ const initialState = {
   error: [],
 }
 
+const mapError = (errors) => {
+  return errors ? Object.keys(errors).map(k => `${k} ${errors[k].join(', ')}`) : []
+}
+
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -80,17 +84,18 @@ export default (state = initialState, action) => {
         draft.error = []
         return
 
+      case UPDATE_FAILURE:
+        draft.loading = false
+        draft.error = mapError(action.payload.response.data.errors)
+        
+        return
+
       case LOGIN_FAILURE:
       case REGISTER_FAILURE:
-      case UPDATE_FAILURE:
         draft.user = null
         draft.loading = false
+        draft.error = mapError(action.payload.response.data.errors)
         API.setToken(null)
-        
-        const errors = action.payload.response.data.errors
-        if(errors) {
-          draft.error = Object.keys(errors).map(k => `${k} ${errors[k].join(', ')}`)
-        }
         
         return
 
