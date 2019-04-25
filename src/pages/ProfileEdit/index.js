@@ -70,8 +70,6 @@ const ProfileEdit = (props) => {
         userData.password = password
       }
 
-      console.log({ user: userData })
-
       authActions.update({ user: userData })
         .then(() => {
           props.pushBack()
