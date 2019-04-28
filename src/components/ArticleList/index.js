@@ -1,8 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import compose from 'lodash-es/flowRight'
+import { useSelector, useActions } from 'react-redux'
 import * as articleListActions from '~/store/modules/articleList'
 
 import ReactPlaceholder from 'react-placeholder'
@@ -23,7 +21,6 @@ const ListPlaceHolder = () => (
 )
 
 const ArticleList = ({
-  articleListActions,
   username,
   filter,
   tag,
@@ -31,26 +28,26 @@ const ArticleList = ({
   page = 1,
   countPerPage,
   handlePageChange,
-  getPageUrl,
-  loading,
-  articles,
-  articlesCount,
+  getPageUrl
 }) => {
 
+  const { loading, articles, articlesCount } = useSelector(state => state.articleList, [])
+  const actions = useActions(articleListActions, []);
+
   const fetch = useCallback(() => {
-    articleListActions.fetch({
+    actions.fetch({
       filter,
       param: { username, page: parseInt(page) - 1, tag },
     })
-  }, [articleListActions, filter, page, tag, username])
+  }, [actions, filter, page, tag, username])
 
   useEffect(() => {
     fetch()
 
     return () => {
-      articleListActions.reset()
+      actions.reset()
     }
-  }, [articleListActions, fetch])
+  }, [actions, fetch])
 
   const pageTotal = Math.ceil(articlesCount / countPerPage)
 
@@ -99,17 +96,4 @@ ArticleList.defaultProps = {
   countPerPage: 10
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.articleList.loading,
-  articles: state.articleList.articles,
-  articlesCount: state.articleList.articlesCount,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  articleListActions: bindActionCreators(articleListActions, dispatch)
-})
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
-)(ArticleList)
+export default withRouter(ArticleList)

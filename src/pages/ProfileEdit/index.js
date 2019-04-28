@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
@@ -11,7 +10,9 @@ import withPushBack from '~/util/withPushBack'
 import Page from './style'
 
 const ProfileEdit = (props) => {
-  const { loading, error, userInfo, authActions, history, t } = props
+  const { history, t } = props
+  const { userInfo, loading, error } = useSelector(state => state.auth, [])
+  const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
   const [ form, setForm ] = useState({
     image: userInfo.image,
@@ -24,9 +25,9 @@ const ProfileEdit = (props) => {
 
   useEffect(() => {
     return () => {
-      authActions.resetAuth()
+      actions.resetAuth()
     }
-  }, [authActions, userInfo])
+  }, [actions, userInfo])
 
   const validate = () => {
     const errors = {}
@@ -68,7 +69,7 @@ const ProfileEdit = (props) => {
         ...password !== '' && { password },
       }
 
-      authActions.update({ user: userData })
+      actions.update({ user: userData })
         .then(() => {
           if(userData.username === undefined) {
             props.pushBack()
@@ -155,19 +156,7 @@ const ProfileEdit = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-  loading: state.auth.loading,
-  error: state.auth.error,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  authActions: bindActionCreators(authActions, dispatch)
-})
-
 export default compose(
   withPushBack,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('profileEdit'),
 )(ProfileEdit)

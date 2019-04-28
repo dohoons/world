@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { withAlert } from 'react-alert'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 
@@ -9,7 +9,8 @@ import ArticleList from '~/components/ArticleList'
 import TabNav from '~/components/TabNav'
 
 const MainList = (props) => {
-  const { user, match: { params, url }, history, t } = props
+  const { match: { params, url }, history, t } = props
+  const { user } = useSelector(state => state.auth, [])
   const isRoot = url === '/'
 
   const getListType = useCallback(() => {
@@ -55,16 +56,8 @@ const MainList = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-    user: state.auth.user,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-})
-
 export default compose(
   withRouter,
   withAlert,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('home'),
 )(MainList)

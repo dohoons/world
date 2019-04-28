@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
@@ -20,17 +19,21 @@ import withPushBack from '~/util/withPushBack'
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { article, comments, user, articleActions, history, pushBack, t } = props
+  const { history, pushBack, t } = props
   const { slug } = props.match.params
 
+  const { user } = useSelector(state => state.auth, [])
+  const { article, comments, error } = useSelector(state => state.article, [])
+  const actions = useActions(articleActions, []);
+
   useEffect(() => {
-    articleActions.reset()
-    articleActions.fetch(slug)
+    actions.reset()
+    actions.fetch(slug)
 
     return () => {
-      articleActions.reset()
+      actions.reset()
     }
-  }, [articleActions, slug, user])
+  }, [actions, slug])
 
   const del = async () => {
     if(!user) {
@@ -61,17 +64,22 @@ const Article = (props) => {
     if(window.confirm(t('components:comment.confirmDelete'))) {
       try {
         await API.Comments.delete({ slug, commentId })
-        articleActions.deleteComment(commentId)
+        actions.deleteComment(commentId)
       } catch (e) {
         props.alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, t, props, articleActions])
+  }, [user, t, props, actions])
 
   if(!article) {
-    return <div className="page-loading">
-      <ReactPlaceholder showLoadingAnimation={true} type='text' ready={false} rows={20} color='#E0E0E0'><div></div></ReactPlaceholder>
-    </div>
+    if(error && error.status === '404') {
+      history.goBack()
+      return null
+    } else {
+      return <div className="page-loading">
+        <ReactPlaceholder showLoadingAnimation={true} type='text' ready={false} rows={20} color='#E0E0E0'><div></div></ReactPlaceholder>
+      </div>
+    }
   }
 
   return (
@@ -97,7 +105,7 @@ const Article = (props) => {
       </ArticleHeader>
       <div className="container">
         <ArticleBody>
-          <div className="body" dangerouslySetInnerHTML={{ __html: article.body }}></div>
+          <div className="body" dangerouslySetInnerHTML={{ __html: article.bodyHTML }}></div>
           <TagList tags={article.tagList} />
         </ArticleBody>
 
@@ -121,21 +129,8 @@ const Article = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-  loading: state.article.loading,
-  article: state.article.article,
-  comments: state.article.comments,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  articleActions: bindActionCreators(articleActions, dispatch)
-})
-
 export default compose(
   withAlert,
   withPushBack,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('article'),
 )(Article)

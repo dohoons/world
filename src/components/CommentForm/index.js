@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces, Trans } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import * as articleActions from '~/store/modules/article'
@@ -9,7 +8,10 @@ import { withAlert } from 'react-alert'
 
 import Form, { LoginMsg } from './style'
 
-const CommentForm = ({ user, articleActions, slug, t, alert }) => {
+const CommentForm = ({ slug, t, alert }) => {
+  const { user } = useSelector(state => state.auth, [])
+  const actions = useActions(articleActions, []);
+
   const [ loading, setLoading ] = useState(false)
   const [ comment, setComment ] = useState('')
   const inputEl = useRef(null);
@@ -27,7 +29,7 @@ const CommentForm = ({ user, articleActions, slug, t, alert }) => {
 
     setLoading(true)
 
-    articleActions.createComment({
+    actions.createComment({
       slug,
       comment: {
         body: commentValue
@@ -73,21 +75,8 @@ const CommentForm = ({ user, articleActions, slug, t, alert }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-  loading: state.article.loading,
-  article: state.article.article,
-  comments: state.article.comments,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  articleActions: bindActionCreators(articleActions, dispatch)
-})
-
 export default compose(
   withRouter,
   withAlert,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('components'),
 )(CommentForm)

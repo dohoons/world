@@ -4,6 +4,7 @@ import { markdown } from 'markdown'
 
 const ARTICLE_PAGE_LOAD = 'ARTICLE_PAGE_LOAD'
 const ARTICLE_PAGE_LOAD_SUCCESS = 'ARTICLE_PAGE_LOAD_SUCCESS'
+const ARTICLE_PAGE_LOAD_FAILURE = 'ARTICLE_PAGE_LOAD_FAILURE'
 const ARTICLE_PAGE_UNLOAD = 'ARTICLE_PAGE_UNLOAD'
 const CREATE_COMMENT = 'CREATE_COMMENT'
 const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
@@ -34,6 +35,7 @@ export const deleteComment = (commentId) => ({
 const initialState = {
   article: null,
   comments: [],
+  error: null,
 }
 
 export default (state = initialState, action) => {
@@ -42,16 +44,24 @@ export default (state = initialState, action) => {
       case ARTICLE_PAGE_LOAD_SUCCESS:
         draft.article = {
           ...action.payload[0].data.article,
-          body: markdown.toHTML(action.payload[0].data.article.body)
+          body: action.payload[0].data.article.body,
+          bodyHTML: markdown.toHTML(action.payload[0].data.article.body),
         }
         draft.comments = action.payload[1].data.comments
         draft.loading = false
+        return
+
+      case ARTICLE_PAGE_LOAD_FAILURE:
+        draft.article = null
+        draft.comments = []
+        draft.error = action.payload.response.data
         return
 
       case ARTICLE_PAGE_UNLOAD:
         API.axios.cancel('ARTICLE_PAGE_LOAD')
         draft.article = null
         draft.comments = []
+        draft.error = null
         return
 
       case CREATE_COMMENT_SUCCESS:

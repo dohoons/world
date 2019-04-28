@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import API from '~/api'
@@ -10,7 +10,8 @@ import goLogin from '~/util/goLogin'
 import Button from './style'
 
 const BtnLike = props => {
-  const { t, user, slug } = props
+  const { t, slug } = props
+  const { user } = useSelector(state => state.auth, [])
   const [ loading, setLoading ] = useState(false)
   const [ req, setReq ] = useState(null)
   const [ favorited, setFavorited ] = useState(props.favorited)
@@ -76,16 +77,7 @@ BtnLike.defaultProps = {
   favoritesCount: 0,
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-})
-
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('components'),
 )(BtnLike)

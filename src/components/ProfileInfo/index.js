@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import * as profileAction from '~/store/modules/profile'
@@ -10,15 +9,19 @@ import goLogin from '~/util/goLogin'
 import ProfileInfo from './style'
 
 const Profile = (props) => {
-  const { profileAction, user, userInfo, profile, history, t } = props
+  const { history, t } = props
+
+  const { user, userInfo } = useSelector(state => state.auth, [])
+  const { profile } = useSelector(state => state.profile, [])
+  const actions = useActions(profileAction, []);
 
   useEffect(() => {
-    profileAction.fetch(props.username)
+    actions.fetch(props.username)
 
     return () => {
-      profileAction.reset()
+      actions.reset()
     }
-  }, [profileAction, props.username])
+  }, [actions, props.username])
 
   const follow = async (follow) => {
     if(!user) {
@@ -26,7 +29,7 @@ const Profile = (props) => {
       return
     }
 
-    profileAction[ follow ? 'follow' : 'unfollow' ](props.username)
+    actions[ follow ? 'follow' : 'unfollow' ](props.username)
   }
 
   if (profile.loading) return <div>Loading...</div>
@@ -55,18 +58,7 @@ const Profile = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-  profile: state.profile.profile,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  profileAction: bindActionCreators(profileAction, dispatch)
-})
-
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('components'),
 )(Profile)

@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import * as authActions from '~/store/modules/auth'
 import CommonHeader from './style'
 
-const Header = ({ user, userInfo, authActions, t }) => {
+const Header = ({ t }) => {
+  const { user, userInfo } = useSelector(state => state.auth, [])
+  const actions = useActions(authActions, []);
+
   const [ menuOpened, setMenu ] = useState(false)
   const toggleMenu = () => setMenu(!menuOpened)
   const menuClose = () => setMenu(false)
 
   const logout = e => {
-    authActions.logout()
+    actions.logout()
     e.preventDefault()
   }
 
@@ -60,16 +61,4 @@ const Header = ({ user, userInfo, authActions, t }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  authActions: bindActionCreators(authActions, dispatch)
-})
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withNamespaces('header'),
-)(Header)
+export default withNamespaces('header')(Header)

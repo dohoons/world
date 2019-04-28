@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import * as tagsActions from '~/store/modules/tags'
 
 import TagList from '~/components/TagList'
 
-const SideTag = ({ tags, tagsActions, t }) => {
+const SideTag = ({ t }) => {
+  const { tags } = useSelector(state => state.tags, [])
+  const actions = useActions(tagsActions, [])
+
   useEffect(() => {
-    tagsActions.fetch()
-  }, [tagsActions])
+    actions.fetch()
+  }, [actions])
 
   return (
     <div className="tag-area">
@@ -20,15 +21,4 @@ const SideTag = ({ tags, tagsActions, t }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  tags: state.tags.tags
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  tagsActions: bindActionCreators(tagsActions, dispatch)
-})
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withNamespaces('home'),
-)(SideTag)
+export default withNamespaces('home')(SideTag)

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
@@ -11,11 +11,10 @@ import Page from './style'
 
 const Form = (props) => {
   const { params } = props.match
-  const { history, userInfo, t } = props
+  const { history, t } = props
   const [ loading, setLoading ] = useState(false)
   const [ sending, setSending ] = useState(false)
   const [ errors, setErrors ] = useState({})
-  const [ req, setReq ] = useState(null)
   const [ form, setForm ] = useState({
     slug: '',
     title: '',
@@ -26,48 +25,55 @@ const Form = (props) => {
 
   const { slug, title, description, body, tag } = form
 
-  useEffect(() => {
-    const fetchArticles = async (slug) => {
-      try {
-        const req = API.CancelToken.source()
-        setReq(req)
-        setLoading(true)
+  const { userInfo } = useSelector(state => state.auth, [])
 
-        const { data } = await API.Articles.get({
-          slug,
-          config: { cancelToken: req.token },
-        })
-        const { article } = data
+  const req = useRef(API.CancelToken.source())
+  
+  const fetchArticles = useCallback(async (slug) => {
+    try {
+      setLoading(true)
 
-        if(article.author.username !== userInfo.username) {
-          props.alert.error(t('errorModifyAuth'))
-          history.goBack()
-          return
-        }
+      const { data } = await API.Articles.get({
+        slug,
+        config: { cancelToken: req.current.token },
+      })
+      const { article } = data
 
-        setLoading(false)
-        setForm({
-          slug: article.slug,
-          title: article.title,
-          description: article.description,
-          body: article.body,
-          tag: article.tagList.join(', ')
-        })
-      } catch(e) {
-        if(e.response && e.response.data.status === '404') {
-          // alert('게시물이 없습니다.')
-          history.goBack()
-        }
+      if(article.author.username !== userInfo.username) {
+        props.alert.error(t('errorModifyAuth'))
+        history.goBack()
+        return
+      }
+
+      setLoading(false)
+      setForm({
+        slug: article.slug,
+        title: article.title,
+        description: article.description,
+        body: article.body,
+        tag: article.tagList.join(', ')
+      })
+    } catch(e) {
+      if(e.response && e.response.data.status === '404') {
+        // alert('게시물이 없습니다.')
+        history.goBack()
       }
     }
+  }, [history, props.alert, t, userInfo.username])
 
-    if(params && params.slug) {
+  const cancel = useCallback(() => {
+    req.current.cancel()
+  }, [])
+
+  useEffect(() => {
+    if(params.slug) {
       fetchArticles(params.slug)
     }
+
     return () => {
-      if(req) req.cancel()
+      cancel()
     }
-  }, [history, params, params.slug, props.alert, req, t, userInfo.username])
+  }, [fetchArticles, cancel, params.slug])
 
   const validate = () => {
     const errors = {}
@@ -193,16 +199,7 @@ const Form = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  userInfo: state.auth.userInfo,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-})
-
 export default compose(
   withAlert,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('form'),
 )(Form)

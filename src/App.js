@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
@@ -25,14 +24,17 @@ import {
   ProfileEdit,
 } from '~/pages'
 
-const App = ({ lng, user, authActions, t }) => {
+const App = ({ lng, t }) => {
   const [ token, setToken ] = useState(Cookies.get('jwt'))
+
+  const { user } = useSelector(state => state.auth, [])
+  const actions = useActions(authActions, []);
 
   useEffect(() => {
     if(token) {
-      authActions.init(token)
+      actions.init(token)
     }
-  }, [authActions, token])
+  }, [actions, token])
 
   if(token && !user) {
     setToken(undefined)
@@ -63,16 +65,7 @@ const App = ({ lng, user, authActions, t }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  authActions: bindActionCreators(authActions, dispatch)
-})
-
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('common'),
 )(App)

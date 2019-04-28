@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useActions } from 'react-redux'
 import { withNamespaces, Trans } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
 import validator from 'validator'
@@ -11,7 +9,9 @@ import validator from 'validator'
 import Page from './style'
 
 const Join = (props) => {
-  const { user, loading, error, authActions, history, t } = props
+  const { history, t } = props
+  const { user, loading, error } = useSelector(state => state.auth, [])
+  const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
   const [ form, setForm ] = useState({
     username: '',
@@ -22,9 +22,9 @@ const Join = (props) => {
 
   useEffect(() => {
     return () => {
-      authActions.resetAuth()
+      actions.resetAuth()
     }
-  }, [authActions, user])
+  }, [actions, user])
 
   const validate = () => {
     const errors = {}
@@ -60,7 +60,7 @@ const Join = (props) => {
     setErrors({})
 
     if(validate()) {
-      authActions.register({ username, email, password })
+      actions.register({ username, email, password })
       .catch(console.log)
     }
 
@@ -131,18 +131,4 @@ const Join = (props) => {
   )
 }
 
-
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  loading: state.auth.loading,
-  error: state.auth.error,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  authActions: bindActionCreators(authActions, dispatch)
-})
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withNamespaces('join'),
-)(Join)
+export default withNamespaces('join')(Join)
