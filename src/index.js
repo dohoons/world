@@ -43,15 +43,15 @@ const renderApp = Component => {
         <Provider store={store}>
           <ScrollManager history={history}>
             <Router history={history}>
-              <LastLocationProvider>
-                <WindowScroller>
+              <WindowScroller>
+                <LastLocationProvider>
                   <AlertProvider template={AlertTemplate} {...alertOptions}>
                     <I18nextProvider i18n={i18next}>
                       <Component />
                     </I18nextProvider>
                   </AlertProvider>
-                </WindowScroller>
-              </LastLocationProvider>
+                </LastLocationProvider>
+              </WindowScroller>
             </Router>
           </ScrollManager>
         </Provider>
