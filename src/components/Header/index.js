@@ -9,9 +9,12 @@ const Header = ({ t }) => {
   const { user, userInfo } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
 
-  const [ menuOpened, setMenu ] = useState(false)
-  const toggleMenu = () => setMenu(() => !menuOpened)
-  const menuClose = () => setMenu(() => false)
+  const [ menuOpened, setMenuOpened ] = useState(false)
+  const toggleMenu = e => {
+    e.stopPropagation()
+    setMenuOpened(() => !menuOpened)
+  }
+  const menuClose = () => setMenuOpened(() => false)
 
   const logout = e => {
     actions.logout()
