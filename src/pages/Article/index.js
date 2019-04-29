@@ -24,7 +24,7 @@ const Article = (props) => {
 
   const { user } = useSelector(state => state.auth, [])
   const { article, comments, error } = useSelector(state => state.article, [])
-  const actions = useActions(articleActions, []);
+  const actions = useActions(articleActions, [])
 
   useEffect(() => {
     actions.reset()

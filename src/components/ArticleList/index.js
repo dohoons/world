@@ -32,7 +32,7 @@ const ArticleList = ({
 }) => {
 
   const { loading, articles, articlesCount } = useSelector(state => state.articleList, [])
-  const actions = useActions(articleListActions, []);
+  const actions = useActions(articleListActions, [])
 
   const fetch = useCallback(() => {
     actions.fetch({

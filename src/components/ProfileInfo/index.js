@@ -13,7 +13,7 @@ const Profile = (props) => {
 
   const { user, userInfo } = useSelector(state => state.auth, [])
   const { profile } = useSelector(state => state.profile, [])
-  const actions = useActions(profileAction, []);
+  const actions = useActions(profileAction, [])
 
   useEffect(() => {
     actions.fetch(props.username)

@@ -10,11 +10,11 @@ import Form, { LoginMsg } from './style'
 
 const CommentForm = ({ slug, t, alert }) => {
   const { user } = useSelector(state => state.auth, [])
-  const actions = useActions(articleActions, []);
+  const actions = useActions(articleActions, [])
 
   const [ loading, setLoading ] = useState(false)
   const [ comment, setComment ] = useState('')
-  const inputEl = useRef(null);
+  const inputEl = useRef(null)
 
   const submitHandle = e => {
     e.preventDefault()

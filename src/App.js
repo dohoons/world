@@ -28,7 +28,7 @@ const App = ({ lng, t }) => {
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
   const { user } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, []);
+  const actions = useActions(authActions, [])
 
   useEffect(() => {
     if(token) {

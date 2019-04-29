@@ -7,11 +7,11 @@ import CommonHeader from './style'
 
 const Header = ({ t }) => {
   const { user, userInfo } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, []);
+  const actions = useActions(authActions, [])
 
   const [ menuOpened, setMenu ] = useState(false)
-  const toggleMenu = () => setMenu(!menuOpened)
-  const menuClose = () => setMenu(false)
+  const toggleMenu = () => setMenu(() => !menuOpened)
+  const menuClose = () => setMenu(() => false)
 
   const logout = e => {
     actions.logout()
