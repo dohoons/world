@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 
 import ProfileInfo from '~/components/ProfileInfo'
@@ -10,7 +9,8 @@ import TabNav from '~/components/TabNav'
 
 import Page from './style'
 
-const Profile = ({ match: { params }, history, t }) => {
+const Profile = ({ match: { params }, history }) => {
+  const { t } = useTranslation('profile')
   const { username } = params
   const isRoot = params.filter === undefined
 
@@ -57,6 +57,4 @@ const Profile = ({ match: { params }, history, t }) => {
   )
 }
 
-export default compose(
-  withNamespaces('profile'),
-)(Profile)
+export default Profile

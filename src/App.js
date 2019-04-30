@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import Cookies from 'js-cookie'
 import * as authActions from '~/store/modules/auth'
@@ -24,7 +23,8 @@ import {
   ProfileEdit,
 } from '~/pages'
 
-const App = ({ lng, t }) => {
+const App = () => {
+  const { t, i18n } = useTranslation('common')
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
   const { user } = useSelector(state => state.auth, [])
@@ -44,7 +44,7 @@ const App = ({ lng, t }) => {
   return (
     <>
       <Helmet
-        htmlAttributes={{ lang : lng }}
+        htmlAttributes={{ lang : i18n.language }}
         defaultTitle={`${t('common:siteName')}`}
         titleTemplate={`%s - ${t('common:siteName')}`}
       />
@@ -65,7 +65,4 @@ const App = ({ lng, t }) => {
   )
 }
 
-export default compose(
-  withRouter,
-  withNamespaces('common'),
-)(App)
+export default withRouter(App)

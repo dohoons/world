@@ -1,7 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import needAuth from '~/util/needAuth'
 
@@ -12,7 +10,7 @@ import TagPage from './TagPage'
 
 import Page from './style'
 
-const Home = ({ t }) => {
+const Home = () => {
   return (
     <Page>
       <Helmet title={`Home`} />
@@ -34,6 +32,4 @@ const Home = ({ t }) => {
   )
 }
 
-export default compose(
-  withNamespaces('home'),
-)(Home)
+export default Home

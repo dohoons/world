@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import API from '~/api'
 import goLogin from '~/util/goLogin'
 
 import Button from './style'
 
 const BtnLike = props => {
-  const { t, slug } = props
+  const { slug } = props
+  const { t } = useTranslation('components')
   const { user } = useSelector(state => state.auth, [])
   const [ loading, setLoading ] = useState(false)
   const [ req, setReq ] = useState(null)
@@ -77,7 +77,4 @@ BtnLike.defaultProps = {
   favoritesCount: 0,
 }
 
-export default compose(
-  withRouter,
-  withNamespaces('components'),
-)(BtnLike)
+export default withRouter(BtnLike)

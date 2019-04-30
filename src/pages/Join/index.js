@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
 import validator from 'validator'
@@ -9,7 +9,8 @@ import validator from 'validator'
 import Page from './style'
 
 const Join = (props) => {
-  const { history, t } = props
+  const { history } = props
+  const { t } = useTranslation('join')
   const { user, loading, error } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
@@ -131,4 +132,4 @@ const Join = (props) => {
   )
 }
 
-export default withNamespaces('join')(Join)
+export default Join

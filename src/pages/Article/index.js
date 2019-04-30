@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import * as articleActions from '~/store/modules/article'
@@ -19,8 +19,10 @@ import withPushBack from '~/util/withPushBack'
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { history, pushBack, t } = props
+  const { history, pushBack } = props
   const { slug } = props.match.params
+
+  const { t } = useTranslation('article')
 
   const { user } = useSelector(state => state.auth, [])
   const { article, comments, error } = useSelector(state => state.article, [])
@@ -132,5 +134,4 @@ const Article = (props) => {
 export default compose(
   withAlert,
   withPushBack,
-  withNamespaces('article'),
 )(Article)

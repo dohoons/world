@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 
 import { Top } from './style'
 
@@ -24,6 +22,4 @@ const TopVisual = () => {
   )
 }
 
-export default compose(
-  withNamespaces('home'),
-)(TopVisual)
+export default TopVisual

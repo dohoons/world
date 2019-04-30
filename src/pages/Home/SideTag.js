@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import * as tagsActions from '~/store/modules/tags'
 
 import TagList from '~/components/TagList'
 
-const SideTag = ({ t }) => {
+const SideTag = () => {
+  const { t } = useTranslation('home')
   const { tags } = useSelector(state => state.tags, [])
   const actions = useActions(tagsActions, [])
 
@@ -21,4 +22,4 @@ const SideTag = ({ t }) => {
   )
 }
 
-export default withNamespaces('home')(SideTag)
+export default SideTag

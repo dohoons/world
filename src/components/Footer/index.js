@@ -1,9 +1,10 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import CommonFooter from './style'
 
-const Footer = ({ t, lng, i18n }) => {
+const Footer = () => {
+  const { t, i18n } = useTranslation('footer')
+
   const changeLanguage = lang => {
     i18n.changeLanguage(lang)
     localStorage.setItem('lang', lang)
@@ -13,13 +14,11 @@ const Footer = ({ t, lng, i18n }) => {
     <CommonFooter>
       <h2 className="hide">{t('heading')}</h2>
       <div className="lang-change">
-        <button className={lng === 'ko' ? 'is-active': ''} onClick={() => changeLanguage('ko')}><i className="fas fa-check"></i> 한국어</button>
-        <button className={lng === 'en' ? 'is-active': ''} onClick={() => changeLanguage('en')}><i className="fas fa-check"></i> English</button>
+        <button className={i18n.language === 'ko' ? 'is-active': ''} onClick={() => changeLanguage('ko')}><i className="fas fa-check"></i> 한국어</button>
+        <button className={i18n.language === 'en' ? 'is-active': ''} onClick={() => changeLanguage('en')}><i className="fas fa-check"></i> English</button>
       </div>
     </CommonFooter>
   )
 }
 
-export default compose(
-  withNamespaces('footer'),
-)(Footer)
+export default Footer

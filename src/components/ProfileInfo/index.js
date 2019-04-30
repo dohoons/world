@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import * as profileAction from '~/store/modules/profile'
 import goLogin from '~/util/goLogin'
 
 import ProfileInfo from './style'
 
 const Profile = (props) => {
-  const { history, t } = props
+  const { history } = props
+  const { t } = useTranslation('components')
 
   const { user, userInfo } = useSelector(state => state.auth, [])
   const { profile } = useSelector(state => state.profile, [])
@@ -58,7 +58,4 @@ const Profile = (props) => {
   )
 }
 
-export default compose(
-  withRouter,
-  withNamespaces('components'),
-)(Profile)
+export default withRouter(Profile)

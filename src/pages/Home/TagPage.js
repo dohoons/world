@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react'
 import { withRouter } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 
 import ArticleList from '~/components/ArticleList'
 import { TagTitle } from './style'
@@ -32,7 +30,4 @@ const TagPage = ({ history, match: { params } }) => {
   )
 }
 
-export default compose(
-  withRouter,
-  withNamespaces('home'),
-)(TagPage)
+export default withRouter(TagPage)

@@ -2,14 +2,15 @@ import React, { useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { withAlert } from 'react-alert'
 import { useSelector } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import compose from 'lodash-es/flowRight'
 
 import ArticleList from '~/components/ArticleList'
 import TabNav from '~/components/TabNav'
 
 const MainList = (props) => {
-  const { match: { params, url }, history, t } = props
+  const { match: { params, url }, history } = props
+  const { t } = useTranslation('home')
   const { user } = useSelector(state => state.auth, [])
   const isRoot = url === '/'
 
@@ -59,5 +60,4 @@ const MainList = (props) => {
 export default compose(
   withRouter,
   withAlert,
-  withNamespaces('home'),
 )(MainList)

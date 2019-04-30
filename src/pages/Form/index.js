@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import API from '~/api'
 import validator from 'validator'
@@ -10,8 +9,9 @@ import { withAlert } from 'react-alert'
 import Page from './style'
 
 const Form = (props) => {
+  const { history } = props
   const { params } = props.match
-  const { history, t } = props
+  const { t } = useTranslation('form')
   const [ loading, setLoading ] = useState(false)
   const [ sending, setSending ] = useState(false)
   const [ errors, setErrors ] = useState({})
@@ -199,7 +199,4 @@ const Form = (props) => {
   )
 }
 
-export default compose(
-  withAlert,
-  withNamespaces('form'),
-)(Form)
+export default withAlert(Form)

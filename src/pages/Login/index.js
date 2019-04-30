@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
 import validator from 'validator'
@@ -9,7 +9,8 @@ import validator from 'validator'
 import Page from './style'
 
 const Login = (props) => {
-  const { history, location, t } = props
+  const { history, location } = props
+  const { t } = useTranslation('login')
   const { user, loading, error } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
@@ -125,4 +126,4 @@ const Login = (props) => {
   )
 }
 
-export default withNamespaces('login')(Login)
+export default Login

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import * as authActions from '~/store/modules/auth'
 import CommonHeader from './style'
 
-const Header = ({ t }) => {
+const Header = () => {
+  const { t } = useTranslation('header')
   const { user, userInfo } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
 
@@ -64,4 +65,4 @@ const Header = ({ t }) => {
   )
 }
 
-export default withNamespaces('header')(Header)
+export default Header

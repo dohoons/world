@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useActions } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
+import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import validator from 'validator'
 import * as authActions from '~/store/modules/auth'
@@ -10,7 +9,8 @@ import withPushBack from '~/util/withPushBack'
 import Page from './style'
 
 const ProfileEdit = (props) => {
-  const { history, t } = props
+  const { history } = props
+  const { t } = useTranslation('profileEdit')
   const { userInfo, loading, error } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
@@ -156,7 +156,4 @@ const ProfileEdit = (props) => {
   )
 }
 
-export default compose(
-  withPushBack,
-  withNamespaces('profileEdit'),
-)(ProfileEdit)
+export default withPushBack(ProfileEdit)
