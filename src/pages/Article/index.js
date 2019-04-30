@@ -13,16 +13,17 @@ import CommentForm from '~/components/CommentForm'
 import CommentList from '~/components/CommentList'
 import TagList from '~/components/TagList'
 import goLogin from '~/util/goLogin'
-import withPushBack from '~/util/withPushBack'
+import usePushBack from '~/util/usePushBack'
 
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { history, pushBack } = props
+  const { history } = props
   const { slug } = props.match.params
 
   const { t } = useTranslation('article')
   const alert = useAlert()
+  const pushBack = usePushBack()
 
   const { user } = useSelector(state => state.auth, [])
   const { article, comments, error } = useSelector(state => state.article, [])
@@ -131,4 +132,4 @@ const Article = (props) => {
   )
 }
 
-export default withPushBack(Article)
+export default Article

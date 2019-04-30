@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import validator from 'validator'
 import * as authActions from '~/store/modules/auth'
-import withPushBack from '~/util/withPushBack'
+import usePushBack from '~/util/usePushBack'
 
 import Page from './style'
 
 const ProfileEdit = (props) => {
   const { history } = props
   const { t } = useTranslation('profileEdit')
+  const pushBack = usePushBack()
   const { userInfo, loading, error } = useSelector(state => state.auth, [])
   const actions = useActions(authActions, [])
   const [ errors, setErrors ] = useState({})
@@ -72,7 +73,7 @@ const ProfileEdit = (props) => {
       actions.update({ user: userData })
         .then(() => {
           if(userData.username === undefined) {
-            props.pushBack()
+            pushBack()
           } else {
             history.push(`/@${userData.username}`)
           }
@@ -156,4 +157,4 @@ const ProfileEdit = (props) => {
   )
 }
 
-export default withPushBack(ProfileEdit)
+export default ProfileEdit

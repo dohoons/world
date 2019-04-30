@@ -32,7 +32,7 @@
     "react-placeholder": "^3.0.1",
     "react-redux": "^7.1.0-alpha.3",
     "react-router-dom": "^4.3.1",
-    "react-router-last-location": "^1.1.0",
+    "react-router-last-location": "^2.0.0-beta.1",
     "react-scripts": "3.0.0",
     "react-scroll-manager": "^1.0.0",
     "react-transition-group": "^4.0.0",
