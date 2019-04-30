@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Pagination from "react-js-pagination"
-import Paging from './style'
+import PagingWrap from './style'
 
-export default ({
+const Paging = ({
   page = 1,
   total = 1,
   onChange = () => {},
@@ -14,7 +14,7 @@ export default ({
   const { t } = useTranslation('components')
 
   return (
-    <Paging>
+    <PagingWrap>
       <Pagination
         activePage={page}
         totalItemsCount={total}
@@ -33,6 +33,8 @@ export default ({
         nextPageText={<span className="fas fa-angle-right"><span className="txt">{t('pagination.next')}</span></span>}
         lastPageText={<span className="fas fa-angle-double-right"><span className="txt">{t('pagination.last')}</span></span>}
       />
-    </Paging>
+    </PagingWrap>
   )
 }
+
+export default React.memo(Paging)

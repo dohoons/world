@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Tag from './style'
 
-export default ({ tags, currentTag, small }) => (
+const TagList = ({ tags, currentTag, small }) => (
   <Tag small={small}>
     {
       tags.map((v) => (
@@ -11,3 +11,5 @@ export default ({ tags, currentTag, small }) => (
     }
   </Tag>
 )
+
+export default React.memo(TagList)

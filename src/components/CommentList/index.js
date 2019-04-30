@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import CommentList from './style'
+import List from './style'
 
-export default ({ slug, comments, deleteComment }) => {
+ const CommentList = ({ slug, comments, deleteComment }) => {
   const { t } = useTranslation('components')
 
   return (
-    <CommentList>
+    <List>
     {
       comments.length ?
       comments.map(v => (
@@ -34,6 +34,8 @@ export default ({ slug, comments, deleteComment }) => {
         {t('comment.noItem')}
       </li>
     }
-    </CommentList>
+    </List>
   )
 }
+
+export default React.memo(CommentList)
