@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import API from '~/api'
 import validator from 'validator'
-import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 
 import Page from './style'
 
@@ -12,6 +12,7 @@ const Form = (props) => {
   const { history } = props
   const { params } = props.match
   const { t } = useTranslation('form')
+  const alert = useAlert()
   const [ loading, setLoading ] = useState(false)
   const [ sending, setSending ] = useState(false)
   const [ errors, setErrors ] = useState({})
@@ -40,7 +41,7 @@ const Form = (props) => {
       const { article } = data
 
       if(article.author.username !== userInfo.username) {
-        props.alert.error(t('errorModifyAuth'))
+        alert.error(t('errorModifyAuth'))
         history.goBack()
         return
       }
@@ -59,7 +60,7 @@ const Form = (props) => {
         history.goBack()
       }
     }
-  }, [history, props.alert, t, userInfo.username])
+  }, [history, alert, t, userInfo.username])
 
   const cancel = useCallback(() => {
     req.current.cancel()
@@ -129,7 +130,7 @@ const Form = (props) => {
     }).catch(res => {
       // console.log(res.response.data)
 
-      props.alert.error(t('errorWrite'))
+      alert.error(t('errorWrite'))
       setSending(false)
     })
   }
@@ -199,4 +200,4 @@ const Form = (props) => {
   )
 }
 
-export default withAlert(Form)
+export default Form

@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import * as articleActions from '~/store/modules/article'
-import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 
 import Form, { LoginMsg } from './style'
 
-const CommentForm = ({ slug, alert }) => {
+const CommentForm = ({ slug }) => {
   const { t } = useTranslation('components')
+  const alert = useAlert()
   const { user } = useSelector(state => state.auth, [])
   const actions = useActions(articleActions, [])
 
@@ -76,7 +76,4 @@ const CommentForm = ({ slug, alert }) => {
   )
 }
 
-export default compose(
-  withRouter,
-  withAlert,
-)(CommentForm)
+export default withRouter(CommentForm)

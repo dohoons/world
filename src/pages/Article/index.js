@@ -1,11 +1,10 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useActions } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 import { Helmet } from "react-helmet"
 import * as articleActions from '~/store/modules/article'
 import API from '~/api'
-import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 
 import ReactPlaceholder from 'react-placeholder'
 import AuthorInfo from '~/components/AuthorInfo'
@@ -23,6 +22,7 @@ const Article = (props) => {
   const { slug } = props.match.params
 
   const { t } = useTranslation('article')
+  const alert = useAlert()
 
   const { user } = useSelector(state => state.auth, [])
   const { article, comments, error } = useSelector(state => state.article, [])
@@ -49,9 +49,9 @@ const Article = (props) => {
         pushBack()
       } catch(e) {
         if(e.response.data.errors.article[0] === 'not owned by user') {
-          props.alert.error(t('canAuthorDelete'))
+          alert.error(t('canAuthorDelete'))
         } else {
-          props.alert.error(t('errorDelete'))
+          alert.error(t('errorDelete'))
         }
       }
     }
@@ -68,10 +68,10 @@ const Article = (props) => {
         await API.Comments.delete({ slug, commentId })
         actions.deleteComment(commentId)
       } catch (e) {
-        props.alert.error(t('components:comment.errorDelete'))
+        alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, t, props, actions])
+  }, [user, t, props, actions, alert])
 
   if(!article) {
     if(error && error.status === '404') {
@@ -131,7 +131,4 @@ const Article = (props) => {
   )
 }
 
-export default compose(
-  withAlert,
-  withPushBack,
-)(Article)
+export default withPushBack(Article)

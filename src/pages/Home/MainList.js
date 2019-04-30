@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import compose from 'lodash-es/flowRight'
 
 import ArticleList from '~/components/ArticleList'
 import TabNav from '~/components/TabNav'
@@ -11,6 +10,7 @@ import TabNav from '~/components/TabNav'
 const MainList = (props) => {
   const { match: { params, url }, history } = props
   const { t } = useTranslation('home')
+  const alert = useAlert()
   const { user } = useSelector(state => state.auth, [])
   const isRoot = url === '/'
 
@@ -39,7 +39,7 @@ const MainList = (props) => {
           <li><Link to={`/feed`} onClick={
             e => {
               e.preventDefault()
-              props.alert.show(t('loginMsg'))
+              alert.show(t('loginMsg'))
             }
           }>{t('myfeed')}<span className="sub">({t('needLogin')})</span></Link></li>
         }
@@ -57,7 +57,4 @@ const MainList = (props) => {
   )
 }
 
-export default compose(
-  withRouter,
-  withAlert,
-)(MainList)
+export default withRouter(MainList)
