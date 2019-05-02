@@ -38,8 +38,8 @@ const alertOptions = {
 
 const renderApp = Component => {
   render(
-    <ErrorMonitoring>
       <AppContainer>
+    <ErrorMonitoring>
         <Provider store={store}>
           <ScrollManager history={history}>
             <Router history={history}>
@@ -55,8 +55,8 @@ const renderApp = Component => {
             </Router>
           </ScrollManager>
         </Provider>
-      </AppContainer>
-    </ErrorMonitoring>,
+    </ErrorMonitoring>
+      </AppContainer>,
     document.getElementById('root'),
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Switch, Route } from 'react-router-dom'
 import { Helmet } from "react-helmet"
 import needAuth from '~/util/needAuth'
@@ -32,4 +33,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default hot(Home)

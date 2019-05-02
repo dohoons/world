@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useActions } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
@@ -132,4 +133,4 @@ const Join = (props) => {
   )
 }
 
-export default Join
+export default hot(Join)

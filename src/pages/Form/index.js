@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import API from '~/api'
 import validator from 'validator'
+import { hot } from 'react-hot-loader/root'
 import { useAlert } from 'react-alert'
 
 import Page from './style'
@@ -200,4 +201,4 @@ const Form = (props) => {
   )
 }
 
-export default Form
+export default hot(Form)

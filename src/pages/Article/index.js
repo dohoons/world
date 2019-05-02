@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { useSelector, useActions } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
@@ -132,4 +133,4 @@ const Article = (props) => {
   )
 }
 
-export default Article
+export default hot(Article)

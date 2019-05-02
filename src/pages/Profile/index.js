@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
@@ -57,4 +58,4 @@ const Profile = ({ match: { params }, history }) => {
   )
 }
 
-export default Profile
+export default hot(Profile)
