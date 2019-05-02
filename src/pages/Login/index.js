@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Link, Redirect } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
@@ -13,7 +13,7 @@ const Login = (props) => {
   const { history, location } = props
   const { t } = useTranslation('login')
   const { user, loading, error } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, [])
+  const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const [ form, setForm ] = useState({
     email: '',
@@ -23,9 +23,9 @@ const Login = (props) => {
 
   useEffect(() => {
     return () => {
-      actions.resetAuth()
+      dispatch(authActions.resetAuth())
     }
-  }, [actions, user])
+  }, [dispatch, user])
 
   const validate = () => {
     const errors = {}
@@ -55,7 +55,10 @@ const Login = (props) => {
     setErrors({})
 
     if(validate()) {
-      actions.login({ email, password }).then(() => {
+      dispatch(
+        authActions.login({ email, password })
+      )
+      .then(() => {
         if(!location.state) {
           history.goBack()
         }

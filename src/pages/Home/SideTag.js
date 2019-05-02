@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import * as tagsActions from '~/store/modules/tags'
 
@@ -8,11 +8,11 @@ import TagList from '~/components/TagList'
 const SideTag = () => {
   const { t } = useTranslation('home')
   const { tags } = useSelector(state => state.tags, [])
-  const actions = useActions(tagsActions, [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    actions.fetch()
-  }, [actions])
+    dispatch(tagsActions.fetch())
+  }, [dispatch])
 
   return (
     <div className="tag-area">

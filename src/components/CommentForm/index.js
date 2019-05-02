@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import * as articleActions from '~/store/modules/article'
 import { useAlert } from 'react-alert'
@@ -11,7 +11,7 @@ const CommentForm = ({ slug }) => {
   const { t } = useTranslation('components')
   const alert = useAlert()
   const { user } = useSelector(state => state.auth, [])
-  const actions = useActions(articleActions, [])
+  const dispatch = useDispatch()
 
   const [ loading, setLoading ] = useState(false)
   const [ comment, setComment ] = useState('')
@@ -30,12 +30,14 @@ const CommentForm = ({ slug }) => {
 
     setLoading(true)
 
-    actions.createComment({
-      slug,
-      comment: {
-        body: commentValue
-      }
-    })
+    dispatch(
+      articleActions.createComment({
+        slug,
+        comment: {
+          body: commentValue
+        }
+      })
+    )
     .then(() => {
       setLoading(false)
       setComment('')

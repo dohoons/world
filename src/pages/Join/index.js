@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Link, Redirect } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
@@ -13,7 +13,7 @@ const Join = (props) => {
   const { history } = props
   const { t } = useTranslation('join')
   const { user, loading, error } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, [])
+  const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const [ form, setForm ] = useState({
     username: '',
@@ -24,9 +24,9 @@ const Join = (props) => {
 
   useEffect(() => {
     return () => {
-      actions.resetAuth()
+      dispatch(authActions.resetAuth())
     }
-  }, [actions, user])
+  }, [dispatch, user])
 
   const validate = () => {
     const errors = {}
@@ -62,7 +62,7 @@ const Join = (props) => {
     setErrors({})
 
     if(validate()) {
-      actions.register({ username, email, password })
+      dispatch(authActions.register({ username, email, password }))
       .catch(console.log)
     }
 

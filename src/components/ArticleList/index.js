@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import * as articleListActions from '~/store/modules/articleList'
 
 import ReactPlaceholder from 'react-placeholder'
@@ -32,22 +32,24 @@ const ArticleList = ({
 }) => {
 
   const { loading, articles, articlesCount } = useSelector(state => state.articleList, [])
-  const actions = useActions(articleListActions, [])
+  const dispatch = useDispatch()
 
   const fetch = useCallback(() => {
-    actions.fetch({
-      filter,
-      param: { username, page: parseInt(page) - 1, tag },
-    })
-  }, [actions, filter, page, tag, username])
+    dispatch(
+      articleListActions.fetch({
+        filter,
+        param: { username, page: parseInt(page) - 1, tag },
+      })
+    )
+  }, [dispatch, filter, page, tag, username])
 
   useEffect(() => {
     fetch()
 
     return () => {
-      actions.reset()
+      dispatch(articleListActions.reset())
     }
-  }, [actions, fetch])
+  }, [dispatch, fetch])
 
   const pageTotal = Math.ceil(articlesCount / countPerPage)
 

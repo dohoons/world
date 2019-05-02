@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import Cookies from 'js-cookie'
@@ -28,13 +28,13 @@ const App = () => {
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
   const { user } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(token) {
-      actions.init(token)
+      dispatch(authActions.init(token))
     }
-  }, [actions, token])
+  }, [dispatch, token])
 
   if(token && !user) {
     setToken(undefined)

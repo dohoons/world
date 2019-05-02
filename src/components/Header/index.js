@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import * as authActions from '~/store/modules/auth'
 import CommonHeader from './style'
@@ -8,7 +8,7 @@ import CommonHeader from './style'
 const Header = () => {
   const { t } = useTranslation('header')
   const { user, userInfo } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, [])
+  const dispatch = useDispatch()
 
   const [ menuOpened, setMenuOpened ] = useState(false)
   const toggleMenu = e => {
@@ -18,7 +18,7 @@ const Header = () => {
   const menuClose = () => setMenuOpened(() => false)
 
   const logout = e => {
-    actions.logout()
+    dispatch(authActions.logout())
     e.preventDefault()
   }
 

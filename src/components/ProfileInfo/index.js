@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import * as profileAction from '~/store/modules/profile'
+import * as profileActions from '~/store/modules/profile'
 import goLogin from '~/util/goLogin'
 
 import ProfileInfo from './style'
@@ -13,15 +13,15 @@ const Profile = (props) => {
 
   const { user, userInfo } = useSelector(state => state.auth, [])
   const { profile } = useSelector(state => state.profile, [])
-  const actions = useActions(profileAction, [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    actions.fetch(props.username)
+    dispatch(profileActions.fetch(props.username))
 
     return () => {
-      actions.reset()
+      dispatch(profileActions.reset())
     }
-  }, [actions, props.username])
+  }, [dispatch, props.username])
 
   const follow = async (follow) => {
     if(!user) {
@@ -29,7 +29,9 @@ const Profile = (props) => {
       return
     }
 
-    actions[ follow ? 'follow' : 'unfollow' ](props.username)
+    dispatch(
+      profileActions[ follow ? 'follow' : 'unfollow' ](props.username)
+    )
   }
 
   if (profile.loading) return <div>Loading...</div>

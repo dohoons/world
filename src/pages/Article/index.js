@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as articleActions from '~/store/modules/article'
@@ -28,16 +28,16 @@ const Article = (props) => {
 
   const { user } = useSelector(state => state.auth, [])
   const { article, comments, error } = useSelector(state => state.article, [])
-  const actions = useActions(articleActions, [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    actions.reset()
-    actions.fetch(slug)
+    dispatch(articleActions.reset())
+    dispatch(articleActions.fetch(slug))
 
     return () => {
-      actions.reset()
+      dispatch(articleActions.reset())
     }
-  }, [actions, slug])
+  }, [dispatch, slug])
 
   const del = async () => {
     if(!user) {
@@ -68,12 +68,12 @@ const Article = (props) => {
     if(window.confirm(t('components:comment.confirmDelete'))) {
       try {
         await API.Comments.delete({ slug, commentId })
-        actions.deleteComment(commentId)
+        dispatch(articleActions.deleteComment(commentId))
       } catch (e) {
         alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, t, props, actions, alert])
+  }, [user, t, props, dispatch, alert])
 
   if(!article) {
     if(error && error.status === '404') {

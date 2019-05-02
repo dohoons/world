@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { useSelector, useActions } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import validator from 'validator'
@@ -14,7 +14,7 @@ const ProfileEdit = (props) => {
   const { t } = useTranslation('profileEdit')
   const pushBack = usePushBack()
   const { userInfo, loading, error } = useSelector(state => state.auth, [])
-  const actions = useActions(authActions, [])
+  const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const [ form, setForm ] = useState({
     image: userInfo.image,
@@ -27,9 +27,9 @@ const ProfileEdit = (props) => {
 
   useEffect(() => {
     return () => {
-      actions.resetAuth()
+      dispatch(authActions.resetAuth())
     }
-  }, [actions, userInfo])
+  }, [dispatch, userInfo])
 
   const validate = () => {
     const errors = {}
@@ -71,15 +71,17 @@ const ProfileEdit = (props) => {
         ...password !== '' && { password },
       }
 
-      actions.update({ user: userData })
-        .then(() => {
-          if(userData.username === undefined) {
-            pushBack()
-          } else {
-            history.push(`/@${userData.username}`)
-          }
-        })
-        .catch(console.log)
+      dispatch(
+        authActions.update({ user: userData })
+      )
+      .then(() => {
+        if(userData.username === undefined) {
+          pushBack()
+        } else {
+          history.push(`/@${userData.username}`)
+        }
+      })
+      .catch(console.log)
     }
 
     e.preventDefault()
