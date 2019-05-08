@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{246:function(n,o,t){"use strict";t.r(o);var e=t(94),i=t(95);function r(){var n=Object(e.a)(["\n  .login-msg {\n    margin-bottom: 20px;\n    text-align: center;\n    font-size: 16px;\n    color: #5f6e78;\n\n    i {\n      color: #4a9eda;\n    }\n  }\n"]);return r=function(){return n},n}o.default=i.a.div(r())}}]);
