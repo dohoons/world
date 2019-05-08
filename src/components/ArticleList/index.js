@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import * as articleListActions from '~/store/modules/articleList'
 
@@ -98,4 +98,4 @@ ArticleList.defaultProps = {
   countPerPage: 10
 }
 
-export default withRouter(ArticleList)
+export default ArticleList

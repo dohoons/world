@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
@@ -65,4 +65,4 @@ const App = () => {
   )
 }
 
-export default withRouter(App)
+export default App

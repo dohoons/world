@@ -4,12 +4,14 @@ import { withRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import API from '~/api'
+import useRouter from '~/util/useRouter'
 import goLogin from '~/util/goLogin'
 
 import Button from './style'
 
 const BtnLike = props => {
   const { slug } = props
+  const route = useRouter()
   const { t } = useTranslation('components')
   const { user } = useSelector(state => state.auth, [])
   const [ loading, setLoading ] = useState(false)
@@ -25,7 +27,7 @@ const BtnLike = props => {
 
   const like = async () => {
     if(!user) {
-      goLogin(props)
+      goLogin(route)
       return
     }
 

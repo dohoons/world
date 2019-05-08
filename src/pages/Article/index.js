@@ -13,13 +13,15 @@ import BtnLike from '~/components/BtnLike'
 import CommentForm from '~/components/CommentForm'
 import CommentList from '~/components/CommentList'
 import TagList from '~/components/TagList'
+import useRouter from '~/util/useRouter'
 import goLogin from '~/util/goLogin'
 import usePushBack from '~/util/usePushBack'
 
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const { history } = props
+  const route = useRouter()
+  const { history } = route
   const { slug } = props.match.params
 
   const { t } = useTranslation('article')
@@ -41,7 +43,7 @@ const Article = (props) => {
 
   const del = async () => {
     if(!user) {
-      goLogin(props)
+      goLogin(route)
       return
     }
 
@@ -61,7 +63,7 @@ const Article = (props) => {
 
   const delComment = useCallback(async (slug, commentId) => {
     if(!user) {
-      goLogin(props)
+      goLogin(route)
       return
     }
 
@@ -73,7 +75,7 @@ const Article = (props) => {
         alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, t, props, dispatch, alert])
+  }, [user, t, route, dispatch, alert])
 
   if(!article) {
     if(error && error.status === '404') {
