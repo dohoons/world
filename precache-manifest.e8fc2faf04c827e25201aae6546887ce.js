@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "16c60a6f2f0dc493474c5668f4fa641a",
+    "revision": "afa4921c633edb29b0a9daf58a300412",
     "url": "/world/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/world/static/js/0.6ca77453.chunk.js"
   },
   {
-    "revision": "1d2b255441e88c7bdc22",
-    "url": "/world/static/js/1.c4ea556b.chunk.js"
+    "revision": "e04ed65876b493cc0072",
+    "url": "/world/static/js/1.aed76952.chunk.js"
   },
   {
     "revision": "1c814a68d78e8392b4fa",
@@ -60,24 +60,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/world/static/js/19.3938885c.chunk.js"
   },
   {
-    "revision": "2528c8edda19d3eac2d9",
-    "url": "/world/static/js/2.3cd361d6.chunk.js"
+    "revision": "aeb5d943938a9e5e435c",
+    "url": "/world/static/js/2.b3cf557f.chunk.js"
   },
   {
     "revision": "7f8aa3c21ec6fec47607",
     "url": "/world/static/js/22.97a5ef31.chunk.js"
   },
   {
-    "revision": "ad0c7bb636606447bdb2",
-    "url": "/world/static/js/3.1b3ce035.chunk.js"
+    "revision": "2cafd0aade96f2ee2c7b",
+    "url": "/world/static/js/3.ce33f23f.chunk.js"
   },
   {
     "revision": "55c426af272d60ff06f1",
     "url": "/world/static/js/4.fb038fe4.chunk.js"
   },
   {
-    "revision": "11828b69b848656b5fff",
-    "url": "/world/static/js/5.2bf9e0a7.chunk.js"
+    "revision": "0fd914326ff10bffcf9d",
+    "url": "/world/static/js/5.5d2268b0.chunk.js"
   },
   {
     "revision": "0188ded66371b3eb5ee0",
@@ -88,20 +88,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/world/static/js/7.2899d8b4.chunk.js"
   },
   {
-    "revision": "45782c641332d64db83d",
-    "url": "/world/static/js/8.bf8fd3e1.chunk.js"
+    "revision": "48e1367c3010ad9ad8b6",
+    "url": "/world/static/js/8.6ad9def6.chunk.js"
   },
   {
-    "revision": "e7df157d2bd3fb9b4684",
-    "url": "/world/static/js/9.3a471dd1.chunk.js"
+    "revision": "ef6cc26547d88302a756",
+    "url": "/world/static/js/9.e4e64349.chunk.js"
   },
   {
     "revision": "88cdf12fd509d4531545",
     "url": "/world/static/js/main.b247c10c.chunk.js"
   },
   {
-    "revision": "632d9f87eed1d1bfb5b8",
-    "url": "/world/static/js/runtime~main.9c9b0667.js"
+    "revision": "698b66fbf9924a48e65b",
+    "url": "/world/static/js/runtime~main.f77250e4.js"
   },
   {
     "revision": "0b5e3a5451fc62d9023ccafc85bc89db",
