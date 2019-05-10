@@ -63,6 +63,7 @@ const Login = (props) => {
           history.goBack()
         }
       })
+      .catch(console.log)
     }
 
     e.preventDefault()
