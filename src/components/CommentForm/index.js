@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import * as articleActions from '~/store/modules/article'
 import { useAlert } from 'react-alert'
+import useForm from '~/util/useForm'
 
 import Form, { LoginMsg } from './style'
 
@@ -14,7 +15,9 @@ const CommentForm = ({ slug }) => {
   const dispatch = useDispatch()
 
   const [ loading, setLoading ] = useState(false)
-  const [ comment, setComment ] = useState('')
+  const { form: { comment }, setForm, bindInput } = useForm({
+    comment: '',
+  })
   const inputEl = useRef(null)
 
   const submitHandle = e => {
@@ -40,15 +43,15 @@ const CommentForm = ({ slug }) => {
     )
     .then(() => {
       setLoading(false)
-      setComment('')
+      setForm(() => ({
+        comment: '',
+      }))
     })
     .catch(() => {
       alert.error(t('comment.errorWrite'))
       setLoading(false)
     })
   }
-
-  const changeInput = e => setComment(e.target.value)
 
   if(!user) {
     return <LoginMsg className="login-msg">
@@ -66,8 +69,7 @@ const CommentForm = ({ slug }) => {
           rows="10"
           cols="40"
           placeholder={t('comment.placeHolder')}
-          value={comment}
-          onChange={changeInput}
+          {...bindInput('comment')}
           disabled={loading}
         ></textarea>
       </div>

@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet"
 import validator from 'validator'
 import * as authActions from '~/store/modules/auth'
 import usePushBack from '~/util/usePushBack'
+import useForm from '~/util/useForm'
 
 import Page from './style'
 
@@ -16,7 +17,7 @@ const ProfileEdit = (props) => {
   const { userInfo, loading, error } = useSelector(state => state.auth, [])
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
-  const [ form, setForm ] = useState({
+  const { form, bindInput } = useForm({
     image: userInfo.image,
     username: userInfo.username,
     bio: userInfo.bio,
@@ -87,13 +88,6 @@ const ProfileEdit = (props) => {
     e.preventDefault()
   }
 
-  const changeInput = name => e => {
-    setForm({
-      ...form,
-      [name]: e.target.value,
-    })
-  }
-
   return (
     <Page className="container">
       <Helmet title={t('heading')} />
@@ -106,7 +100,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('image')}
                 </span>
-                <input type="text" placeholder={t('imageURL')} className="txt large block" disabled={loading} value={image} onChange={changeInput('image')} />
+                <input type="text" {...bindInput('image')} placeholder={t('imageURL')} className="txt large block" disabled={loading} value={image} />
               </label>
               { errors.image && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.image}</p> }
             </div>
@@ -115,7 +109,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('username')}
                 </span>
-                <input type="text" placeholder={t('username')} className="txt large block" disabled={loading} value={username} onChange={changeInput('username')} />
+                <input type="text" {...bindInput('username')} placeholder={t('username')} className="txt large block" disabled={loading} value={username} />
               </label>
               { errors.username && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.username}</p> }
             </div>
@@ -124,7 +118,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('bio')}
                 </span>
-                <textarea cols="60" rows="10" placeholder={t('bio')} className="txt large block" disabled={loading} value={bio} onChange={changeInput('bio')}></textarea>
+                <textarea cols="60" rows="10" {...bindInput('bio')} placeholder={t('bio')} className="txt large block" disabled={loading} value={bio}></textarea>
               </label>
               { errors.bio && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.bio}</p> }
             </div>
@@ -133,7 +127,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('email')}
                 </span>
-                <input type="text" placeholder={t('email')} className="txt large block" disabled={loading} value={email} onChange={changeInput('email')} />
+                <input type="text" {...bindInput('email')} placeholder={t('email')} className="txt large block" disabled={loading} value={email} />
               </label>
               { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
             </div>
@@ -142,7 +136,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('newPassword')}
                 </span>
-                <input type="password" placeholder={t('newPassword')} className="txt large block" disabled={loading} value={password} onChange={changeInput('password')} />
+                <input type="password" {...bindInput('password')} placeholder={t('newPassword')} className="txt large block" disabled={loading} value={password} />
               </label>
               { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
             </div>

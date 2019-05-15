@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
+import useForm from '~/util/useForm'
 import validator from 'validator'
 
 import Page from './style'
@@ -15,7 +16,7 @@ const Login = (props) => {
   const { user, loading, error } = useSelector(state => state.auth, [])
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
-  const [ form, setForm ] = useState({
+  const { form, bindInput } = useForm({
     email: '',
     password: '',
   })
@@ -68,13 +69,6 @@ const Login = (props) => {
     e.preventDefault()
   }
 
-  const changeInput = name => e => {
-    setForm({
-      ...form,
-      [name]: e.target.value,
-    })
-  }
-
   const { prevLocation, loginMsg } = location.state || { prevLocation: { pathname: '/' }, loginMsg: false }
   const errorMsg = error[0] === 'email or password is invalid' ? t('invalidLoginInfo') : t('loginFail')
 
@@ -98,7 +92,7 @@ const Login = (props) => {
                 <span className="form-head">
                   {t('email')}
                 </span>
-                <input type="email" placeholder={t('email')} className="txt large block" disabled={loading} onChange={changeInput('email')} />
+                <input type="email" {...bindInput('email')} placeholder={t('email')} className="txt large block" disabled={loading} />
               </label>
               { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
             </div>
@@ -107,7 +101,7 @@ const Login = (props) => {
                 <span className="form-head">
                   {t('password')}
                 </span>
-                <input type="password" placeholder={t('password')} className="txt large block" disabled={loading} onChange={changeInput('password')} />
+                <input type="password" {...bindInput('password')} placeholder={t('password')} className="txt large block" disabled={loading} />
               </label>
               { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
             </div>

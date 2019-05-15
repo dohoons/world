@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from "react-helmet"
-import API from '~/api'
 import validator from 'validator'
 import { hot } from 'react-hot-loader/root'
 import { useAlert } from 'react-alert'
+import API from '~/api'
+import useForm from '~/util/useForm'
 
 import Page from './style'
 
@@ -17,14 +18,13 @@ const Form = (props) => {
   const [ loading, setLoading ] = useState(false)
   const [ sending, setSending ] = useState(false)
   const [ errors, setErrors ] = useState({})
-  const [ form, setForm ] = useState({
+  const { form, setForm, bindInput } = useForm({
     slug: '',
     title: '',
     description: '',
     body: '',
     tag: '',
   })
-
   const { slug, title, description, body, tag } = form
 
   const { userInfo } = useSelector(state => state.auth, [])
@@ -61,7 +61,7 @@ const Form = (props) => {
         history.goBack()
       }
     }
-  }, [history, alert, t, userInfo.username])
+  }, [userInfo.username, setForm, alert, t, history])
 
   const cancel = useCallback(() => {
     req.current.cancel()
@@ -136,13 +136,6 @@ const Form = (props) => {
     })
   }
 
-  const changeInput = name => e => {
-    setForm({
-      ...form,
-      [name]: e.target.value,
-    })
-  }
-
   return loading ?
   <div></div>
   :
@@ -158,7 +151,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('title')}
                 </span>
-                <input type="text" placeholder={t('title')} className="txt large block" disabled={sending} value={title} onChange={changeInput('title')} />
+                <input type="text" {...bindInput('title')} placeholder={t('title')} className="txt large block" disabled={sending} value={title} />
               </label>
               { errors.title && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.title}</p> }
             </div>
@@ -167,7 +160,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('description')}
                 </span>
-                <input type="text" placeholder={t('description')} className="txt large block" disabled={sending} value={description} onChange={changeInput('description')} />
+                <input type="text" {...bindInput('description')} placeholder={t('description')} className="txt large block" disabled={sending} value={description} />
               </label>
               { errors.description && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.description}</p> }
             </div>
@@ -176,7 +169,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('body')}
                 </span>
-                <textarea cols="60" rows="10" placeholder={t('body')} className="txt large block" disabled={sending} value={body} onChange={changeInput('body')}></textarea>
+                <textarea cols="60" rows="10" {...bindInput('body')} placeholder={t('body')} className="txt large block" disabled={sending} value={body}></textarea>
               </label>
               { errors.body && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.body}</p> }
             </div>
@@ -185,7 +178,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('tag')}
                 </span>
-                <input type="text" placeholder={t('tag')} className="txt large block" disabled={sending} value={tag} onChange={changeInput('tag')} />
+                <input type="text" {...bindInput('tag')} placeholder={t('tag')} className="txt large block" disabled={sending} value={tag} />
               </label>
             </div>
             { sending && <div>{t('sending')}</div> }

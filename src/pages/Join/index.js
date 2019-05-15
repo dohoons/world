@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import { Helmet } from "react-helmet"
 import * as authActions from '~/store/modules/auth'
+import useForm from '~/util/useForm'
 import validator from 'validator'
 
 import Page from './style'
@@ -15,7 +16,7 @@ const Join = (props) => {
   const { user, loading, error } = useSelector(state => state.auth, [])
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
-  const [ form, setForm ] = useState({
+  const { form, bindInput } = useForm({
     username: '',
     email: '',
     password: '',
@@ -69,13 +70,6 @@ const Join = (props) => {
     e.preventDefault()
   }
 
-  const changeInput = name => e => {
-    setForm({
-      ...form,
-      [name]: e.target.value,
-    })
-  }
-
   return user ?
   <Redirect to="/" />
   :
@@ -91,7 +85,7 @@ const Join = (props) => {
                 <span className="form-head">
                   {t('username')}
                 </span>
-                <input type="text" placeholder={t('username')} className="txt large block" disabled={loading} value={username} onChange={changeInput('username')} />
+                <input type="text" {...bindInput('username')} placeholder={t('username')} className="txt large block" disabled={loading}/>
               </label>
               { errors.username && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.username}</p> }
             </div>
@@ -100,7 +94,7 @@ const Join = (props) => {
                 <span className="form-head">
                   {t('email')}
                 </span>
-                <input type="text" placeholder={t('email')} className="txt large block" disabled={loading} value={email} onChange={changeInput('email')} />
+                <input type="text" {...bindInput('email')}  placeholder={t('email')} className="txt large block" disabled={loading} />
               </label>
               { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
             </div>
@@ -109,7 +103,7 @@ const Join = (props) => {
                 <span className="form-head">
                   {t('password')}
                 </span>
-                <input type="password" placeholder={t('password')} className="txt large block" disabled={loading} value={password} onChange={changeInput('password')} />
+                <input type="password" {...bindInput('password')} placeholder={t('password')} className="txt large block" disabled={loading} />
               </label>
               { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
             </div>
