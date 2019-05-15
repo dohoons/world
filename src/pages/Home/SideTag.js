@@ -11,7 +11,7 @@ const SideTag = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(tagsActions.fetch())
+    dispatch(tagsActions.fetch()).catch(console.log)
   }, [dispatch])
 
   return (
