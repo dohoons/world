@@ -18,7 +18,7 @@ const Form = (props) => {
   const [ loading, setLoading ] = useState(false)
   const [ sending, setSending ] = useState(false)
   const [ errors, setErrors ] = useState({})
-  const { form, setForm, bindInput } = useForm({
+  const { form, setField, bindInput } = useForm({
     slug: '',
     title: '',
     description: '',
@@ -48,7 +48,7 @@ const Form = (props) => {
       }
 
       setLoading(false)
-      setForm({
+      setField({
         slug: article.slug,
         title: article.title,
         description: article.description,
@@ -61,7 +61,7 @@ const Form = (props) => {
         history.goBack()
       }
     }
-  }, [userInfo.username, setForm, alert, t, history])
+  }, [userInfo.username, setField, alert, t, history])
 
   const cancel = useCallback(() => {
     req.current.cancel()

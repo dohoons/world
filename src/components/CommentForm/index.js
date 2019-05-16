@@ -15,7 +15,7 @@ const CommentForm = ({ slug }) => {
   const dispatch = useDispatch()
 
   const [ loading, setLoading ] = useState(false)
-  const { form: { comment }, setForm, bindInput } = useForm({
+  const { form: { comment }, setField, bindInput } = useForm({
     comment: '',
   })
   const inputEl = useRef(null)
@@ -43,9 +43,7 @@ const CommentForm = ({ slug }) => {
     )
     .then(() => {
       setLoading(false)
-      setForm(() => ({
-        comment: '',
-      }))
+      setField('comment', '')
     })
     .catch(() => {
       alert.error(t('comment.errorWrite'))
