@@ -100,7 +100,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('image')}
                 </span>
-                <input type="text" {...bindInput('image')} placeholder={t('imageURL')} className="txt large block" disabled={loading} value={image} />
+                <input type="text" {...bindInput('image')} placeholder={t('imageURL')} className="txt large block" disabled={loading} />
               </label>
               { errors.image && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.image}</p> }
             </div>
@@ -109,7 +109,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('username')}
                 </span>
-                <input type="text" {...bindInput('username')} placeholder={t('username')} className="txt large block" disabled={loading} value={username} />
+                <input type="text" {...bindInput('username')} placeholder={t('username')} className="txt large block" disabled={loading} />
               </label>
               { errors.username && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.username}</p> }
             </div>
@@ -118,7 +118,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('bio')}
                 </span>
-                <textarea cols="60" rows="10" {...bindInput('bio')} placeholder={t('bio')} className="txt large block" disabled={loading} value={bio}></textarea>
+                <textarea cols="60" rows="10" {...bindInput('bio')} placeholder={t('bio')} className="txt large block" disabled={loading}></textarea>
               </label>
               { errors.bio && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.bio}</p> }
             </div>
@@ -127,7 +127,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('email')}
                 </span>
-                <input type="text" {...bindInput('email')} placeholder={t('email')} className="txt large block" disabled={loading} value={email} />
+                <input type="text" {...bindInput('email')} placeholder={t('email')} className="txt large block" disabled={loading} />
               </label>
               { errors.email && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.email}</p> }
             </div>
@@ -136,7 +136,7 @@ const ProfileEdit = (props) => {
                 <span className="form-head">
                   {t('newPassword')}
                 </span>
-                <input type="password" {...bindInput('password')} placeholder={t('newPassword')} className="txt large block" disabled={loading} value={password} />
+                <input type="password" {...bindInput('password')} placeholder={t('newPassword')} className="txt large block" disabled={loading} />
               </label>
               { errors.password && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.password}</p> }
             </div>

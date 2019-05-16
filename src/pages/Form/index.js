@@ -151,7 +151,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('title')}
                 </span>
-                <input type="text" {...bindInput('title')} placeholder={t('title')} className="txt large block" disabled={sending} value={title} />
+                <input type="text" {...bindInput('title')} placeholder={t('title')} className="txt large block" disabled={sending} />
               </label>
               { errors.title && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.title}</p> }
             </div>
@@ -160,7 +160,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('description')}
                 </span>
-                <input type="text" {...bindInput('description')} placeholder={t('description')} className="txt large block" disabled={sending} value={description} />
+                <input type="text" {...bindInput('description')} placeholder={t('description')} className="txt large block" disabled={sending} />
               </label>
               { errors.description && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.description}</p> }
             </div>
@@ -169,7 +169,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('body')}
                 </span>
-                <textarea cols="60" rows="10" {...bindInput('body')} placeholder={t('body')} className="txt large block" disabled={sending} value={body}></textarea>
+                <textarea cols="60" rows="10" {...bindInput('body')} placeholder={t('body')} className="txt large block" disabled={sending}></textarea>
               </label>
               { errors.body && <p className="input-error"><i className="fas fa-times-circle"></i> {errors.body}</p> }
             </div>
@@ -178,7 +178,7 @@ const Form = (props) => {
                 <span className="form-head">
                   {t('tag')}
                 </span>
-                <input type="text" {...bindInput('tag')} placeholder={t('tag')} className="txt large block" disabled={sending} value={tag} />
+                <input type="text" {...bindInput('tag')} placeholder={t('tag')} className="txt large block" disabled={sending} />
               </label>
             </div>
             { sending && <div>{t('sending')}</div> }
