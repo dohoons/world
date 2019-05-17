@@ -1,28 +1,15 @@
 import produce from "immer"
 import API from '~/api'
 
-const ARTICLE_LIST_LOAD = 'ARTICLE_LIST_LOAD'
-const ARTICLE_LIST_LOAD_PENDING = 'ARTICLE_LIST_LOAD_PENDING'
-const ARTICLE_LIST_LOAD_SUCCESS = 'ARTICLE_LIST_LOAD_SUCCESS'
-const ARTICLE_LIST_LOAD_FAILURE = 'ARTICLE_LIST_LOAD_FAILURE'
-const ARTICLE_LIST_UNLOAD = 'ARTICLE_LIST_UNLOAD'
-
-const apiName = {
-  undefined: 'all',
-  all: 'all',
-  feed: 'feed',
-  articles: 'byAuthor',
-  favorites: 'favoritedBy',
-  tag: 'byTag',
-}
+export const ARTICLE_LIST_LOAD = 'ARTICLE_LIST_LOAD'
+export const ARTICLE_LIST_LOAD_PENDING = 'ARTICLE_LIST_LOAD_PENDING'
+export const ARTICLE_LIST_LOAD_SUCCESS = 'ARTICLE_LIST_LOAD_SUCCESS'
+export const ARTICLE_LIST_LOAD_FAILURE = 'ARTICLE_LIST_LOAD_FAILURE'
+export const ARTICLE_LIST_UNLOAD = 'ARTICLE_LIST_UNLOAD'
 
 export const fetch = ({ filter, param, config }) => ({
   type: ARTICLE_LIST_LOAD,
-  payload: API.Articles[apiName[filter]]({ 
-    ...param,
-    requestId: 'ARTICLE_LIST_LOAD',
-    config,
-  }),
+  payload: { filter, param, config }
 })
 
 export const reset = () => ({

@@ -2,46 +2,46 @@ import produce from "immer"
 import API from '~/api'
 import Cookies from 'js-cookie'
 
-const LOGIN = 'LOGIN'
-const LOGIN_PENDING = 'LOGIN_PENDING'
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-const LOGIN_FAILURE = 'LOGIN_FAILURE'
-const LOGOUT = 'LOGOUT'
-const REGISTER = 'REGISTER'
-const REGISTER_PENDING = 'REGISTER_PENDING'
-const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-const REGISTER_FAILURE = 'REGISTER_FAILURE'
-const UPDATE = 'UPDATE'
-const UPDATE_PENDING = 'UPDATE_PENDING'
-const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
-const UPDATE_FAILURE = 'UPDATE_FAILURE'
-const RESET_AUTH = 'RESET_AUTH'
+export const LOGIN = 'LOGIN'
+export const LOGIN_INIT = 'LOGIN_INIT'
+export const LOGIN_PENDING = 'LOGIN_PENDING'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGOUT = 'LOGOUT'
+export const REGISTER = 'REGISTER'
+export const REGISTER_PENDING = 'REGISTER_PENDING'
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const REGISTER_FAILURE = 'REGISTER_FAILURE'
+export const UPDATE = 'UPDATE'
+export const UPDATE_PENDING = 'UPDATE_PENDING'
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
+export const UPDATE_FAILURE = 'UPDATE_FAILURE'
+export const RESET_AUTH = 'RESET_AUTH'
 
 export const init = (token) => {
   API.setToken(token)
   return ({
-    type: LOGIN,
-    payload: API.Auth.current()
+    type: LOGIN_INIT,
   })
 }
 
-export const login = ({ email, password }) => ({
+export const login = payload => ({
   type: LOGIN,
-  payload: API.Auth.login({ email, password })
+  payload,
 })
 
 export const logout = () => ({
   type: LOGOUT
 })
 
-export const register = ({ username, email, password }) => ({
+export const register = payload => ({
   type: REGISTER,
-  payload: API.Auth.register({ username, email, password })
+  payload,
 })
 
-export const update = ({ user }) => ({
+export const update = payload => ({
   type: UPDATE,
-  payload: API.Auth.save({ user })
+  payload,
 })
 
 export const resetAuth = () => ({
@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
 
       case UPDATE_FAILURE:
         draft.loading = false
-        draft.error = mapError(action.payload.response.data.errors)
+        draft.error = mapError(action.error.response.data.errors)
         
         return
 
@@ -94,7 +94,7 @@ export default (state = initialState, action) => {
       case REGISTER_FAILURE:
         draft.user = null
         draft.loading = false
-        draft.error = mapError(action.payload.response.data.errors)
+        draft.error = mapError(action.error.response.data.errors)
         API.setToken(null)
         
         return

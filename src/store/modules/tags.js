@@ -1,15 +1,13 @@
 import produce from "immer"
-import API from '~/api'
 
-const TAGS_LOAD = 'TAGS_LOAD'
-const TAGS_LOAD_PENDING = 'TAGS_LOAD_PENDING'
-const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS'
-const TAGS_LOAD_FAILURE = 'TAGS_LOAD_FAILURE'
-const TAGS_UNLOAD = 'TAGS_UNLOAD'
+export const TAGS_LOAD = 'TAGS_LOAD'
+export const TAGS_LOAD_PENDING = 'TAGS_LOAD_PENDING'
+export const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS'
+export const TAGS_LOAD_FAILURE = 'TAGS_LOAD_FAILURE'
+export const TAGS_UNLOAD = 'TAGS_UNLOAD'
 
 export const fetch = () => ({
   type: TAGS_LOAD,
-  payload: API.Tags.getAll()
 })
 
 export const reset = () => ({

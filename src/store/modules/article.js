@@ -2,29 +2,27 @@ import produce from "immer"
 import API from '~/api'
 import { markdown } from 'markdown'
 
-const ARTICLE_PAGE_LOAD = 'ARTICLE_PAGE_LOAD'
-const ARTICLE_PAGE_LOAD_SUCCESS = 'ARTICLE_PAGE_LOAD_SUCCESS'
-const ARTICLE_PAGE_LOAD_FAILURE = 'ARTICLE_PAGE_LOAD_FAILURE'
-const ARTICLE_PAGE_UNLOAD = 'ARTICLE_PAGE_UNLOAD'
-const CREATE_COMMENT = 'CREATE_COMMENT'
-const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
-const DELETE_COMMENT = 'DELETE_COMMENT'
+export const ARTICLE_PAGE_LOAD = 'ARTICLE_PAGE_LOAD'
+export const ARTICLE_PAGE_LOAD_PENDING = 'ARTICLE_PAGE_LOAD_PENDING'
+export const ARTICLE_PAGE_LOAD_SUCCESS = 'ARTICLE_PAGE_LOAD_SUCCESS'
+export const ARTICLE_PAGE_LOAD_FAILURE = 'ARTICLE_PAGE_LOAD_FAILURE'
+export const ARTICLE_PAGE_UNLOAD = 'ARTICLE_PAGE_UNLOAD'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 export const fetch = (slug, config) => ({
   type: ARTICLE_PAGE_LOAD,
-  payload: Promise.all([
-    API.Articles.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config }),
-    API.Comments.get({ slug, requestId: 'ARTICLE_PAGE_LOAD', config }),
-  ])
+  payload: { slug, config }
 })
 
 export const reset = () => ({
   type: ARTICLE_PAGE_UNLOAD
 })
 
-export const createComment = ({ slug, comment }) => ({
+export const createComment = payload => ({
   type: CREATE_COMMENT,
-  payload: API.Comments.create({ slug, comment })
+  payload: payload
 })
 
 export const deleteComment = (commentId) => ({

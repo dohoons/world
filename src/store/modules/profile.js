@@ -1,19 +1,19 @@
 import produce from "immer"
 import API from '~/api'
 
-const PROFILE_LOAD = 'PROFILE_LOAD'
-const PROFILE_LOAD_PENDING = 'PROFILE_LOAD_PENDING'
-const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS'
-const PROFILE_LOAD_FAILURE = 'PROFILE_LOAD_FAILURE'
-const PROFILE_UNLOAD = 'PROFILE_UNLOAD'
-const PROFILE_FOLLOW = 'PROFILE_FOLLOW'
-const PROFILE_FOLLOW_SUCCESS = 'PROFILE_FOLLOW_SUCCESS'
-const PROFILE_UNFOLLOW = 'PROFILE_UNFOLLOW'
-const PROFILE_UNFOLLOW_SUCCESS = 'PROFILE_UNFOLLOW_SUCCESS'
+export const PROFILE_LOAD = 'PROFILE_LOAD'
+export const PROFILE_LOAD_PENDING = 'PROFILE_LOAD_PENDING'
+export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS'
+export const PROFILE_LOAD_FAILURE = 'PROFILE_LOAD_FAILURE'
+export const PROFILE_UNLOAD = 'PROFILE_UNLOAD'
+export const PROFILE_FOLLOW = 'PROFILE_FOLLOW'
+export const PROFILE_FOLLOW_SUCCESS = 'PROFILE_FOLLOW_SUCCESS'
+export const PROFILE_UNFOLLOW = 'PROFILE_UNFOLLOW'
+export const PROFILE_UNFOLLOW_SUCCESS = 'PROFILE_UNFOLLOW_SUCCESS'
 
-export const fetch = (username) => ({
+export const fetch = username => ({
   type: PROFILE_LOAD,
-  payload: API.Profile.get({ username, requestId: 'PROFILE_LOAD' })
+  payload: { username },
 })
 
 export const reset = () => ({
@@ -22,12 +22,12 @@ export const reset = () => ({
 
 export const follow = (username) => ({
   type: PROFILE_FOLLOW,
-  payload: API.Profile.follow({ username })
+  payload: { username }
 })
 
 export const unfollow = (username) => ({
   type: PROFILE_UNFOLLOW,
-  payload: API.Profile.unfollow({ username })
+  payload: { username }
 })
 
 const initialState = {

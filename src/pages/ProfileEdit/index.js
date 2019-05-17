@@ -73,16 +73,17 @@ const ProfileEdit = (props) => {
       }
 
       dispatch(
-        authActions.update({ user: userData })
+        authActions.update({
+          user: userData,
+          onSuccess: () => {
+            if(userData.username === undefined) {
+              pushBack()
+            } else {
+              history.push(`/@${userData.username}`)
+            }
+          }
+        })
       )
-      .then(() => {
-        if(userData.username === undefined) {
-          pushBack()
-        } else {
-          history.push(`/@${userData.username}`)
-        }
-      })
-      .catch(console.log)
     }
 
     e.preventDefault()

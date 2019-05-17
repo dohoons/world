@@ -18,7 +18,7 @@ const Profile = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(profileActions.fetch(props.username)).catch(console.log)
+    dispatch(profileActions.fetch(props.username))
 
     return () => {
       dispatch(profileActions.reset())

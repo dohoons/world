@@ -57,14 +57,16 @@ const Login = (props) => {
 
     if(validate()) {
       dispatch(
-        authActions.login({ email, password })
+        authActions.login({
+          email,
+          password,
+          onSuccess: () => {
+            if(!location.state) {
+              history.goBack()
+            }
+          },
+        })
       )
-      .then(() => {
-        if(!location.state) {
-          history.goBack()
-        }
-      })
-      .catch(console.log)
     }
 
     e.preventDefault()

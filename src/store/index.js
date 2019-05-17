@@ -1,23 +1,20 @@
 import { createStore, compose, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import modules from './modules'
+import rootSaga from './sagas'
 
-import ReduxThunk from 'redux-thunk'
-import promiseMiddleware from 'redux-promise-middleware'
-
-const customizedPromiseMiddleware = promiseMiddleware({
-    promiseTypeSuffixes: ['PENDING', 'SUCCESS', 'FAILURE']
-})
-
+const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
   modules,
   composeEnhancers(
     applyMiddleware(
-      ReduxThunk,
-      customizedPromiseMiddleware,
+      sagaMiddleware,
     )
   )
 )
+
+sagaMiddleware.run(rootSaga)
 
 export default store

@@ -38,17 +38,17 @@ const CommentForm = ({ slug }) => {
         slug,
         comment: {
           body: commentValue
-        }
+        },
+        onSuccess: () => {
+          setLoading(false)
+          setField('comment', '')
+        },
+        onFailure: () => {
+          alert.error(t('comment.errorWrite'))
+          setLoading(false)
+        },
       })
     )
-    .then(() => {
-      setLoading(false)
-      setField('comment', '')
-    })
-    .catch(() => {
-      alert.error(t('comment.errorWrite'))
-      setLoading(false)
-    })
   }
 
   if(!user) {
