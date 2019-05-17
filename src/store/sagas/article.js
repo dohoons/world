@@ -1,4 +1,4 @@
-import { all, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   ARTICLE_PAGE_LOAD,
@@ -34,7 +34,7 @@ function* fetch(action) {
 }
 
 function* watchFetch() {
-  yield takeLatest(ARTICLE_PAGE_LOAD, fetch);
+  yield takeEvery(ARTICLE_PAGE_LOAD, fetch);
 }
 
 function* createComment(action) {

@@ -1,4 +1,4 @@
-import { all, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, put, takeEvery } from 'redux-saga/effects'
 import API from '~/api'
 import {
   ARTICLE_LIST_LOAD,
@@ -42,7 +42,7 @@ function* fetch(action) {
 }
 
 function* watchFetch() {
-  yield takeLatest(ARTICLE_LIST_LOAD, fetch);
+  yield takeEvery(ARTICLE_LIST_LOAD, fetch);
 }
 
 export default function* articleListSaga() {

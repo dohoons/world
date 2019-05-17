@@ -1,4 +1,4 @@
-import { all, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   PROFILE_LOAD,
@@ -33,7 +33,7 @@ function* fetch(action) {
 }
 
 function* watchFetch() {
-  yield takeLatest(PROFILE_LOAD, fetch);
+  yield takeEvery(PROFILE_LOAD, fetch);
 }
 
 function* follow(action) {

@@ -1,4 +1,4 @@
-import { all, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, put, takeEvery } from 'redux-saga/effects'
 import API from '~/api'
 import {
   TAGS_LOAD,
@@ -28,7 +28,7 @@ function* fetch() {
 }
 
 function* watchFetch() {
-  yield takeLatest(TAGS_LOAD, fetch);
+  yield takeEvery(TAGS_LOAD, fetch);
 }
 
 export default function* tagsSaga() {

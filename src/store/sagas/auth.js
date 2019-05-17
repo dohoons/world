@@ -1,4 +1,4 @@
-import { all, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   LOGIN,
@@ -63,7 +63,7 @@ function* loginInit() {
 }
 
 function* watchLoginInit() {
-  yield takeLatest(LOGIN_INIT, loginInit);
+  yield takeEvery(LOGIN_INIT, loginInit);
 }
 
 function* register(action) {
