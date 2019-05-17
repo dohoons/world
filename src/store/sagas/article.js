@@ -17,8 +17,8 @@ function* fetch(action) {
 
     const { slug, config } = action.payload
     const res = yield Promise.all([
-      API.Articles.get({ slug, requestId: 'ARTICLE_PAGE_LOAD_LOAD', config }),
-      API.Comments.get({ slug, requestId: 'ARTICLE_PAGE_LOAD_LOAD', config }),
+      API.Articles.get({ slug, requestId: ARTICLE_PAGE_LOAD, config }),
+      API.Comments.get({ slug, requestId: ARTICLE_PAGE_LOAD, config }),
     ])
 
     yield put({

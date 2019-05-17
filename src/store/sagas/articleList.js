@@ -25,7 +25,7 @@ function* fetch(action) {
     const { filter, param, config } = action.payload
     const res = yield API.Articles[apiName[filter]]({ 
       ...param,
-      requestId: 'ARTICLE_LIST_LOAD',
+      requestId: ARTICLE_LIST_LOAD,
       config,
     })
 

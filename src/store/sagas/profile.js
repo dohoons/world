@@ -18,7 +18,7 @@ function* fetch(action) {
     })
 
     const { username } = action.payload
-    const res = yield API.Profile.get({ username, requestId: 'PROFILE_LOAD' })
+    const res = yield API.Profile.get({ username, requestId: PROFILE_LOAD })
 
     yield put({
       type: PROFILE_LOAD_SUCCESS,
