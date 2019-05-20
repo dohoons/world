@@ -13,7 +13,7 @@ const BtnLike = props => {
   const { slug } = props
   const route = useRouter()
   const { t } = useTranslation('components')
-  const { user } = useSelector(state => state.auth, [])
+  const { user } = useSelector(state => state.auth)
   const [ loading, setLoading ] = useState(false)
   const [ req, setReq ] = useState(null)
   const [ favorited, setFavorited ] = useState(props.favorited)

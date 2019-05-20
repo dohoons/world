@@ -7,7 +7,7 @@ import CommonHeader from './style'
 
 const Header = () => {
   const { t } = useTranslation('header')
-  const { user, userInfo } = useSelector(state => state.auth, [])
+  const { user, userInfo } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const [ menuOpened, setMenuOpened ] = useState(false)

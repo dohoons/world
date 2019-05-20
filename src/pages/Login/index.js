@@ -13,7 +13,7 @@ import Page from './style'
 const Login = (props) => {
   const { history, location } = props
   const { t } = useTranslation('login')
-  const { user, loading, error } = useSelector(state => state.auth, [])
+  const { user, loading, error } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const { form, bindInput } = useForm({

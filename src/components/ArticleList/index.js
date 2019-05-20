@@ -31,7 +31,7 @@ const ArticleList = ({
   getPageUrl
 }) => {
 
-  const { loading, articles, articlesCount } = useSelector(state => state.articleList, [])
+  const { loading, articles, articlesCount } = useSelector(state => state.articleList)
   const dispatch = useDispatch()
 
   const fetch = useCallback(() => {

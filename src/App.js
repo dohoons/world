@@ -27,7 +27,7 @@ const App = () => {
   const { t, i18n } = useTranslation('common')
   const [ token, setToken ] = useState(Cookies.get('jwt'))
 
-  const { user } = useSelector(state => state.auth, [])
+  const { user } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   useEffect(() => {

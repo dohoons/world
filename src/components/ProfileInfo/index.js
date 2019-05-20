@@ -13,8 +13,8 @@ const Profile = (props) => {
   const { history } = route
   const { t } = useTranslation('components')
 
-  const { user, userInfo } = useSelector(state => state.auth, [])
-  const { profile } = useSelector(state => state.profile, [])
+  const { user, userInfo } = useSelector(state => state.auth)
+  const { profile } = useSelector(state => state.profile)
   const dispatch = useDispatch()
 
   useEffect(() => {

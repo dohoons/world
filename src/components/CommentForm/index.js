@@ -11,7 +11,7 @@ import Form, { LoginMsg } from './style'
 const CommentForm = ({ slug }) => {
   const { t } = useTranslation('components')
   const alert = useAlert()
-  const { user } = useSelector(state => state.auth, [])
+  const { user } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const [ loading, setLoading ] = useState(false)

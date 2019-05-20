@@ -7,7 +7,7 @@ import TagList from '~/components/TagList'
 
 const SideTag = () => {
   const { t } = useTranslation('home')
-  const { tags } = useSelector(state => state.tags, [])
+  const { tags } = useSelector(state => state.tags)
   const dispatch = useDispatch()
 
   useEffect(() => {

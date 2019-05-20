@@ -11,7 +11,7 @@ const MainList = (props) => {
   const { match: { params, url }, history } = props
   const { t } = useTranslation('home')
   const alert = useAlert()
-  const { user } = useSelector(state => state.auth, [])
+  const { user } = useSelector(state => state.auth)
   const isRoot = url === '/'
 
   const getListType = useCallback(() => {

@@ -14,7 +14,7 @@ const ProfileEdit = (props) => {
   const { history } = props
   const { t } = useTranslation('profileEdit')
   const pushBack = usePushBack()
-  const { userInfo, loading, error } = useSelector(state => state.auth, [])
+  const { userInfo, loading, error } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const { form, bindInput } = useForm({

@@ -13,7 +13,7 @@ import Page from './style'
 const Join = (props) => {
   const { history } = props
   const { t } = useTranslation('join')
-  const { user, loading, error } = useSelector(state => state.auth, [])
+  const { user, loading, error } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const { form, bindInput } = useForm({

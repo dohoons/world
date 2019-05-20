@@ -28,8 +28,8 @@ const Article = (props) => {
   const alert = useAlert()
   const pushBack = usePushBack()
 
-  const { user } = useSelector(state => state.auth, [])
-  const { article, comments, error } = useSelector(state => state.article, [])
+  const { user } = useSelector(state => state.auth)
+  const { article, comments, error } = useSelector(state => state.article)
   const dispatch = useDispatch()
 
   useEffect(() => {

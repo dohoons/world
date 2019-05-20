@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 export default (WrappedComponent = null) => {
   const NeedAuth = (props) => {
-    const { user } = useSelector(state => state.auth, [])
+    const { user } = useSelector(state => state.auth)
 
     if(!user) {
       return <Redirect to={{

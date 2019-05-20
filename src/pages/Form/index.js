@@ -27,7 +27,7 @@ const Form = (props) => {
   })
   const { slug, title, description, body, tag } = form
 
-  const { userInfo } = useSelector(state => state.auth, [])
+  const { userInfo } = useSelector(state => state.auth)
 
   const req = useRef(API.CancelToken.source())
   
