@@ -1,5 +1,16 @@
 import { useState, useCallback } from 'react'
 
+const debounce = (fn, time) => {
+  let timeout;
+
+  return function() {
+    const functionCall = () => fn.apply(this, arguments)
+    
+    clearTimeout(timeout)
+    timeout = setTimeout(functionCall, time)
+  }
+}
+
 const useForm = initial => {
   const [form, setForm] = useState(initial)
 
@@ -12,16 +23,28 @@ const useForm = initial => {
     }
   }, [])
 
+  const debouncedSetValue = useCallback(
+    debounce((name, value) => {
+      setForm(form => ({ ...form, [name]: value }))
+    }, 250),
+    []
+  )
+
   const changeInput = useCallback(e => {
     const { name, value } = e.target
     setForm(form => ({ ...form, [name]: value }))
   }, [])
 
-  const bindInput = useCallback(name => ({
+  const debouncedChangeInput = useCallback(e => {
+    const { name, value } = e.target
+    debouncedSetValue(name, value)
+  }, [debouncedSetValue])
+
+  const bindInput = useCallback((name, useDebouncing) => ({
     name,
-    value: form[name],
-    onChange: changeInput,
-  }), [changeInput, form])
+    [ useDebouncing ? 'defaultValue' : 'value' ]: form[name],
+    onChange: useDebouncing ? debouncedChangeInput : changeInput,
+  }), [changeInput, debouncedChangeInput, form])
 
   return {
     form,
