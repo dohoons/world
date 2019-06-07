@@ -64,7 +64,6 @@ const Join = (props) => {
 
     if(validate()) {
       dispatch(authActions.register({ username, email, password }))
-      .catch(console.log)
     }
 
     e.preventDefault()
