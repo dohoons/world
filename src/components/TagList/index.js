@@ -6,7 +6,7 @@ const TagList = ({ tags, currentTag, small }) => (
   <Tag small={small}>
     {
       tags.map((v) => (
-        <li key={v}><Link to={`/tag/${v}`} className={ v === currentTag ? 'selected' : '' }>{v}</Link></li>
+        <li key={v}><Link to={`/tag/${encodeURIComponent(v)}`} className={ v === currentTag ? 'selected' : '' }>{v}</Link></li>
       ))
     }
   </Tag>

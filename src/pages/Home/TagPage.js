@@ -7,6 +7,8 @@ import { TagTitle } from './style'
 const TagPage = ({ history, match: { params } }) => {
   const { tag, page } = params
 
+  const decodeTag = decodeURIComponent(tag)
+
   const getPageUrl = useCallback(pageNumber => {
     return `/tag/${tag}/${pageNumber}`
   }, [tag])
@@ -17,10 +19,10 @@ const TagPage = ({ history, match: { params } }) => {
 
   return (
     <>
-      <TagTitle>Tag <span>#{tag}</span></TagTitle>
+      <TagTitle>Tag <span>#{decodeTag}</span></TagTitle>
       <ArticleList
         filter="tag"
-        tag={tag}
+        tag={decodeTag}
         page={page}
         handlePageChange={handlePageChange}
         getPageUrl={getPageUrl}
