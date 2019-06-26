@@ -59,7 +59,7 @@ class ScrollManager extends React.Component {
               state: { ...state, scroll: { x, y } }
             },
             null,
-            process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/${pathname}` : pathname
+            process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}${pathname}` : pathname
           )
         }
       })
