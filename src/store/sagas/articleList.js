@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 import API from '~/api'
 import {
   ARTICLE_LIST_LOAD,
@@ -23,7 +23,7 @@ function* fetch(action) {
     })
 
     const { filter, param, config } = action.payload
-    const res = yield API.Articles[apiName[filter]]({ 
+    const res = yield call(API.Articles[apiName[filter]], { 
       ...param,
       requestId: ARTICLE_LIST_LOAD,
       config,

@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   ARTICLE_PAGE_LOAD,
@@ -16,9 +16,9 @@ function* fetch(action) {
     })
 
     const { slug, config } = action.payload
-    const res = yield Promise.all([
-      API.Articles.get({ slug, requestId: ARTICLE_PAGE_LOAD, config }),
-      API.Comments.get({ slug, requestId: ARTICLE_PAGE_LOAD, config }),
+    const res = yield all([
+      call(API.Articles.get, { slug, requestId: ARTICLE_PAGE_LOAD, config }),
+      call(API.Comments.get, { slug, requestId: ARTICLE_PAGE_LOAD, config }),
     ])
 
     yield put({
@@ -41,7 +41,7 @@ function* createComment(action) {
   const { slug, comment, onSuccess, onFailure } = action.payload
 
   try {
-    const res = yield API.Comments.create({ slug, comment })
+    const res = yield call(API.Comments.create, { slug, comment })
 
     if(onSuccess) {
       onSuccess(res)

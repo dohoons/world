@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   PROFILE_LOAD,
@@ -18,7 +18,7 @@ function* fetch(action) {
     })
 
     const { username } = action.payload
-    const res = yield API.Profile.get({ username, requestId: PROFILE_LOAD })
+    const res = yield call(API.Profile.get, { username, requestId: PROFILE_LOAD })
 
     yield put({
       type: PROFILE_LOAD_SUCCESS,
@@ -39,7 +39,7 @@ function* watchFetch() {
 function* follow(action) {
   try {
     const { username } = action.payload
-    const res = yield API.Profile.follow({ username })
+    const res = yield call(API.Profile.follow, { username })
 
     yield put({
       type: PROFILE_FOLLOW_SUCCESS,
@@ -57,7 +57,7 @@ function* watchFollow() {
 function* unfollow(action) {
   try {
     const { username } = action.payload
-    const res = yield API.Profile.unfollow({ username })
+    const res = yield call(API.Profile.unfollow, { username })
 
     yield put({
       type: PROFILE_UNFOLLOW_SUCCESS,

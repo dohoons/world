@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   LOGIN,
@@ -24,7 +24,7 @@ function* loginReq(type, action) {
 
     if(type === 'login') {
       const { email, password, onSuccess } = action.payload
-      const res = yield API.Auth.login({ email, password })
+      const res = yield call(API.Auth.login, { email, password })
 
       if(onSuccess) {
         onSuccess(res)
@@ -35,7 +35,7 @@ function* loginReq(type, action) {
         payload: res,
       })
     } else {
-      const res = yield API.Auth.current()
+      const res = yield call(API.Auth.current)
 
       yield put({
         type: LOGIN_SUCCESS,
@@ -73,7 +73,7 @@ function* register(action) {
     })
 
     const { username, email, password } = action.payload
-    const res = yield API.Auth.register({ username, email, password })
+    const res = yield call(API.Auth.register, { username, email, password })
 
     yield put({
       type: REGISTER_SUCCESS,
@@ -98,7 +98,7 @@ function* update(action) {
     })
     
     const { user, onSuccess } = action.payload
-    const res = yield API.Auth.save({ user })
+    const res = yield call(API.Auth.save, { user })
 
     if(onSuccess) {
       onSuccess(res)

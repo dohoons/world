@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 import API from '~/api'
 import {
   TAGS_LOAD,
@@ -13,7 +13,7 @@ function* fetch() {
       type: TAGS_LOAD_PENDING,
     })
 
-    const res = yield API.Tags.getAll()
+    const res = yield call(API.Tags.getAll)
 
     yield put({
       type: TAGS_LOAD_SUCCESS,
