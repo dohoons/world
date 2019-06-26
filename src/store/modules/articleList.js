@@ -1,14 +1,12 @@
 import produce from "immer"
 import API from '~/api'
+import createReqTypes from "~/util/createReqTypes"
 
-export const ARTICLE_LIST_LOAD = 'ARTICLE_LIST_LOAD'
-export const ARTICLE_LIST_LOAD_PENDING = 'ARTICLE_LIST_LOAD_PENDING'
-export const ARTICLE_LIST_LOAD_SUCCESS = 'ARTICLE_LIST_LOAD_SUCCESS'
-export const ARTICLE_LIST_LOAD_FAILURE = 'ARTICLE_LIST_LOAD_FAILURE'
+export const ARTICLE_LIST_LOAD = createReqTypes('ARTICLE_LIST_LOAD')
 export const ARTICLE_LIST_UNLOAD = 'ARTICLE_LIST_UNLOAD'
 
 export const fetch = ({ filter, param, config }) => ({
-  type: ARTICLE_LIST_LOAD,
+  type: ARTICLE_LIST_LOAD.request,
   payload: { filter, param, config }
 })
 
@@ -25,25 +23,25 @@ const initialState = {
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case ARTICLE_LIST_LOAD_PENDING:
+      case ARTICLE_LIST_LOAD.request:
         draft.loading = true
         return
 
-      case ARTICLE_LIST_LOAD_SUCCESS:
+      case ARTICLE_LIST_LOAD.success:
         const { articles, articlesCount } = action.payload.data
         draft.loading = false
         draft.articles = articles
         draft.articlesCount = articlesCount
         return
 
-      case ARTICLE_LIST_LOAD_FAILURE:
+      case ARTICLE_LIST_LOAD.failure:
         draft.loading = false
         draft.articles = []
         draft.articlesCount = 0
         return
 
       case ARTICLE_LIST_UNLOAD:
-        API.axios.cancel('ARTICLE_LIST_LOAD')
+        API.axios.cancel(ARTICLE_LIST_LOAD.request)
         draft.loading = false
         draft.articles = []
         draft.articlesCount = 0

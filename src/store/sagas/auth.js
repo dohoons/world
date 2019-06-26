@@ -3,25 +3,12 @@ import API from '~/api'
 import {
   LOGIN,
   LOGIN_INIT,
-  LOGIN_PENDING,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
   REGISTER,
-  REGISTER_PENDING,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
   UPDATE,
-  UPDATE_PENDING,
-  UPDATE_SUCCESS,
-  UPDATE_FAILURE,
 } from '../modules/auth'
 
 function* loginReq(type, action) {
   try {
-    yield put({
-      type: LOGIN_PENDING,
-    })
-
     if(type === 'login') {
       const { email, password, onSuccess } = action.payload
       const res = yield call(API.Auth.login, { email, password })
@@ -31,35 +18,35 @@ function* loginReq(type, action) {
       }
 
       yield put({
-        type: LOGIN_SUCCESS,
+        type: LOGIN.success,
         payload: res,
       })
     } else {
       const res = yield call(API.Auth.current)
 
       yield put({
-        type: LOGIN_SUCCESS,
+        type: LOGIN.success,
         payload: res,
       })
     }
   } catch(error) {
     yield put({
-      type: LOGIN_FAILURE,
+      type: LOGIN.failure,
       error,
     })
   }
 }
 
 function* login(action) {
-  yield loginReq('login', action)
+  yield call(loginReq, 'login', action)
 }
 
 function* watchLogin() {
-  yield takeLatest(LOGIN, login);
+  yield takeLatest(LOGIN.request, login);
 }
 
 function* loginInit() {
-  yield loginReq('loginInit')
+  yield call(loginReq ,'loginInit')
 }
 
 function* watchLoginInit() {
@@ -68,35 +55,27 @@ function* watchLoginInit() {
 
 function* register(action) {
   try {
-    yield put({
-      type: REGISTER_PENDING,
-    })
-
     const { username, email, password } = action.payload
     const res = yield call(API.Auth.register, { username, email, password })
 
     yield put({
-      type: REGISTER_SUCCESS,
+      type: REGISTER.success,
       payload: res,
     })
   } catch(error) {
     yield put({
-      type: REGISTER_FAILURE,
+      type: REGISTER.failure,
       error,
     })
   }
 }
 
 function* watchRegister() {
-  yield takeLatest(REGISTER, register);
+  yield takeLatest(REGISTER.request, register);
 }
 
 function* update(action) {  
   try {
-    yield put({
-      type: UPDATE_PENDING,
-    })
-    
     const { user, onSuccess } = action.payload
     const res = yield call(API.Auth.save, { user })
 
@@ -105,20 +84,20 @@ function* update(action) {
     }
 
     yield put({
-      type: UPDATE_SUCCESS,
+      type: UPDATE.success,
       payload: res,
     })
 
   } catch(error) {
     yield put({
-      type: UPDATE_FAILURE,
+      type: UPDATE.failure,
       error,
     })
   }
 }
 
 function* watchUpdate() {
-  yield takeLatest(UPDATE, update);
+  yield takeLatest(UPDATE.request, update);
 }
 
 export default function* authSaga() {

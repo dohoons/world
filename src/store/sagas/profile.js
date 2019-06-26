@@ -2,38 +2,29 @@ import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import API from '~/api'
 import {
   PROFILE_LOAD,
-  PROFILE_LOAD_PENDING,
-  PROFILE_LOAD_SUCCESS,
-  PROFILE_LOAD_FAILURE,
   PROFILE_FOLLOW,
-  PROFILE_FOLLOW_SUCCESS,
   PROFILE_UNFOLLOW,
-  PROFILE_UNFOLLOW_SUCCESS,
 } from '../modules/profile'
 
 function* fetch(action) {
   try {
-    yield put({
-      type: PROFILE_LOAD_PENDING,
-    })
-
     const { username } = action.payload
     const res = yield call(API.Profile.get, { username, requestId: PROFILE_LOAD })
 
     yield put({
-      type: PROFILE_LOAD_SUCCESS,
+      type: PROFILE_LOAD.success,
       payload: res,
     })
   } catch(error) {
     yield put({
-      type: PROFILE_LOAD_FAILURE,
+      type: PROFILE_LOAD.failure,
       error,
     })
   }
 }
 
 function* watchFetch() {
-  yield takeEvery(PROFILE_LOAD, fetch);
+  yield takeEvery(PROFILE_LOAD.request, fetch);
 }
 
 function* follow(action) {
@@ -42,7 +33,7 @@ function* follow(action) {
     const res = yield call(API.Profile.follow, { username })
 
     yield put({
-      type: PROFILE_FOLLOW_SUCCESS,
+      type: PROFILE_FOLLOW.success,
       payload: res,
     })
   } catch(error) {
@@ -51,7 +42,7 @@ function* follow(action) {
 }
 
 function* watchFollow() {
-  yield takeLatest(PROFILE_FOLLOW, follow);
+  yield takeLatest(PROFILE_FOLLOW.request, follow);
 }
 
 function* unfollow(action) {
@@ -60,7 +51,7 @@ function* unfollow(action) {
     const res = yield call(API.Profile.unfollow, { username })
 
     yield put({
-      type: PROFILE_UNFOLLOW_SUCCESS,
+      type: PROFILE_UNFOLLOW.success,
       payload: res,
     })
   } catch(error) {
@@ -69,7 +60,7 @@ function* unfollow(action) {
 }
 
 function* watchUnfollow() {
-  yield takeLatest(PROFILE_UNFOLLOW, unfollow);
+  yield takeLatest(PROFILE_UNFOLLOW.request, unfollow);
 }
 
 export default function* profileSaga() {

@@ -1,21 +1,13 @@
 import produce from "immer"
 import API from '~/api'
 import Cookies from 'js-cookie'
+import createReqTypes from "~/util/createReqTypes"
 
-export const LOGIN = 'LOGIN'
+export const LOGIN = createReqTypes('LOGIN')
 export const LOGIN_INIT = 'LOGIN_INIT'
-export const LOGIN_PENDING = 'LOGIN_PENDING'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGOUT = 'LOGOUT'
-export const REGISTER = 'REGISTER'
-export const REGISTER_PENDING = 'REGISTER_PENDING'
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-export const REGISTER_FAILURE = 'REGISTER_FAILURE'
-export const UPDATE = 'UPDATE'
-export const UPDATE_PENDING = 'UPDATE_PENDING'
-export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
-export const UPDATE_FAILURE = 'UPDATE_FAILURE'
+export const REGISTER = createReqTypes('REGISTER')
+export const UPDATE = createReqTypes('UPDATE')
 export const RESET_AUTH = 'RESET_AUTH'
 
 export const init = (token) => {
@@ -26,7 +18,7 @@ export const init = (token) => {
 }
 
 export const login = payload => ({
-  type: LOGIN,
+  type: LOGIN.request,
   payload,
 })
 
@@ -35,12 +27,12 @@ export const logout = () => ({
 })
 
 export const register = payload => ({
-  type: REGISTER,
+  type: REGISTER.request,
   payload,
 })
 
 export const update = payload => ({
-  type: UPDATE,
+  type: UPDATE.request,
   payload,
 })
 
@@ -62,14 +54,14 @@ const mapError = (errors) => {
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case LOGIN_PENDING:
-      case REGISTER_PENDING:
-      case UPDATE_PENDING:
+      case LOGIN.request:
+      case REGISTER.request:
+      case UPDATE.request:
         draft.loading = true
         return
       
-      case LOGIN_SUCCESS:
-      case REGISTER_SUCCESS:
+      case LOGIN.success:
+      case REGISTER.success:
         const { token } = action.payload.data.user
         API.setToken(token)
         draft.user = token
@@ -78,20 +70,20 @@ export default (state = initialState, action) => {
         draft.error = []
         return
 
-      case UPDATE_SUCCESS:
+      case UPDATE.success:
         draft.userInfo = action.payload.data.user
         draft.loading = false
         draft.error = []
         return
 
-      case UPDATE_FAILURE:
+      case UPDATE.failure:
         draft.loading = false
         draft.error = mapError(action.error.response.data.errors)
         
         return
 
-      case LOGIN_FAILURE:
-      case REGISTER_FAILURE:
+      case LOGIN.failure:
+      case REGISTER.failure:
         draft.user = null
         draft.loading = false
         draft.error = mapError(action.error.response.data.errors)

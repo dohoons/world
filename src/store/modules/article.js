@@ -1,18 +1,15 @@
 import produce from "immer"
-import API from '~/api'
 import { markdown } from 'markdown'
+import API from '~/api'
+import createReqTypes from "~/util/createReqTypes"
 
-export const ARTICLE_PAGE_LOAD = 'ARTICLE_PAGE_LOAD'
-export const ARTICLE_PAGE_LOAD_PENDING = 'ARTICLE_PAGE_LOAD_PENDING'
-export const ARTICLE_PAGE_LOAD_SUCCESS = 'ARTICLE_PAGE_LOAD_SUCCESS'
-export const ARTICLE_PAGE_LOAD_FAILURE = 'ARTICLE_PAGE_LOAD_FAILURE'
+export const ARTICLE_PAGE_LOAD = createReqTypes('ARTICLE_PAGE_LOAD')
 export const ARTICLE_PAGE_UNLOAD = 'ARTICLE_PAGE_UNLOAD'
-export const CREATE_COMMENT = 'CREATE_COMMENT'
-export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
+export const CREATE_COMMENT = createReqTypes('CREATE_COMMENT')
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 export const fetch = (slug, config) => ({
-  type: ARTICLE_PAGE_LOAD,
+  type: ARTICLE_PAGE_LOAD.request,
   payload: { slug, config }
 })
 
@@ -21,7 +18,7 @@ export const reset = () => ({
 })
 
 export const createComment = payload => ({
-  type: CREATE_COMMENT,
+  type: CREATE_COMMENT.request,
   payload: payload
 })
 
@@ -39,7 +36,7 @@ const initialState = {
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case ARTICLE_PAGE_LOAD_SUCCESS:
+      case ARTICLE_PAGE_LOAD.success:
         draft.article = {
           ...action.payload[0].data.article,
           body: action.payload[0].data.article.body,
@@ -49,20 +46,20 @@ export default (state = initialState, action) => {
         draft.loading = false
         return
 
-      case ARTICLE_PAGE_LOAD_FAILURE:
+      case ARTICLE_PAGE_LOAD.failure:
         draft.article = null
         draft.comments = []
         draft.error = action.payload.response.data
         return
 
       case ARTICLE_PAGE_UNLOAD:
-        API.axios.cancel('ARTICLE_PAGE_LOAD')
+        API.axios.cancel(ARTICLE_PAGE_LOAD.request)
         draft.article = null
         draft.comments = []
         draft.error = null
         return
 
-      case CREATE_COMMENT_SUCCESS:
+      case CREATE_COMMENT.success:
         draft.comments = [action.payload.data.comment, ...state.comments]
         return
 

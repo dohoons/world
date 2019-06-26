@@ -2,33 +2,26 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 import API from '~/api'
 import {
   TAGS_LOAD,
-  TAGS_LOAD_PENDING,
-  TAGS_LOAD_SUCCESS,
-  TAGS_LOAD_FAILURE,
 } from '../modules/tags'
 
 function* fetch() {
   try {
-    yield put({
-      type: TAGS_LOAD_PENDING,
-    })
-
     const res = yield call(API.Tags.getAll)
 
     yield put({
-      type: TAGS_LOAD_SUCCESS,
+      type: TAGS_LOAD.success,
       payload: res,
     })
   } catch(error) {
     yield put({
-      type: TAGS_LOAD_FAILURE,
+      type: TAGS_LOAD.failure,
       error,
     })
   }
 }
 
 function* watchFetch() {
-  yield takeEvery(TAGS_LOAD, fetch);
+  yield takeEvery(TAGS_LOAD.request, fetch);
 }
 
 export default function* tagsSaga() {
