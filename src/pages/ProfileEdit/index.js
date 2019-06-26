@@ -18,10 +18,10 @@ const ProfileEdit = (props) => {
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
   const { form, bindInput } = useForm({
-    image: userInfo.image,
-    username: userInfo.username,
-    bio: userInfo.bio,
-    email: userInfo.email,
+    image: userInfo.image || '',
+    username: userInfo.username || '',
+    bio: userInfo.bio || '',
+    email: userInfo.email || '',
     password: '',
   })
   const { image, username, bio, email, password } = form
