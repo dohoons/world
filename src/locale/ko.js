@@ -94,6 +94,7 @@ export default {
     password: '비밀번호',
     sending: '로그인 중...',
     login: '로그인',
+    demoLogin: '체험계정 로그인',
     infoDesc: '처음 오셨나요? <1>회원가입</1>을 해주세요.',
     invalidLoginInfo: '이메일 또는 패스워드가 틀렸습니다.',
     loginFail: '로그인에 실패했습니다.',
@@ -112,5 +113,6 @@ export default {
     email: '이메일',
     newPassword: '새 비밀번호',
     sending: '저장하는 중...',
+    demoUserMsg: '체험계정은 프로필을 수정할 수 없습니다.',
   },
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,7 +16,8 @@ const Login = (props) => {
   const { user, loading, error } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [ errors, setErrors ] = useState({})
-  const { form, bindInput } = useForm({
+  const formRef = useRef(null)
+  const { form, bindInput, setForm } = useForm({
     email: '',
     password: '',
   })
@@ -52,24 +53,38 @@ const Login = (props) => {
     }
   }
 
+  const loginAction = (email, password) => {
+    dispatch(
+      authActions.login({
+        email,
+        password,
+        onSuccess: () => {
+          if(!location.state) {
+            history.goBack()
+          }
+        },
+      })
+    )
+  }
+
   const submitHandle = (e) => {
     setErrors({})
 
     if(validate()) {
-      dispatch(
-        authActions.login({
-          email,
-          password,
-          onSuccess: () => {
-            if(!location.state) {
-              history.goBack()
-            }
-          },
-        })
-      )
+      loginAction(email, password)
     }
 
     e.preventDefault()
+  }
+
+  const demoLogin = () => {
+    const testUser = {
+      email: 'test@naver.com',
+      password: '12345678',
+    }
+
+    setForm(() => testUser)
+    loginAction(testUser.email, testUser.password)
   }
 
   const { prevLocation, loginMsg } = location.state || { prevLocation: { pathname: '/' }, loginMsg: false }
@@ -87,7 +102,7 @@ const Login = (props) => {
           loginMsg &&
           <p className="login-msg"><i className="fas fa-info-circle"></i> {t('needLogin')}</p> 
         }
-        <form onSubmit={submitHandle}>
+        <form ref={formRef} onSubmit={submitHandle}>
           <fieldset>
             <legend>{t('heading')}</legend>
             <div className="form-row">
@@ -113,6 +128,7 @@ const Login = (props) => {
 
             <div className="form-action">
               <button type="submit" className="btn large primary" disabled={loading}>{t('login')}</button>
+              <button type="button" className="btn large" onClick={demoLogin} disabled={loading}>{t('demoLogin')}</button>
             </div>
           </fieldset>
         </form>

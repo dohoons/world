@@ -93,6 +93,7 @@ export default {
     password: 'Password',
     sending: 'Sending...',
     login: 'Sign in',
+    demoLogin: 'Sign in (Demo)',
     infoDesc: 'Do you need an account? Please <1>Sign up.</1>',
     invalidLoginInfo: 'Email or password is incorrect.',
     loginFail: 'Login failed.',
@@ -111,5 +112,6 @@ export default {
     email: 'Email',
     newPassword: 'New Password',
     sending: 'Sending...',
+    demoUserMsg: 'Demo accounts can not be edited.',
   },
 }
