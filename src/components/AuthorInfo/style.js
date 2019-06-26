@@ -27,6 +27,7 @@ export default styled.div`
     height: 24px;
     border-radius: 16px;
     overflow: hidden;
+    background: url('${process.env.PUBLIC_URL}/assets/profile-dummy.jpg') no-repeat 0 0 / 100%;
 
     img {
       width: 100%;
