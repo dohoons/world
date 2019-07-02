@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import React from 'react'
 import { render } from 'react-dom'
+import ReactGA from 'react-ga'
 import { AppContainer } from 'react-hot-loader'
 import { Router } from 'react-router-dom'
 import { LastLocationProvider } from 'react-router-last-location'
@@ -36,12 +37,19 @@ const alertOptions = {
   transition: 'scale'
 }
 
+ReactGA.initialize('UA-143179392-1')
+
+const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname })
+  ReactGA.pageview(window.location.pathname)
+}
+
 const renderApp = Component => {
   render(
     <ErrorMonitoring>
       <AppContainer>
         <Provider store={store}>
-          <Router history={history}>
+          <Router history={history} onUpdate={logPageView}>
             <ScrollManager>
               <LastLocationProvider>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
