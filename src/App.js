@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Switch, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -65,4 +66,4 @@ const App = () => {
   )
 }
 
-export default App
+export default hot(App)
