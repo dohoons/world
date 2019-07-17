@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "module": "es6",
+    "module": "commonjs",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["*"]
     }
   }
 }
