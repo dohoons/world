@@ -13,30 +13,10 @@ const AsyncPage = loadable(
   { fallback: PageLoading }
 )
 
-export const Home = props => (
-  <AsyncPage page='Home' {...props} />
-)
-
-export const Login = props => (
-  <AsyncPage page='Login' {...props} />
-)
-
-export const Join = props => (
-  <AsyncPage page='Join' {...props} />
-)
-
-export const Form = props => (
-  <AsyncPage page='Form' {...props} />
-)
-
-export const Article = props => (
-  <AsyncPage page='Article' {...props} />
-)
-
-export const Profile = props => (
-  <AsyncPage page='Profile' {...props} />
-)
-
-export const ProfileEdit = props => (
-  <AsyncPage page='ProfileEdit' {...props} />
-)
+export const Home = props => <AsyncPage page='Home' {...props} />
+export const Login = props => <AsyncPage page='Login' {...props} />
+export const Join = props => <AsyncPage page='Join' {...props} />
+export const Form = props => <AsyncPage page='Form' {...props} />
+export const Article = props => <AsyncPage page='Article' {...props} />
+export const Profile = props => <AsyncPage page='Profile' {...props} />
+export const ProfileEdit = props => <AsyncPage page='ProfileEdit' {...props} />
