@@ -39,18 +39,19 @@ const alertOptions = {
 }
 
 ReactGA.initialize('UA-143179392-1')
+ReactGA.pageview(window.location.pathname + window.location.search)
 
-const logPageView = () => {
-  ReactGA.set({ page: window.location.pathname })
-  ReactGA.pageview(window.location.pathname)
-}
+history.listen((location) => {
+  ReactGA.set({ page: location.pathname })
+  ReactGA.pageview(location.pathname + location.search)
+})
 
 const renderApp = Component => {
   render(
     <ErrorMonitoring>
       <AppContainer>
         <Provider store={store}>
-          <Router history={history} onUpdate={logPageView}>
+          <Router history={history}>
             <ScrollManager>
               <LastLocationProvider>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
