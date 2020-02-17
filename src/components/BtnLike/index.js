@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import API from '~/api'
@@ -9,7 +9,7 @@ import goLogin from '~/util/goLogin'
 import Button from './style'
 
 const BtnLike = props => {
-  const { slug } = useParams()
+  const { slug } = props
   const history = useHistory()
   const { t } = useTranslation('components')
   const { user } = useSelector(state => state.auth)
