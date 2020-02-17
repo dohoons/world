@@ -21,12 +21,12 @@
     "static/js/18.522d61e9.chunk.js": "/world/static/js/18.522d61e9.chunk.js",
     "static/js/19.369f99e3.chunk.js": "/world/static/js/19.369f99e3.chunk.js",
     "main.css": "/world/static/css/main.9ab0d8c3.chunk.css",
-    "main.js": "/world/static/js/main.d75e438f.chunk.js",
+    "main.js": "/world/static/js/main.551ef481.chunk.js",
     "runtime-main.js": "/world/static/js/runtime-main.7fae51ec.js",
     "static/css/22.a9795d55.chunk.css": "/world/static/css/22.a9795d55.chunk.css",
     "static/js/22.c2c3ab18.chunk.js": "/world/static/js/22.c2c3ab18.chunk.js",
     "index.html": "/world/index.html",
-    "precache-manifest.8c313681c1650c667d1a82887468de9e.js": "/world/precache-manifest.8c313681c1650c667d1a82887468de9e.js",
+    "precache-manifest.ac4239cb5aabf86fc971985ecf50ff79.js": "/world/precache-manifest.ac4239cb5aabf86fc971985ecf50ff79.js",
     "service-worker.js": "/world/service-worker.js",
     "static/media/style.scss": "/world/static/media/fa-solid-900.fb493903.woff2"
   },
@@ -35,6 +35,6 @@
     "static/css/22.a9795d55.chunk.css",
     "static/js/22.c2c3ab18.chunk.js",
     "static/css/main.9ab0d8c3.chunk.css",
-    "static/js/main.d75e438f.chunk.js"
+    "static/js/main.551ef481.chunk.js"
   ]
 }
