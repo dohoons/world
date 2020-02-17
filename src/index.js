@@ -22,7 +22,7 @@ import ScrollManager from '~/util/ScrollManager'
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: localStorage.getItem('lang') || (navigator.language === 'ko-KR' ? 'ko' : 'en'),
+  lng: localStorage.getItem('lang') || (navigator.language.includes('ko') ? 'ko' : 'en'),
   resources: {
     en: locale.en,
     ko: locale.ko,
