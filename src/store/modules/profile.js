@@ -1,4 +1,5 @@
 import produce from "immer"
+import { createPromiseAction } from '@adobe/redux-saga-promise'
 import API from '~/api'
 import createReqTypes from "~/util/createReqTypes"
 
@@ -7,24 +8,10 @@ export const PROFILE_UNLOAD = 'PROFILE_UNLOAD'
 export const PROFILE_FOLLOW = createReqTypes('PROFILE_FOLLOW')
 export const PROFILE_UNFOLLOW = createReqTypes('PROFILE_UNFOLLOW')
 
-export const fetch = username => ({
-  type: PROFILE_LOAD.request,
-  payload: { username },
-})
-
-export const reset = () => ({
-  type: PROFILE_UNLOAD
-})
-
-export const follow = (username) => ({
-  type: PROFILE_FOLLOW.request,
-  payload: { username }
-})
-
-export const unfollow = (username) => ({
-  type: PROFILE_UNFOLLOW.request,
-  payload: { username }
-})
+export const fetch = createPromiseAction(PROFILE_LOAD.type, (username) => ({ username }))
+export const reset = () => ({ type: PROFILE_UNLOAD })
+export const follow = createPromiseAction(PROFILE_FOLLOW.type, (username) => ({ username }))
+export const unfollow = createPromiseAction(PROFILE_UNFOLLOW.type, (username) => ({ username }))
 
 const initialState = {
   loading: false,

@@ -1,16 +1,12 @@
 import produce from "immer"
+import { createPromiseAction } from '@adobe/redux-saga-promise'
 import createReqTypes from "~/util/createReqTypes"
 
 export const TAGS_LOAD = createReqTypes('TAGS_LOAD')
 export const TAGS_UNLOAD = 'TAGS_UNLOAD'
 
-export const fetch = () => ({
-  type: TAGS_LOAD.request,
-})
-
-export const reset = () => ({
-  type: TAGS_UNLOAD
-})
+export const fetch = createPromiseAction(TAGS_LOAD.type)
+export const reset = () => ({ type: TAGS_UNLOAD })
 
 const initialState = {
   loading: false,

@@ -1,18 +1,13 @@
 import produce from "immer"
+import { createPromiseAction } from '@adobe/redux-saga-promise'
 import API from '~/api'
 import createReqTypes from "~/util/createReqTypes"
 
 export const ARTICLE_LIST_LOAD = createReqTypes('ARTICLE_LIST_LOAD')
 export const ARTICLE_LIST_UNLOAD = 'ARTICLE_LIST_UNLOAD'
 
-export const fetch = ({ filter, param, config }) => ({
-  type: ARTICLE_LIST_LOAD.request,
-  payload: { filter, param, config }
-})
-
-export const reset = () => ({
-  type: ARTICLE_LIST_UNLOAD
-})
+export const fetch = createPromiseAction(ARTICLE_LIST_LOAD.type, ({ filter, param, config }) => ({ filter, param, config }))
+export const reset = () => ({ type: ARTICLE_LIST_UNLOAD })
 
 const initialState = {
   loading: false,

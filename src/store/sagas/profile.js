@@ -1,4 +1,5 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, takeEvery, takeLatest } from 'redux-saga/effects'
+import { implementPromiseAction } from '@adobe/redux-saga-promise'
 import API from '~/api'
 import {
   PROFILE_LOAD,
@@ -7,20 +8,10 @@ import {
 } from '../modules/profile'
 
 function* fetch(action) {
-  try {
+  yield call(implementPromiseAction, action, function* () {
     const { username } = action.payload
-    const res = yield call(API.Profile.get, { username, requestId: PROFILE_LOAD })
-
-    yield put({
-      type: PROFILE_LOAD.success,
-      payload: res,
-    })
-  } catch(error) {
-    yield put({
-      type: PROFILE_LOAD.failure,
-      error,
-    })
-  }
+    return yield call(API.Profile.get, { username, requestId: PROFILE_LOAD.request })
+  })
 }
 
 function* watchFetch() {
@@ -28,17 +19,10 @@ function* watchFetch() {
 }
 
 function* follow(action) {
-  try {
+  yield call(implementPromiseAction, action, function* () {
     const { username } = action.payload
-    const res = yield call(API.Profile.follow, { username })
-
-    yield put({
-      type: PROFILE_FOLLOW.success,
-      payload: res,
-    })
-  } catch(error) {
-    console.log(error)
-  }
+    return yield call(API.Profile.follow, { username })
+  })
 }
 
 function* watchFollow() {
@@ -46,17 +30,10 @@ function* watchFollow() {
 }
 
 function* unfollow(action) {
-  try {
+  yield call(implementPromiseAction, action, function* () {
     const { username } = action.payload
-    const res = yield call(API.Profile.unfollow, { username })
-
-    yield put({
-      type: PROFILE_UNFOLLOW.success,
-      payload: res,
-    })
-  } catch(error) {
-    console.log(error)
-  }
+    return yield call(API.Profile.unfollow, { username })
+  })
 }
 
 function* watchUnfollow() {

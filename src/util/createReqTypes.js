@@ -1,8 +1,9 @@
 function createReqTypes(type) {
   return {
-    request: `${type}_REQUEST`,
-    success: `${type}_SUCCESS`,
-    failure: `${type}_FAILURE`,
+    type: `${type}`,
+    request: `${type}.TRIGGER`,
+    success: `${type}.RESOLVED`,
+    failure: `${type}.REJECTED`,
   }
 }
 

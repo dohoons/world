@@ -53,18 +53,18 @@ const Login = (props) => {
     }
   }
 
-  const loginAction = (email, password) => {
-    dispatch(
-      authActions.login({
+  const loginAction = async (email, password) => {
+    try {
+      await dispatch(authActions.login({
         email,
         password,
-        onSuccess: () => {
-          if(!location.state) {
-            history.goBack()
-          }
-        },
-      })
-    )
+      }))
+      if(!location.state) {
+        history.goBack()
+      }
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   const submitHandle = (e) => {

@@ -21,7 +21,7 @@ const CommentForm = () => {
   })
   const inputEl = useRef(null)
 
-  const submitHandle = e => {
+  const submitHandle = async e => {
     e.preventDefault()
 
     const commentValue = comment.trim()
@@ -34,22 +34,21 @@ const CommentForm = () => {
 
     setLoading(true)
 
-    dispatch(
-      articleActions.createComment({
-        slug,
-        comment: {
-          body: commentValue
-        },
-        onSuccess: () => {
-          setLoading(false)
-          setField('comment', '')
-        },
-        onFailure: () => {
-          alert.error(t('comment.errorWrite'))
-          setLoading(false)
-        },
-      })
-    )
+    try {
+      await dispatch(
+        articleActions.createComment({
+          slug,
+          comment: {
+            body: commentValue
+          }
+        })
+      )
+      setLoading(false)
+      setField('comment', '')
+    } catch(e) {
+      alert.error(t('comment.errorWrite'))
+      setLoading(false)
+    }
   }
 
   if(!user) {

@@ -1,4 +1,5 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, takeEvery, takeLatest } from 'redux-saga/effects'
+import { implementPromiseAction } from '@adobe/redux-saga-promise'
 import API from '~/api'
 import {
   ARTICLE_PAGE_LOAD,
@@ -6,23 +7,13 @@ import {
 } from '../modules/article'
 
 function* fetch(action) {
-  try {
+  yield call(implementPromiseAction, action, function* () {
     const { slug, config } = action.payload
-    const res = yield all([
-      call(API.Articles.get, { slug, requestId: ARTICLE_PAGE_LOAD.request, config }),
+    return yield all([
+      call(API.Articles.get, { slug: slug, requestId: ARTICLE_PAGE_LOAD.request, config }),
       call(API.Comments.get, { slug, requestId: ARTICLE_PAGE_LOAD.request, config }),
     ])
-
-    yield put({
-      type: ARTICLE_PAGE_LOAD.success,
-      payload: res,
-    })
-  } catch(error) {
-    yield put({
-      type: ARTICLE_PAGE_LOAD.failure,
-      error,
-    })
-  }
+  })
 }
 
 function* watchFetch() {
@@ -30,24 +21,10 @@ function* watchFetch() {
 }
 
 function* createComment(action) {
-  const { slug, comment, onSuccess, onFailure } = action.payload
-
-  try {
-    const res = yield call(API.Comments.create, { slug, comment })
-
-    if(onSuccess) {
-      onSuccess(res)
-    }
-
-    yield put({
-      type: CREATE_COMMENT.success,
-      payload: res,
-    })
-  } catch(error) {
-    if(onFailure) {
-      onFailure(error)
-    }
-  }
+  yield call(implementPromiseAction, action, function* () {
+    const { slug, comment } = action.payload
+    return yield call(API.Comments.create, { slug, comment })
+  })
 }
 
 function* watchCreateComment() {

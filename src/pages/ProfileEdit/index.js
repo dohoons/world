@@ -60,7 +60,7 @@ const ProfileEdit = (props) => {
     }
   }
 
-  const submitHandle = (e) => {
+  const submitHandle = async (e) => {
     setErrors({})
 
     if(validate()) {
@@ -72,18 +72,17 @@ const ProfileEdit = (props) => {
         ...password !== '' && { password },
       }
 
-      dispatch(
-        authActions.update({
-          user: userData,
-          onSuccess: () => {
-            if(userData.username === undefined) {
-              pushBack()
-            } else {
-              history.push(`/@${userData.username}`)
-            }
-          }
-        })
-      )
+      try {
+        await dispatch(authActions.update({ user: userData }))
+
+        if(userData.username === undefined) {
+          pushBack()
+        } else {
+          history.push(`/@${userData.username}`)
+        }
+      } catch(e) {
+        console.log(e)
+      }
     }
 
     e.preventDefault()

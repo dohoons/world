@@ -1,4 +1,5 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, takeEvery } from 'redux-saga/effects'
+import { implementPromiseAction } from '@adobe/redux-saga-promise'
 import API from '~/api'
 import {
   ARTICLE_LIST_LOAD,
@@ -14,24 +15,14 @@ const apiName = {
 }
 
 function* fetch(action) {
-  try {
+  yield call(implementPromiseAction, action, function* () {
     const { filter, param, config } = action.payload
-    const res = yield call(API.Articles[apiName[filter]], { 
+    return yield call(API.Articles[apiName[filter]], { 
       ...param,
       requestId: ARTICLE_LIST_LOAD.request,
       config,
     })
-
-    yield put({
-      type: ARTICLE_LIST_LOAD.success,
-      payload: res,
-    })
-  } catch(error) {
-    yield put({
-      type: ARTICLE_LIST_LOAD.failure,
-      error,
-    })
-  }
+  })
 }
 
 function* watchFetch() {
