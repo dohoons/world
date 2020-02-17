@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import * as profileActions from '~/store/modules/profile'
-import useRouter from '~/util/useRouter'
 import goLogin from '~/util/goLogin'
 
 import ProfileInfo from './style'
 
 const Profile = (props) => {
-  const route = useRouter()
-  const { history } = route
+  const history = useHistory()
   const { t } = useTranslation('components')
 
   const { user, userInfo } = useSelector(state => state.auth)
@@ -27,7 +25,7 @@ const Profile = (props) => {
 
   const follow = async (follow) => {
     if(!user) {
-      goLogin(route)
+      goLogin(history)
       return
     }
 

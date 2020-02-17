@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
+import { useHistory } from "react-router-dom"
 import { hot } from 'react-hot-loader/root'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -13,15 +14,13 @@ import BtnLike from '~/components/BtnLike'
 import CommentForm from '~/components/CommentForm'
 import CommentList from '~/components/CommentList'
 import TagList from '~/components/TagList'
-import useRouter from '~/util/useRouter'
 import goLogin from '~/util/goLogin'
 import usePushBack from '~/util/usePushBack'
 
 import Page, { ArticleHeader, ArticleBody } from './style'
 
 const Article = (props) => {
-  const route = useRouter()
-  const { history } = route
+  const history = useHistory()
   const { slug } = props.match.params
 
   const { t } = useTranslation('article')
@@ -43,7 +42,7 @@ const Article = (props) => {
 
   const del = async () => {
     if(!user) {
-      goLogin(route)
+      goLogin(history)
       return
     }
 
@@ -63,7 +62,7 @@ const Article = (props) => {
 
   const delComment = useCallback(async (slug, commentId) => {
     if(!user) {
-      goLogin(route)
+      goLogin(history)
       return
     }
 
@@ -75,7 +74,7 @@ const Article = (props) => {
         alert.error(t('components:comment.errorDelete'))
       }
     }
-  }, [user, t, route, dispatch, alert])
+  }, [user, t, history, dispatch, alert])
 
   if(!article) {
     if(error && error.status === '404') {

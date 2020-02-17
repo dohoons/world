@@ -1,5 +1,5 @@
 export default props => {
-  props.history.push({
+  props.push({
     pathname: '/login',
     state: {
       prevLocation: props.location.pathname,
