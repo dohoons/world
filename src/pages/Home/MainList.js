@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -7,8 +7,9 @@ import { useTranslation } from 'react-i18next'
 import ArticleList from '~/components/ArticleList'
 import TabNav from '~/components/TabNav'
 
-const MainList = (props) => {
-  const { match: { params, url }, history } = props
+const MainList = () => {
+  const { params, url } = useRouteMatch()
+  const history = useHistory()
   const { t } = useTranslation('home')
   const alert = useAlert()
   const { user } = useSelector(state => state.auth)
@@ -57,4 +58,4 @@ const MainList = (props) => {
   )
 }
 
-export default withRouter(MainList)
+export default MainList

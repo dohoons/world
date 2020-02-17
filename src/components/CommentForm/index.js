@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
 import * as articleActions from '~/store/modules/article'
@@ -8,7 +8,8 @@ import useForm from '~/util/useForm'
 
 import Form, { LoginMsg } from './style'
 
-const CommentForm = ({ slug }) => {
+const CommentForm = () => {
+  const { slug } = useParams()
   const { t } = useTranslation('components')
   const alert = useAlert()
   const { user } = useSelector(state => state.auth)
@@ -78,4 +79,4 @@ const CommentForm = ({ slug }) => {
   )
 }
 
-export default withRouter(CommentForm)
+export default CommentForm

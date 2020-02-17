@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
-import { withRouter } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import ArticleList from '~/components/ArticleList'
 import { TagTitle } from './style'
 
 const TagPage = ({ history, match: { params } }) => {
-  const { tag, page } = params
+  const { tag, page } = useParams()
 
   const decodeTag = decodeURIComponent(tag)
 
@@ -32,4 +32,4 @@ const TagPage = ({ history, match: { params } }) => {
   )
 }
 
-export default withRouter(TagPage)
+export default TagPage
