@@ -70,7 +70,7 @@ const Articles = {
     return http.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`, historyPopCache(config))
   },
   favorite: ({ slug, config } = {}) => {
-    return http.post(`/articles/${slug}/favorite`, config)
+    return http.post(`/articles/${slug}/favorite`, null, config)
   },
   unfavorite: ({ slug, config } = {}) => {
     return http.delete(`/articles/${slug}/favorite`, config)
@@ -106,7 +106,7 @@ const Profile = {
     return http.get(`/profiles/${username}`, historyPopCache(config))
   },
   follow: ({ username, config } = {}) => {
-    return http.post(`/profiles/${username}/follow`, config)
+    return http.post(`/profiles/${username}/follow`, null, config)
   },
   unfollow: ({ username, config } = {}) => {
     return http.delete(`/profiles/${username}/follow`, config)
