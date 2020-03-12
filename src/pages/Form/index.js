@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet"
 import validator from 'validator'
 import { hot } from 'react-hot-loader/root'
 import { useAlert } from 'react-alert'
-import API from '~/api'
+import API, { CancelToken } from '~/api'
 import useForm from '~/util/useForm'
 
 import Page from './style'
@@ -29,7 +29,7 @@ const Form = (props) => {
 
   const { userInfo } = useSelector(state => state.auth)
 
-  const req = useRef(API.CancelToken.source())
+  const req = useRef(CancelToken.source())
   
   const fetchArticles = useCallback(async (slug) => {
     try {

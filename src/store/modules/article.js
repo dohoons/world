@@ -1,7 +1,7 @@
 import produce from "immer"
 import { createPromiseAction } from '@adobe/redux-saga-promise'
 import { markdown } from 'markdown'
-import API from '~/api'
+import { http } from '~/api'
 import createReqTypes from "~/util/createReqTypes"
 
 export const ARTICLE_PAGE_LOAD = createReqTypes('ARTICLE_PAGE_LOAD')
@@ -40,7 +40,8 @@ export default (state = initialState, action) => {
         return
 
       case ARTICLE_PAGE_UNLOAD:
-        API.axios.cancel(ARTICLE_PAGE_LOAD.request)
+        http.cancel(ARTICLE_PAGE_LOAD.request)
+        http.cancel(ARTICLE_PAGE_LOAD.request + '2')
         draft.article = null
         draft.comments = []
         draft.error = null

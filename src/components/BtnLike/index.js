@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import API from '~/api'
+import API, { CancelToken } from '~/api'
 import goLogin from '~/util/goLogin'
 
 import Button from './style'
@@ -31,7 +31,7 @@ const BtnLike = props => {
     }
 
     try {
-      const req = API.CancelToken.source()
+      const req = CancelToken.source()
       setReq(req)
       setLoading(true)
 

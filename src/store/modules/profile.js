@@ -1,6 +1,6 @@
 import produce from "immer"
 import { createPromiseAction } from '@adobe/redux-saga-promise'
-import API from '~/api'
+import { http } from '~/api'
 import createReqTypes from "~/util/createReqTypes"
 
 export const PROFILE_LOAD = createReqTypes('PROFILE_LOAD')
@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
         return
 
       case PROFILE_UNLOAD:
-        API.axios.cancel(PROFILE_LOAD.request)
+        http.cancel(PROFILE_LOAD.request)
         draft.loading = false
         draft.profile = {}
         return

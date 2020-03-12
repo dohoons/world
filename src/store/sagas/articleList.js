@@ -17,11 +17,7 @@ const apiName = {
 function* fetch(action) {
   yield call(implementPromiseAction, action, function* () {
     const { filter, param, config } = action.payload
-    return yield call(API.Articles[apiName[filter]], { 
-      ...param,
-      requestId: ARTICLE_LIST_LOAD.request,
-      config,
-    })
+    return yield call(API.Articles[apiName[filter]], { ...param, config })
   })
 }
 

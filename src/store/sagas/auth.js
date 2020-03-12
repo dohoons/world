@@ -1,6 +1,6 @@
 import { all, call, fork, takeEvery, takeLatest } from 'redux-saga/effects'
 import { implementPromiseAction } from '@adobe/redux-saga-promise'
-import API from '~/api'
+import API, { setToken } from '~/api'
 import {
   LOGIN,
   LOGIN_INIT,
@@ -21,7 +21,7 @@ function* watchLogin() {
 
 function* loginInit(action) {
   yield call(implementPromiseAction, action, function* () {
-    API.setToken(action.payload.token)
+    setToken(action.payload.token)
     return yield call(API.Auth.current)
   })
 }

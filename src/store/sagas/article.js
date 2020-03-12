@@ -10,8 +10,8 @@ function* fetch(action) {
   yield call(implementPromiseAction, action, function* () {
     const { slug, config } = action.payload
     return yield all([
-      call(API.Articles.get, { slug: slug, requestId: ARTICLE_PAGE_LOAD.request, config }),
-      call(API.Comments.get, { slug, requestId: ARTICLE_PAGE_LOAD.request, config }),
+      call(API.Articles.get, { slug, config: { ...config, requestId: ARTICLE_PAGE_LOAD.request }}),
+      call(API.Comments.get, { slug, config: { ...config, requestId: ARTICLE_PAGE_LOAD.request + '2' }}),
     ])
   })
 }

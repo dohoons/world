@@ -1,6 +1,5 @@
 import produce from "immer"
 import { createPromiseAction } from '@adobe/redux-saga-promise'
-import API from '~/api'
 import createReqTypes from "~/util/createReqTypes"
 
 export const ARTICLE_LIST_LOAD = createReqTypes('ARTICLE_LIST_LOAD')
@@ -36,7 +35,6 @@ export default (state = initialState, action) => {
         return
 
       case ARTICLE_LIST_UNLOAD:
-        API.axios.cancel(ARTICLE_LIST_LOAD.request)
         draft.loading = false
         draft.articles = []
         draft.articlesCount = 0

@@ -4,14 +4,16 @@ import axiosCancel from 'axios-cancel'
 import Cookies from 'js-cookie'
 import { history } from '~/index'
 
-axiosCancel(axios, {
-  debug: false // process.env.NODE_ENV === 'development'
-})
-
-const http = axios.create({
+export const http = axios.create({
   baseURL: 'https://conduit.productionready.io/api',
   adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false })
 })
+
+axiosCancel(http, {
+  debug: false // process.env.NODE_ENV === 'development'
+})
+
+export const CancelToken = axios.CancelToken
 
 const historyPopCache = config => ({
   forceUpdate: history.action === 'PUSH',
@@ -19,9 +21,7 @@ const historyPopCache = config => ({
   cache: true,
 })
 
-const CancelToken = axios.CancelToken
-
-const setToken = (token = null) => {
+export const setToken = (token = null) => {
   if(token) {
     Cookies.set('jwt', token)
     http.defaults.headers.common['Authorization'] = `Token ${token}`
@@ -114,9 +114,6 @@ const Profile = {
 }
 
 export default {
-  axios,
-  CancelToken,
-  setToken,
   Auth,
   Tags,
 	Articles,

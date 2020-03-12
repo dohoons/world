@@ -1,6 +1,6 @@
 import produce from "immer"
 import { createPromiseAction } from '@adobe/redux-saga-promise'
-import API from '~/api'
+import { setToken } from '~/api'
 import Cookies from 'js-cookie'
 import createReqTypes from "~/util/createReqTypes"
 
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
       case LOGIN_INIT.success:
       case REGISTER.success:
         const { token } = action.payload.data.user
-        API.setToken(token)
+        setToken(token)
         draft.user = token
         draft.userInfo = action.payload.data.user
         draft.loading = false
@@ -67,14 +67,14 @@ export default (state = initialState, action) => {
         draft.user = null
         draft.loading = false
         draft.error = mapError(action.payload.response.data.errors)
-        API.setToken(null)
+        setToken(null)
         
         return
 
       case LOGOUT:
         draft.user = null
         draft.userInfo = {}
-        API.setToken(null)
+        setToken(null)
         return
 
       case RESET_AUTH:
