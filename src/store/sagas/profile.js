@@ -10,7 +10,7 @@ import {
 function* fetch(action) {
   yield call(implementPromiseAction, action, function* () {
     const { username } = action.payload
-    return yield call(API.Profile.get, { username, requestId: PROFILE_LOAD.request })
+    return yield call(API.Profile.get, { username, config: { requestId: PROFILE_LOAD.request } })
   })
 }
 
