@@ -33,7 +33,7 @@ const Article = (props) => {
 
   useEffect(() => {
     dispatch(articleActions.reset())
-    dispatch(articleActions.fetch(slug))
+    dispatch(articleActions.fetch(slug)).catch(console.log)
 
     return () => {
       dispatch(articleActions.reset())
