@@ -45,7 +45,6 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
-  "homepage": "https://dohoons.github.io/world",
   "eslintConfig": {
     "extends": "react-app"
   },
