@@ -91,14 +91,12 @@ class ScrollManager extends React.Component {
     this.debouncedScrollSync = debounce(scrollSync, props.scrollSyncDebounce)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     const { location, onLocationChange } = this.props
     if (onLocationChange) {
       onLocationChange(location)
     }
-  }
 
-  componentDidMount () {
     this.onPop(this.props)
     window.addEventListener('scroll', this.debouncedScroll, { passive: true })
   }
@@ -108,16 +106,16 @@ class ScrollManager extends React.Component {
     window.removeEventListener('scroll', this.debouncedScroll, { passive: true })
   }
 
-  componentWillReceiveProps (nextProps) {
-    switch (nextProps.history.action) {
+  componentDidUpdate() {
+    switch (this.props.history.action) {
       case 'PUSH':
       case 'REPLACE': this.onPush(); break
-      case 'POP': this.onPop(nextProps); break
+      case 'POP': this.onPop(this.props); break
       default:
-        console.warn(`Unrecognized location change action! "${nextProps.history.action}"`)
+        console.warn(`Unrecognized location change action! "${this.props.history.action}"`)
     }
-    if (nextProps.onLocationChange) {
-      nextProps.onLocationChange(nextProps.location)
+    if (this.props.onLocationChange) {
+      this.props.onLocationChange(this.props.location)
     }
   }
 
