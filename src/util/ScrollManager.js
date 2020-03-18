@@ -46,7 +46,7 @@ class ScrollManager extends React.Component {
     const scrollCapture = () => {
       requestAnimationFrame(() => {
         const { pageXOffset: x, pageYOffset: y } = window
-        const { pathname } = this.props.location
+        const { pathname, search, hash } = this.props.location
 
         // use browser history instead of router history
         // to avoid infinite history.replace loop
@@ -59,7 +59,7 @@ class ScrollManager extends React.Component {
               state: { ...state, scroll: { x, y } }
             },
             null,
-            process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}${pathname}` : pathname
+            `${process.env.PUBLIC_URL}${pathname}${search}${hash}`
           )
         }
       })
