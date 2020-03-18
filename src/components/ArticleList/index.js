@@ -40,7 +40,7 @@ const ArticleList = ({
         filter,
         param: { username, page: parseInt(page) - 1, tag },
       })
-    )
+    ).catch(console.log)
   }, [dispatch, filter, page, tag, username])
 
   useEffect(() => {
