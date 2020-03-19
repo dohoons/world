@@ -52,7 +52,7 @@ const renderApp = Component => {
       <AppContainer>
         <Provider store={store}>
           <Router history={history}>
-            <ScrollManager>
+            <ScrollManager basename={process.env.PUBLIC_URL}>
               <LastLocationProvider>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
                   <I18nextProvider i18n={i18next}>

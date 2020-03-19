@@ -1,6 +1,6 @@
 import React from 'react'
 import { func, node, number, object, shape, string } from 'prop-types'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 const debounce = (fn, time) => {
   let timeout;
@@ -21,6 +21,7 @@ class ScrollManager extends React.Component {
       push: func.isRequired,
       replace: func.isRequired
     }).isRequired,
+    basename: string,
     location: object,
     onLocationChange: func,
     scrollCaptureDebounce: number,
@@ -29,6 +30,7 @@ class ScrollManager extends React.Component {
   }
 
   static defaultProps = {
+    basename: '',
     scrollCaptureDebounce: 50,
     scrollSyncDebounce: 100,
     scrollSyncAttemptLimit: 5
@@ -59,7 +61,7 @@ class ScrollManager extends React.Component {
               state: { ...state, scroll: { x, y } }
             },
             null,
-            `${process.env.PUBLIC_URL}${pathname}${search}${hash}`
+            `${this.props.basename}${pathname}${search}${hash}`
           )
         }
       })
