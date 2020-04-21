@@ -13,7 +13,7 @@
     "core-js": "^3.6.4",
     "history": "^4.10.1",
     "i18next": "^19.3.3",
-    "immer": "^6.0.2",
+    "immer": "^5.3.6",
     "js-cookie": "^2.2.1",
     "markdown": "^0.5.0",
     "node-sass": "^4.13.1",
