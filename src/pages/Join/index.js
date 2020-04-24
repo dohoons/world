@@ -63,7 +63,7 @@ const Join = (props) => {
     setErrors({})
 
     if(validate()) {
-      dispatch(authActions.register({ username, email, password }))
+      dispatch(authActions.register({ username, email, password })).catch(console.log)
     }
 
     e.preventDefault()
