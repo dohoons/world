@@ -56,6 +56,7 @@ export const TagTitle = styled.h2`
   font-size: 30px;
   color: #97a1a7;
   letter-spacing: -.04em;
+  word-break: break-all;
 
   span {
     margin-left: 5px;

@@ -20,9 +20,11 @@ export default styled.ul`
     color: #97a1a7;
     text-decoration: none;
     word-wrap: break-word;
+    word-break: break-all;
     background: #fff;
     border: 1px solid #cfd3d6;
     border-radius: ${props => props.small ? '8px' : '10px' };
+    overflow: hidden;
     transition: all .2s;
 
     &:hover,
