@@ -20,9 +20,12 @@ import App from '~/App'
 import ErrorMonitoring from '~/util/ErrorMonitoring'
 import ScrollManager from '~/util/ScrollManager'
 
+const language = window.navigator.userLanguage || window.navigator.language
+const defaultLanguage = localStorage.getItem('lang') || (language?.includes('en') ? 'en' : 'ko')
+
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: localStorage.getItem('lang') || (navigator.language.includes('ko') ? 'ko' : 'en'),
+  lng: defaultLanguage,
   resources: {
     en: locale.en,
     ko: locale.ko,
