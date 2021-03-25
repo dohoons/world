@@ -134,7 +134,7 @@ const Login = (props) => {
         </form>
 
         <div className="info-box">
-          <Trans i18nKey="infoDesc">
+          <Trans i18nKey="infoDesc" t={t}>
             처음 오셨나요? <Link to="/join">회원가입</Link>을 해주세요.
           </Trans>
         </div>

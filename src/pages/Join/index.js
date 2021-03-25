@@ -117,7 +117,7 @@ const Join = (props) => {
         </form>
 
         <div className="info-box">
-          <Trans i18nKey="infoDesc">
+          <Trans i18nKey="infoDesc" t={t}>
             이미 계정이 있으신가요? <Link to="/login">로그인</Link>을 해주세요.
           </Trans>
         </div>

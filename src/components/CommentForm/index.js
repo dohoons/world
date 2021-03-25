@@ -53,7 +53,7 @@ const CommentForm = () => {
 
   if(!user) {
     return <LoginMsg className="login-msg">
-      <i className="fas fa-info-circle"></i> <Trans i18nKey="comment.loginMsg">
+      <i className="fas fa-info-circle"></i> <Trans i18nKey="comment.loginMsg" t={t}>
         댓글을 남기려면 <Link to="/login">로그인</Link>이 필요합니다.
       </Trans>
     </LoginMsg>
