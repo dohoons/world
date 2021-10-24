@@ -5,7 +5,8 @@ import Cookies from 'js-cookie'
 import { history } from '~/index'
 
 export const http = axios.create({
-  baseURL: 'https://conduit.productionready.io/api',
+  // baseURL: 'https://conduit.productionready.io/api',
+  baseURL: 'https://dohoons-realworld-api.herokuapp.com/api',
   adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false })
 })
 
